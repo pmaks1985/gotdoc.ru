@@ -1053,11 +1053,11 @@
     }
 }
 
-.filter:nth-child(n+5) {
+.filter:nth-child(n+3) {
     margin-top: 16px;
 }
 
-.filter:nth-child(3) .filter-title, .filter:nth-child(4) .filter-title {
+/*.filter:nth-child(1) .filter-title, .filter:nth-child(2) .filter-title {
     font-family: MyriadPro-Regular;
     font-size: 16px;
     line-height: 15px;
@@ -1065,4 +1065,4 @@
     color: #212529;
     text-align: inherit;
     white-space: normal;
-}
+}*/
