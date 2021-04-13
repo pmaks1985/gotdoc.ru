@@ -82,7 +82,6 @@
         <div class="d-flex justify-content-between mt-3">
             <div class="d-flex">
                 <div class="dropdown">
-
                     <? $APPLICATION->IncludeComponent(
                         "bitrix:menu",
                         "top-submenu",
