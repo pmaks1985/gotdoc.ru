@@ -1053,8 +1053,12 @@
     }
 }
 
-.filter:nth-child(n+3) {
+.filter:nth-child(n+5) {
     margin-top: 16px;
+}
+
+.dropright {
+    list-style-type: none;
 }
 
 /*.filter:nth-child(1) .filter-title, .filter:nth-child(2) .filter-title {
