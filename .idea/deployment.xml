@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="gotdoc.ru" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="gotdoc.ru">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/bitrix/catalog_export" />
+            <excludedPath path="/bitrix/wizards" />
+            <excludedPath path="/bitrix/blocks" />
+            <excludedPath path="/bitrix/legal" />
+            <excludedPath path="/ecology-safety" />
+            <excludedPath path="/bitrix/sounds" />
+            <excludedPath path="/antiterroristicheskaya-zashchishchyennost" />
+            <excludedPath path="/bitrix/themes" />
+            <excludedPath path="/bitrix/components/otb" />
+            <excludedPath path="/bitrix/otp" />
+            <excludedPath path="/images" />
+            <excludedPath path="/contacts" />
+            <excludedPath path="/.cache" />
+            <excludedPath path="/go-i-chs" />
+            <excludedPath path="/docs" />
+            <excludedPath path="/bitrix/panel" />
+            <excludedPath path="/bitrix/templates/.default" />
+            <excludedPath path="/bitrix/cache" />
+            <excludedPath path="/about" />
+            <excludedPath path="/bitrix/admin" />
+            <excludedPath path="/bitrix/managed_cache" />
+            <excludedPath path="/bitrix/images" />
+            <excludedPath path="/bitrix/templates/lawcenter" />
+            <excludedPath path="/bitrix/templates/lawcenter_new" />
+            <excludedPath path="/bitrix/templates/rdocrf" />
+            <excludedPath path="/bitrix/services" />
+            <excludedPath path="/bitrix/image_uploader" />
+            <excludedPath path="/bitrix/fonts" />
+            <excludedPath path="/bitrix/tmp" />
+            <excludedPath path="/bitrix/stack_cache" />
+            <excludedPath path="/bitrix/components/mibok" />
+            <excludedPath path="/bitrix/css" />
+            <excludedPath path="/bitrix/js" />
+            <excludedPath path="/docs1" />
+            <excludedPath path="/bitrix/tools" />
+            <excludedPath path="/bitrix/gadgets" />
+            <excludedPath path="/bitrix/components/bitrix" />
+            <excludedPath path="/documents" />
+            <excludedPath path="/bitrix/updates" />
+            <excludedPath path="/bitrix/templates/_del_rdocrf_in" />
+            <excludedPath path="/include" />
+            <excludedPath path="/bitrix/php_interface" />
+            <excludedPath path="/bitrix/backup" />
+            <excludedPath path="/bitrix/templates/_del_rdocrf2" />
+            <excludedPath path="/bitrix/modules" />
+            <excludedPath path="/komplekt_shablonov" />
+            <excludedPath path="/komplekt_shablonov_ot" />
+            <excludedPath path="/komplekt_shablonov_pb" />
+            <excludedPath path="/okhrana-truda" />
+            <excludedPath path="/order" />
+            <excludedPath path="/pervaya-pomoshch" />
+            <excludedPath path="/politika-konfidentsialnosti" />
+            <excludedPath path="/pozharnaya-bezopasnost" />
+            <excludedPath path="/pozharnaya-bezopasnost-old" />
+            <excludedPath path="/pozharnaya-deklaratsiya" />
+            <excludedPath path="/stati" />
+            <excludedPath path="/test" />
+            <excludedPath path="/upload" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/catalog_export" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/wizards" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/blocks" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/legal" />
+            <excludedPath local="true" path="$PROJECT_DIR$/ecology-safety" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/sounds" />
+            <excludedPath local="true" path="$PROJECT_DIR$/antiterroristicheskaya-zashchishchyennost" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/themes" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/components/otb" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/otp" />
+            <excludedPath local="true" path="$PROJECT_DIR$/images" />
+            <excludedPath local="true" path="$PROJECT_DIR$/contacts" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/go-i-chs" />
+            <excludedPath local="true" path="$PROJECT_DIR$/docs" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/panel" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/.default" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/about" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/admin" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/managed_cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/images" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/lawcenter" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/lawcenter_new" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/rdocrf" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/services" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/image_uploader" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/fonts" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/tmp" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/stack_cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/components/mibok" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/css" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/js" />
+            <excludedPath local="true" path="$PROJECT_DIR$/docs1" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/tools" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/gadgets" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/components/bitrix" />
+            <excludedPath local="true" path="$PROJECT_DIR$/documents" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/updates" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/_del_rdocrf_in" />
+            <excludedPath local="true" path="$PROJECT_DIR$/include" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/php_interface" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/backup" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/templates/_del_rdocrf2" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bitrix/modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/komplekt_shablonov" />
+            <excludedPath local="true" path="$PROJECT_DIR$/komplekt_shablonov_ot" />
+            <excludedPath local="true" path="$PROJECT_DIR$/komplekt_shablonov_pb" />
+            <excludedPath local="true" path="$PROJECT_DIR$/okhrana-truda" />
+            <excludedPath local="true" path="$PROJECT_DIR$/order" />
+            <excludedPath local="true" path="$PROJECT_DIR$/pervaya-pomoshch" />
+            <excludedPath local="true" path="$PROJECT_DIR$/politika-konfidentsialnosti" />
+            <excludedPath local="true" path="$PROJECT_DIR$/pozharnaya-bezopasnost" />
+            <excludedPath local="true" path="$PROJECT_DIR$/pozharnaya-bezopasnost-old" />
+            <excludedPath local="true" path="$PROJECT_DIR$/pozharnaya-deklaratsiya" />
+            <excludedPath local="true" path="$PROJECT_DIR$/stati" />
+            <excludedPath local="true" path="$PROJECT_DIR$/test" />
+            <excludedPath local="true" path="$PROJECT_DIR$/upload" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

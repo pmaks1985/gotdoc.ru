@@ -1,0 +1,1121 @@
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="2019-09-16 11:00">
+  <shop>
+<name>Готовые документы</name>
+<company>Сервис разработки документации для прохождения проверок “ГОТОВЫЕ ДОКУМЕНТЫ”</company>
+<url>https://gotdoc.ru</url>
+<currencies> 
+<currency id="RUR" rate="1" plus="0"/> 
+</currencies>
+<categories> 
+<category id="1">Документация по пожарной безопасности</category>
+<category id="2" parentId="1">Документы для образовательных организаций</category>
+<category id="3" parentId="1">Документы для объектов размещения</category>
+<category id="4" parentId="1">Документы для административных зданий</category>
+<category id="5" parentId="1">Документы для производственных предприятий</category>
+<category id="6" parentId="1">Документы для торговых организаций</category>
+<category id="7" parentId="1">Документы для офисных зданий</category>
+<category id="8" parentId="1">Документы для спортивных организаций</category>
+<category id="9" parentId="1">Документы для организаций религиозного назначения</category>
+<category id="10" parentId="1">Документы для организаций, осуществляющих пассажирские перевозки</category>
+<category id="11" parentId="1">Документы для социальных учреждений</category>
+<category id="12" parentId="1">Документы для медицинских организаций</category>
+<category id="13" parentId="1">Документы для организаций бытового обслуживания</category>
+<category id="14" parentId="1">Документы для культурно-просветительских организаций</category>
+<category id="15" parentId="1">Документы для организаций общественного питания</category>
+<category id="16" parentId="1">Документы для жилых домов</category>
+<category id="17" parentId="1">Документы для объектов хранения</category>
+<category id="18" parentId="1">Документы для сельскохозяйственных организаций</category>
+<category id="19">Документация по охране труда</category>
+<category id="20">Документация по экологической безопасности</category>
+<category id="21">Документация по оказанию первой помощи</category>
+<category id="22">Документация по ГО и ЧС</category>
+<category id="23">Документация по антитеррористической защищенности</category>
+</categories>
+<delivery-options> 
+<option cost="0"/>
+</delivery-options>
+<offers>
+<offer id="1" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-detskogo-sada/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов для детского сада по пожарной безопасности в электронном виде</name>
+  <description>Подготовим документацию по пожарной безопасности для детских садов в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="2" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-detskogo-lagerya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для детского лагеря</name>
+  <description>Подготовим документацию по пожарной безопасности для детского лагеря в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="3" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-shkoly/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной в электронном виде безопасности для школы</name>
+  <description>Подготовим документацию по пожарной безопасности для школы в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="4" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-tekhnikuma/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для техникума</name>
+  <description>Подготовим документацию по пожарной безопасности для техникума в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="5" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kolledzha/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для колледжа</name>
+  <description>Подготовим документацию по пожарной безопасности для колледжа в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="6" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-litseya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для лицея</name>
+  <description>Подготовим документацию по пожарной безопасности для лицея в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="7" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-universiteta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для университета</name>
+  <description>Подготовим документацию по пожарной безопасности для университета в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="8" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-gostinitsy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для гостиницы</name>
+  <description>Подготовим документацию по пожарной безопасности для гостиницы в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="9" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-bazy-otdykha/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для базы отдыха</name>
+  <description>Подготовим документацию по пожарной безопасности для базы отдыха в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="10" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-obshchezhitiya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для общежития</name>
+  <description>Подготовим документацию по пожарной безопасности для общежития в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="11" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sanatoriya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для санатория</name>
+  <description>Подготовим документацию по пожарной безопасности для санатория в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="12" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-doma-otdykha/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для дома отдыха</name>
+  <description>Подготовим документацию по пожарной безопасности для дома отдыха в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="13" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-azs/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для АЗС</name>
+  <description>Подготовим документацию по пожарной безопасности для АЗС в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="14" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-magazina/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для магазина</name>
+  <description>Подготовим документацию по пожарной безопасности для магазина в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="15" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-torgovogo-tsentra/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для торгового центра</name>
+  <description>Подготовим документацию по пожарной безопасности для торгового центра в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="16" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-apteki/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для аптеки</name>
+  <description>Подготовим документацию по пожарной безопасности для аптеки в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="17" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-rynka/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для рынка</name>
+  <description>Подготовим документацию по пожарной безопасности для рынка в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="18" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-banka/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для банка</name>
+  <description>Подготовим документацию по пожарной безопасности для банка в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="19" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sportivnogo-kompleksa/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для спорткомплекса</name>
+  <description>Подготовим документацию по пожарной безопасности в электронном виде для спортивного комплекса. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="20" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-tserkvi/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>9</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для церкви</name>
+  <description>Подготовим документацию по пожарной безопасности для церкви в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="21" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-avtovokzala/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>10</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для автовокзала</name>
+  <description>Подготовим документацию по пожарной безопасности для автовокзала в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="22" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-aeroporta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>10</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для аэропорта</name>
+  <description>Подготовим документацию по пожарной безопасности для аэропорта в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="23" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-doma-prestarelykh/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>11</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для дома престарелых</name>
+  <description>Подготовим документацию по пожарной безопасности для дома престарелых в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="24" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sotsialnogo-priyuta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>11</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для социального приюта</name>
+  <description>Подготовим документацию по пожарной безопасности для социального приюта в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="25" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-shkoly-internata/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>11</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для школы-интерната</name>
+  <description>Подготовим документацию по пожарной безопасности для школы-интерната в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="26" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-bolnitsy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для больницы</name>
+  <description>Подготовим документацию по пожарной безопасности для больницы в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="27" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-polikliniki/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для поликлиники</name>
+  <description>Подготовим документацию по пожарной безопасности для поликлиники в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="28" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-stomatologii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для стоматологической клиники</name>
+  <description>Подготовим документацию по пожарной безопасности для стоматологической клиники в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="29" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-atele/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для ателье</name>
+  <description>Подготовим документацию по пожарной безопасности для ателье в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="30" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-salona-krasoty/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для салона красоты</name>
+  <description>Подготовим документацию по пожарной безопасности для салона красоты в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="31" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-khimchistki/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для химчистки</name>
+  <description>Подготовим документацию по пожарной безопасности для химчистки в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="32" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-teatra/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для театра</name>
+  <description>Подготовим документацию по пожарной безопасности для театра в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="33" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kinoteatra/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для кинотеатра</name>
+  <description>Подготовим документацию по пожарной безопасности для кинотеатра в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="34" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-muzeya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для музея</name>
+  <description>Подготовим документацию по пожарной безопасности для музея в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="35" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-restorana/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для ресторана</name>
+  <description>Подготовим документацию по пожарной безопасности для ресторана в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="36" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kofeyni/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для кофейни</name>
+  <description>Подготовим документацию по пожарной безопасности для кофейни в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="37" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-mnogokvartirnogo-zhilogo-doma-mzhd/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>16</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для многоквартирного жилого дома</name>
+  <description>Подготовим документацию по пожарной безопасности для многоквартирного жилого дома в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="38" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-instituta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для института</name>
+  <description>Подготовим документацию по пожарной безопасности для института в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="39" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-avtoshkoly/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для автошколы</name>
+  <description>Подготовим документацию по пожарной безопасности для автошколы в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="40" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-zoomagazina/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для зоомагазина</name>
+  <description>Подготовим документацию по пожарной безопасности для зоомагазина в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="41" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-ofisa/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для офиса</name>
+  <description>Подготовим документацию по пожарной безопасности для офиса в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="42" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-studii-tantsev/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для студии танцев</name>
+  <description>Подготовим документацию по пожарной безопасности для студии танцев в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="43" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-datsana/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>9</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для дацана</name>
+  <description>Подготовим документацию по пожарной безопасности для дацана в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="44" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-zheleznodorozhnogo-vokzala/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>10</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для железнодорожного вокзала</name>
+  <description>Подготовим документацию по пожарной безопасности для жд вокзала в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="45" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-metro/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>10</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для метро</name>
+  <description>Подготовим документацию по пожарной безопасности для метро в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="46" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-ambulatorii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для амбулатории</name>
+  <description>Подготовим документацию по пожарной безопасности для амбулатории в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="47" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-doma-byta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для дома быта</name>
+  <description>Подготовим документацию по пожарной безопасности для дома быта в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="48" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-parikmakherskoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для парикмахерской</name>
+  <description>Подготовим документацию по пожарной безопасности для парикмахерской в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="49" available="true">
+  <url>https://https://gotdoc.ru/docs/komplekt-dokumentov-dlya-fotostudii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для фотостудии</name>
+  <description>Подготовим документацию по пожарной безопасности для фотостудии в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="50" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kontsertnogo-zala/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для концертного зала</name>
+  <description>Подготовим документацию по пожарной безопасности для концертного зала в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="51" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kluba/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для клуба</name>
+  <description>Подготовим документацию по пожарной безопасности для клуба в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="52" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-tsirka/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для цирка</name>
+  <description>Подготовим документацию по пожарной безопасности для цирка в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="53" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-biblioteki/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для библиотеки</name>
+  <description>Подготовим документацию по пожарной безопасности для библиотеки в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="54" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-vystavki/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для выставки в закрытом помещении</name>
+  <description>Подготовим документацию по пожарной безопасности для выставки в закрытом помещении в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="55" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-bara/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для бара</name>
+  <description>Подготовим документацию по пожарной безопасности для бара в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="56" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kafe/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для кафе</name>
+  <description>Подготовим документацию по пожарной безопасности для кафе в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="57" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-stolovoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для столовой</name>
+  <description>Подготовим документацию по пожарной безопасности для столовой в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="58" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-mecheti/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>9</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для мечети</name>
+  <description>Подготовим документацию по пожарной безопасности для мечети в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="59" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sinagogi/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>9</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для синагоги</name>
+  <description>Подготовим документацию по пожарной безопасности для синагоги в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="60" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-prokata/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для предприятий проката</name>
+  <description>Подготовим документацию по пожарной безопасности для предприятий проката в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="61" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-organizatsii-ritualnykh-uslug/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для организации, оказывающей ритуальные услуги</name>
+  <description>Подготовим документацию по пожарной безопасности для организации, оказывающей ритуальные услуги, в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="62" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-bani/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для бани</name>
+  <description>Подготовим документацию по пожарной безопасности для бани в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="63" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sauny/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для сауны</name>
+  <description>Подготовим документацию по пожарной безопасности для сауны в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="64" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-bufeta/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для буфета</name>
+  <description>Подготовим документацию по пожарной безопасности для буфета в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="65" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-snt/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>18</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для СНТ</name>
+  <description>Подготовим документацию по пожарной безопасности для СНТ в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="66" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-organizatsii-dpo/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для организации ДПО</name>
+  <description>Подготовим документацию по пожарной безопасности для организации ДПО в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="67" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-motelya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для мотеля</name>
+  <description>Подготовим документацию по пожарной безопасности для мотеля в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="68" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kliniki-bez-statsionarnogo-prebyvaniya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для клиники без стационара</name>
+  <description>Подготовим документацию по пожарной безопасности для клиники без стационара в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="69" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kempinga/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для кемпинга</name>
+  <description>Подготовим документацию по пожарной безопасности для кемпинга в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="70" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-otelya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для отеля</name>
+  <description>Подготовим документацию по пожарной безопасности для отеля в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="71" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-prokuratury/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>4</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для прокуратуры</name>
+  <description>Подготовим документацию по пожарной безопасности для прокуратуры в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="72" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-tipografii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для типографии</name>
+  <description>Подготовим документацию по пожарной безопасности для типографии в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="73" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-fitnes-kluba/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для фитнес-клуба</name>
+  <description>Подготовим документацию по пожарной безопасности для фитнес-клуба в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="74" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-prachechnoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для прачечной</name>
+  <description>Подготовим документацию по пожарной безопасности для прачечной в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="75" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-veterinarnoy-kliniki</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для ветеринарной клиники</name>
+  <description>Подготовим документацию по пожарной безопасности для ветеринарной клиники в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="76" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-suda/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>4</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для суда</name>
+  <description>Подготовим документацию по пожарной безопасности для суда в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="77" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-administratsii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>4</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для администрации</name>
+  <description>Подготовим документацию по пожарной безопасности для администрации в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="78" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-avtomasterskoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для автомастерской</name>
+  <description>Подготовим документацию по пожарной безопасности для автомастерской в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="79" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-zavoda/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для завода</name>
+  <description>Подготовим документацию по пожарной безопасности для завода в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="80" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-myasopererabatyvayushchego-tsekha/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для мясоперерабатывающего цеха</name>
+  <description>Подготовим документацию по пожарной безопасности для мясоперерабатывающего цеха в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="81" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-koptilni/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для коптильни</name>
+  <description>Подготовим документацию по пожарной безопасности для коптильни в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="82" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-laboratorii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для лаборатории</name>
+  <description>Подготовим документацию по пожарной безопасности для лаборатории в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="83" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kotelnoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для котельной</name>
+  <description>Подготовим документацию по пожарной безопасности для котельной в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="84" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-mebelnogo-proizvodstva/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для мебельного производства</name>
+  <description>Подготовим документацию по пожарной безопасности для мебельного производства в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="85" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-shveynogo-proizvodstva/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>5</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для швейного производства</name>
+  <description>Подготовим документацию по пожарной безопасности для швейного производства в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="86" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-basseyna-s-pomeshcheniyami-bez-tribun-dlya-zriteley/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для бассейнов с помещениями без трибун для зрителей</name>
+  <description>Подготовим документацию по пожарной безопасности для бассейнов с помещениями без трибун для зрителей в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="87" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-sportivnoy-sektsii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для спортивной секции</name>
+  <description>Подготовим документацию по пожарной безопасности для спортивной секции в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="88" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-ryumochnoy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для рюмочной</name>
+  <description>Подготовим документацию по пожарной безопасности для  рюмочной в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="89" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-ctoyanki-avtomobiley/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>13</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для стоянки автомобилей</name>
+  <description>Подготовим документацию по пожарной безопасности для  стоянки автомобилей в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="90" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-garazha-avtotransporta-bez-to/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>17</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для гаража автотранспорта без проведения технического обслуживания</name>
+  <description>Подготовим документацию по пожарной безопасности для  гаража автотранспорта без проведения технического обслуживания в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="91" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-upravlyayushchey-kompanii-v-chasti-ofisa/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для управляющей компании (в части офиса)</name>
+  <description>Подготовим документацию по пожарной безопасности для управляющей компании (в части офиса) в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="92" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-transportnoy-kompanii-v-chasti-ofisa/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для транспортной компании (в части офиса)</name>
+  <description>Подготовим документацию по пожарной безопасности для транспортной компании (в части офиса) в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="93" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-diagnosticheskogo-tsentra/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для диагностического центра (без стационара)</name>
+  <description>Подготовим документацию по пожарной безопасности для диагностического центра (без стационара) в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="94" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-khostela/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>3</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для хостела</name>
+  <description>Подготовим документацию по пожарной безопасности для хостела в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="95" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-lombarda/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>6</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для ломбарда</name>
+  <description>Подготовим документацию по пожарной безопасности для ломбарда в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="96" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-redaktsii-gazet/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для редакции газет</name>
+  <description>Подготовим документацию по пожарной безопасности для редакции газет в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="97" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-strakhovoy-kompanii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для страховой компании</name>
+  <description>Подготовим документацию по пожарной безопасности для страховой компании в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="98" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-stroitelnoy-kompanii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для строительной компании</name>
+  <description>Подготовим документацию по пожарной безопасности для строительной компании в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="99" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-auditorskoy-kompanii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для аудиторской компании</name>
+  <description>Подготовим документацию по пожарной безопасности для аудиторской компании в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="100" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-konsaltingovoy-kompanii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>7</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для консалтинговой компании</name>
+  <description>Подготовим документацию по пожарной безопасности для консалтинговой компании в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="101" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-tantsevalnogo-zala-v-zakrytykh-pomeshcheniyakh/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для танцевального зала (в закрытых помещениях)</name>
+  <description>Подготовим документацию по пожарной безопасности для танцевального зала (в закрытых помещениях) в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="102" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-feldshersko-akusherskogo-punkta-fap/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для фельдшерско-акушерского пункта (ФАП)</name>
+  <description>Подготовим документацию по пожарной безопасности для фельдшерско-акушерского пункта (ФАП) в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="103" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-basseyna-s-tribunami-v-zakrytom-pomeshchenii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>8</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для бассейна с трибунами в закрытом помещении</name>
+  <description>Подготовим документацию по пожарной безопасности для бассейна с трибунами в закрытом помещении в электронном виде. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="104" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-kliniki-s-nalichiem-statsionarnykh-otdeleniy/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для клиники со стационарными помещениями</name>
+  <description>Подготовим документацию по пожарной безопасности для клиники со стационарными помещениями. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="105" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-roddoma/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>12</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для роддома</name>
+  <description>Подготовим документацию по пожарной безопасности для роддома. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="106" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-doma-kultury/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для дома культуры</name>
+  <description>Подготовим документацию по пожарной безопасности для дома культуры. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="107" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-internet-kafe/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>14</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для интернет-кафе</name>
+  <description>Подготовим документацию по пожарной безопасности для интернет-кафе. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="108" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-pitstserii/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>15</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для пиццерии</name>
+  <description>Подготовим документацию по пожарной безопасности для пиццерии. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="109" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-knigokhranilishcha/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>17</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для книгохранилища</name>
+  <description>Подготовим документацию по пожарной безопасности для книгохранилища. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="110" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-arkhiva/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>17</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для архива</name>
+  <description>Подготовим документацию по пожарной безопасности для архива. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="111" available="true">
+  <url>https://gotdoc.ru/docs/komplekt-dokumentov-dlya-selskokhozyaystvennogo-predpriyatiya/</url>
+  <price>5900</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>18</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по пожарной безопасности в электронном виде для сельскохозяйственного предприятия</name>
+  <description>Подготовим документацию по пожарной безопасности для сельскохозяйственного предприятия. От 3 до 7 дней. Работаем по всей России.</description>
+  </offer>
+<offer id="112" available="true">
+  <url>https://gotdoc.ru/okhrana-truda/</url>
+  <price>15000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>19</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по охране труда: инструкции, приказы, удостоверения, программы обучения, личные карточки учета ТМЦ</name>
+  <description>Комплект документов по охране труда. От 2 до 6 недель в зависимости от количества человек по штатному расписанию в организации. Работаем по всей России. </description>
+  </offer>
+<offer id="113" available="true">
+  <url>https://gotdoc.ru/ecology-safety/</url>
+  <price>50000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>20</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по экологической безопасности для объектов I категории НВОС: приказы и инструкции, программы и планы, журналы и отчеты, декларации и паспорта</name>
+  <description>Комплект документов по экологической безопасности для объектов I категории НВОС с учетом специфики деятельности организации и требований НПА. Работаем по всей России. </description>
+  </offer>
+<offer id="114" available="true">
+  <url>https://gotdoc.ru/ecology-safety/</url>
+  <price>35000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>20</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по экологической безопасности для объектов II категории НВОС: приказы и инструкции, программы и планы, журналы и отчеты, декларации и паспорта</name>
+  <description>Комплект документов по экологической безопасности для объектов II категории НВОС с учетом специфики деятельности организации и требований НПА. Работаем по всей России. </description>
+  </offer>
+<offer id="115" available="true">
+  <url>https://gotdoc.ru/ecology-safety/</url>
+  <price>25000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>20</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по экологической безопасности для объектов III категории НВОС: приказы и инструкции, программы и планы, журналы и отчеты, декларации и паспорта</name>
+  <description>Комплект документов по экологической безопасности для объектов III категории НВОС с учетом специфики деятельности организации и требований НПА. Работаем по всей России. </description>
+  </offer>
+<offer id="116" available="true">
+  <url>https://gotdoc.ru/ecology-safety/</url>
+  <price>15000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>20</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по экологической безопасности для объектов IV категории НВОС: приказы и инструкции, программы и планы, журналы и отчеты, декларации и паспорта</name>
+  <description>Комплект документов по экологической безопасности для объектов IV категории НВОС с учетом специфики деятельности организации и требований НПА. Работаем по всей России. </description>
+  </offer>
+<offer id="117" available="true">
+  <url>https://gotdoc.ru/ecology-safety/</url>
+  <price>8000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>20</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по экологической безопасности для объектов без категории НВОС: приказы и инструкции, программы и планы, журналы и отчеты, декларации и паспорта</name>
+  <description>Комплект документов по экологической безопасности для объектов без категории НВОС с учетом специфики деятельности организации и требований НПА. Работаем по всей России. </description>
+  </offer>
+<offer id="118" available="true">
+  <url>https://gotdoc.ru/go-i-chs/</url>
+  <price>32500</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>22</categoryId>
+  <delivery>true</delivery>
+  <name>Комплект документов по ГО и ЧС: приказы, планы, подготовка населения, инструкции и памятки для населения, протоколы и доклады, обязанности руководящего состава ГО и ЧС.</name>
+  <description>Комплект документов по ГО и ЧС для объектов, прекращающих, продолжающих свою деятельность в особый период, и для объектов, отнесенных к категории ГО и ЧС. Работаем по всей России. </description>
+  </offer>
+<offer id="119" available="true">
+  <url>https://gotdoc.ru/pervaya-pomoshch/</url>
+  <price>0</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>21</categoryId>
+  <delivery>true</delivery>
+  <name>Инструкция по оказанию первой помощи пострадавшим: скачать бесплатно документ</name>
+  <description>Разработаем инструкцию по оказанию первой помощи пострадавшим специально для вашего объекта с учетом последних изменений в нормативных актах на основе Типовой инструкции № 22 по оказанию доврачебной помощи при несчастных случаях. Работаем по всей России. </description>
+  </offer>
+<offer id="120" available="true">
+  <url>https://gotdoc.ru/antiterroristicheskaya-zashchishchyennost/</url>
+  <price>30000</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>23</categoryId>
+  <delivery>true</delivery>
+  <name>Паспорт антитеррористической защищенности для объектов с массовым пребыванием людей </name>
+  <description>Разработаем паспорт безопасности антитеррористической защищенности объекта с учетом его категории, профиля, места расположения. Работаем по всей России. </description>
+  </offer>
+</offers>
+  </shop>
+</yml_catalog>

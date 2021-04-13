@@ -1,0 +1,122 @@
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <? $APPLICATION->ShowHead() ?>
+    <title>
+        <? $APPLICATION->ShowTitle() ?>
+    </title>
+    <?
+
+    use Bitrix\Main\Page\Asset;
+
+    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/jquery-3.5.1.min.js");
+    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/popper.min.js");
+    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/bootstrap.min.js");
+    ?>
+    <?
+    Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . "/css/bootstrap.min.css");
+    Asset::getInstance()->addString("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'>");
+    ?>
+</head>
+
+<body>
+<? $APPLICATION->ShowPanel(); ?>
+
+<div class="container">
+    <header>
+        <div class="align-items-center banner">
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <nav class="navbar navbar-expand-lg p-0">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <? $APPLICATION->IncludeComponent(
+                            "bitrix:menu",
+                            "top-menu",
+                            array(
+                                "ALLOW_MULTI_SELECT" => "N",
+                                "CHILD_MENU_TYPE" => "left",
+                                "DELAY" => "N",
+                                "MAX_LEVEL" => "1",
+                                "MENU_CACHE_GET_VARS" => array(""),
+                                "MENU_CACHE_TIME" => "3600",
+                                "MENU_CACHE_TYPE" => "A",
+                                "MENU_CACHE_USE_GROUPS" => "Y",
+                                "ROOT_MENU_TYPE" => "top",
+                                "USE_EXT" => "N"
+                            )
+                        );
+                        ?>
+                    </div>
+                </nav>
+            </div>
+            <div>
+                <div class="d-flex mt-2 select-region">
+                    <div class="mr-3">
+                        <span class="select-region_text">Ваш регион:</span>
+                        <span class="select-region_city">
+								<span class="dottedUnderline">Москва</span><i class="bi bi-caret-down-fill"></i>
+							</span>
+                    </div>
+                    <div>
+                        <a href="#" class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div>
+                <div class="site-name">Готовые документы</div>
+                <div class="site-name_explanation">Автоматизированный помощник для подготовки к проектам</div>
+            </div>
+            <div class="text-right">
+                <img class="mr-1" src="/bitrix/templates/new-gotdoc/img/phone.png" alt="phone"><a
+                        class="phone text-decoration-none" href="tel:+78005504908">8 (800) 550-49-08</a>
+                <div class="opening-hours">пн-вс: 06:00 - 21:00</div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div class="d-flex">
+                <div class="dropdown">
+
+                    <? $APPLICATION->IncludeComponent(
+                        "bitrix:menu",
+                        "top-submenu",
+                        array(
+                            "ALLOW_MULTI_SELECT" => "N",
+                            "CHILD_MENU_TYPE" => "top_submenu",
+                            "DELAY" => "N",
+                            "MAX_LEVEL" => "4",
+                            "MENU_CACHE_GET_VARS" => array(),
+                            "MENU_CACHE_TIME" => "3600",
+                            "MENU_CACHE_TYPE" => "A",
+                            "MENU_CACHE_USE_GROUPS" => "Y",
+                            "ROOT_MENU_TYPE" => "top_submenu",
+                            "USE_EXT" => "Y",
+                            "COMPONENT_TEMPLATE" => "top-submenu"
+                        ),
+                        false
+                    ); ?>
+
+                </div>
+                <div>
+                    <nav class="navbar py-0">
+                        <form class="form-inline">
+                            <input class="form-control form-control_input" type="search"
+                                   placeholder="Введите название документа" aria-label="Введите название документа">
+                            <button class="search_btn" type="submit"></button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+            <div class="btn backet d-flex align-items-center">
+                <img class="pr-3" src="/bitrix/templates/new-gotdoc/img/backet.png" alt="backet">
+                <span class="backet_text"><a class="text-decoration-none text-white" href="/personal/cart/"> Корзина пуста</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="content">

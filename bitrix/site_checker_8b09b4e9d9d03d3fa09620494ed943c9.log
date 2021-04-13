@@ -1,0 +1,26 @@
+2019-Sep-25 12:21:45 Наличие необходимых модулей php (check_php_modules): Ok
+Все необходимые модули установлены
+2019-Sep-25 12:21:45 Обязательные параметры PHP (check_php_settings): Ok
+Настройки правильные
+2019-Sep-25 12:21:45 Модули веб-сервера (check_security): Ok
+Конфликтов не выявлено
+2019-Sep-25 12:21:45 Значения переменных сервера (check_server_vars): Ok
+Корректные
+2019-Sep-25 12:21:45 Сохранение сессии (check_session): Ok
+50% done
+2019-Sep-25 12:21:45 Параметры настройки UTF (mbstring и константа BX_UTF) (check_mbstring): Ok
+Правильные. Сайт работает в UTF кодировке
+2019-Sep-25 12:21:45 Служебные скрипты в корне сайта (check_install_scripts): Ok
+Отсутствуют
+2019-Sep-25 12:21:45 Работа с сокетами (check_socket): Fail
+Connection to ssl://ab-dpo.ru:80	<br />
+<b>Warning</b>:  fsockopen(): SSL operation failed with code 1. OpenSSL Error messages:
+error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol in <b>/home/a/akademia37/ab-dpo.ru/public_html/bitrix/modules/main/classes/general/site_checker.php</b> on line <b>360</b><br />
+<br />
+<b>Warning</b>:  fsockopen(): Failed to enable crypto in <b>/home/a/akademia37/ab-dpo.ru/public_html/bitrix/modules/main/classes/general/site_checker.php</b> on line <b>360</b><br />
+<br />
+<b>Warning</b>:  fsockopen(): unable to connect to ssl://ab-dpo.ru:80 (Unknown error) in <b>/home/a/akademia37/ab-dpo.ru/public_html/bitrix/modules/main/classes/general/site_checker.php</b> on line <b>360</b><br />
+Fail
+Socket error [0]: 
+
+Ошибка! Не работает

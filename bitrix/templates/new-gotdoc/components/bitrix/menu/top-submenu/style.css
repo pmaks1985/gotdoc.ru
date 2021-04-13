@@ -1,0 +1,26 @@
+.dropdown-menu > .first-level > a.dropdown-item,
+.dropdown-menu > .second-level > a.dropdown-item {
+    font-weight: 700 !important;
+}
+
+.first-level_ul > li.first-level,
+.first-level_ul > li.second-level {
+    list-style-type: none;
+}
+
+.first-level_ul > li.first-level > a.dropdown-item:hover,
+.first-level_ul > li.second-level > a.dropdown-item:hover {
+    background-color: #f9f5f1;
+}
+
+.first-level_ul > li.second-level > ul.first-level_ul {
+    padding-left: 0 !important;
+}
+
+li.dropdown-submenu > ul.first-level_ul > li.second-level > ul.first-level_ul > li.first-level > a.dropdown-item {
+    font-weight: normal !important;
+}
+
+ul.dropdown-menu > li.dropdown-submenu > ul.dropdown-menu > li.second-level > a.dropdown-item > i.bi-chevron-right:before {
+    content: none;
+}

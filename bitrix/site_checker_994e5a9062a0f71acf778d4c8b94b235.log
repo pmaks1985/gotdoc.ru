@@ -1,0 +1,43 @@
+2021-Feb-24 20:34:59 Наличие необходимых модулей php (check_php_modules): Ok
+Все необходимые модули установлены
+2021-Feb-24 20:34:59 Обязательные параметры PHP (check_php_settings): Ok
+Настройки правильные
+2021-Feb-24 20:34:59 Модули веб-сервера (check_security): Ok
+Конфликтов не выявлено
+2021-Feb-24 20:34:59 Значения переменных сервера (check_server_vars): Ok
+Корректные
+2021-Feb-24 20:34:59 Сохранение сессии (check_session): Ok
+50% done
+2021-Feb-24 20:34:59 Параметры настройки UTF (mbstring и константа BX_UTF) (check_mbstring): Ok
+Правильные. Сайт работает в UTF кодировке
+2021-Feb-24 20:34:59 Служебные скрипты в корне сайта (check_install_scripts): Ok
+Отсутствуют
+2021-Feb-24 20:38:00 Работа с сокетами (check_socket): Fail
+Connection to ssl://gotdoc.ru:443	Success
+== Request ==
+GET /bitrix/admin/site_checker.php?test_type=socket_test&unique_id=99fc35fb6e2759ef6b55ec1199d87ac1 HTTP/1.1
+Host: gotdoc.ru
+
+
+== Response ==
+
+== Body ==
+HTTP/1.1 504 Gateway Time-out
+Server: nginx-reuseport/1.13.4
+Date: Wed, 24 Feb 2021 17:37:00 GMT
+Content-Type: text/html
+Content-Length: 193
+Connection: keep-alive
+Keep-Alive: timeout=30
+
+<html>
+<head><title>504 Gateway Time-out</title></head>
+<body bgcolor="white">
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx-reuseport/1.13.4</center>
+</body>
+</html>
+
+==========
+
+Ошибка! Не работает
