@@ -621,7 +621,7 @@ $templateData = array(
                         <input class="bx_filter_search_reset" type="submit" id="del_filter" name="del_filter"
                                value="<?= GetMessage("CT_BCSF_DEL_FILTER") ?>"/>
 
-                        <div class="bx_filter_popup_result <?= $arParams["POPUP_POSITION"] ?>"
+                        <div class="bx_filter_popup_result d-none <?= $arParams["POPUP_POSITION"] ?>"
                              id="modef" <? if (!isset($arResult["ELEMENT_COUNT"])) echo 'style="display:none"'; ?>
                              style="display: inline-block;">
                             <? echo GetMessage("CT_BCSF_FILTER_COUNT", array("#ELEMENT_COUNT#" => '<span id="modef_num">' . intval($arResult["ELEMENT_COUNT"]) . '</span>')); ?>
