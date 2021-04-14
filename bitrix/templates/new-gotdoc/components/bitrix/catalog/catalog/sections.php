@@ -61,7 +61,7 @@
 
 
     <? if ($arParams["SHOW_TOP_ELEMENTS"] != "N"): ?>
-        <hr/>
+
         <? /*$APPLICATION->IncludeComponent(
         "bitrix:catalog.top",
         "",
