@@ -48,6 +48,7 @@ if (CModule::IncludeModule("iblock")) {
                 "CACHE_TYPE" => $arParams["CACHE_TYPE"],
                 "CACHE_TIME" => $arParams["CACHE_TIME"],
                 "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+                "DISPLAY_ELEMENT_COUNT" => "N",
                 "SAVE_IN_SESSION" => "N",
                 "XML_EXPORT" => "Y",
                 "SECTION_TITLE" => "NAME",

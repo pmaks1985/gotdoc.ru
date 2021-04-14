@@ -242,10 +242,10 @@ $templateData = array(
                                     window['trackBar<?=$key?>'] = new BX.Iblock.SmartFilter(<?=CUtil::PhpToJSObject($arJsParams)?>);
                                 });
                             </script>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "B"://NUMBERS
-                            ?>
+                        ?>
                             <div class="bx_filter_parameters_box_container_block">
                                 <div class="bx_filter_input_container">
                                     <input
@@ -272,19 +272,19 @@ $templateData = array(
                                     />
                                 </div>
                             </div>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "G"://CHECKBOXES_WITH_PICTURES
-                            ?>
-                            <? foreach ($arItem["VALUES"] as $val => $ar): ?>
-                            <input
-                                    style="display: none"
-                                    type="checkbox"
-                                    name="<?= $ar["CONTROL_NAME"] ?>"
-                                    id="<?= $ar["CONTROL_ID"] ?>"
-                                    value="<?= $ar["HTML_VALUE"] ?>"
-                                <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
-                            />
+                        ?>
+                        <? foreach ($arItem["VALUES"] as $val => $ar): ?>
+                        <input
+                                style="display: none"
+                                type="checkbox"
+                                name="<?= $ar["CONTROL_NAME"] ?>"
+                                id="<?= $ar["CONTROL_ID"] ?>"
+                                value="<?= $ar["HTML_VALUE"] ?>"
+                            <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
+                        />
                             <?
                             $class = "";
                             if ($ar["CHECKED"])
@@ -303,19 +303,19 @@ $templateData = array(
 										</span>
                             </label>
                         <? endforeach ?>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "H"://CHECKBOXES_WITH_PICTURES_AND_LABELS
-                            ?>
-                            <? foreach ($arItem["VALUES"] as $val => $ar): ?>
-                            <input
-                                    style="display: none"
-                                    type="checkbox"
-                                    name="<?= $ar["CONTROL_NAME"] ?>"
-                                    id="<?= $ar["CONTROL_ID"] ?>"
-                                    value="<?= $ar["HTML_VALUE"] ?>"
-                                <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
-                            />
+                        ?>
+                        <? foreach ($arItem["VALUES"] as $val => $ar): ?>
+                        <input
+                                style="display: none"
+                                type="checkbox"
+                                name="<?= $ar["CONTROL_NAME"] ?>"
+                                id="<?= $ar["CONTROL_ID"] ?>"
+                                value="<?= $ar["HTML_VALUE"] ?>"
+                            <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
+                        />
                             <?
                             $class = "";
                             if ($ar["CHECKED"])
@@ -340,11 +340,11 @@ $templateData = array(
                                     endif; ?></span>
                             </label>
                         <? endforeach ?>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "P"://DROPDOWN
-                            $checkedItemExist = false;
-                            ?>
+                        $checkedItemExist = false;
+                        ?>
                             <div class="bx_filter_select_container">
                                 <div class="bx_filter_select_block"
                                      onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
@@ -409,10 +409,10 @@ $templateData = array(
                                     </div>
                                 </div>
                             </div>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "R"://DROPDOWN_WITH_PICTURES_AND_LABELS
-                            ?>
+                        ?>
                             <div class="bx_filter_select_container">
                                 <div class="bx_filter_select_block"
                                      onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
@@ -496,10 +496,10 @@ $templateData = array(
                                     </div>
                                 </div>
                             </div>
-                            <?
-                            break;
+                        <?
+                        break;
                         case "K"://RADIO_BUTTONS
-                            ?>
+                        ?>
                             <li class="dropright">
                                 <a class="dropdown-toggle dropdown-item d-flex align-items-center" href="#"
                                    role="button" id="dropdownMenuLink<?= $val; ?>" data-toggle="dropdown"
@@ -543,10 +543,10 @@ $templateData = array(
                                 </div>
                             </li>
 
-                            <?
-                            break;
+                        <?
+                        break;
                         case "U"://CALENDAR
-                            ?>
+                        ?>
                             <div class="bx_filter_parameters_box_container_block">
                                 <div class="bx_filter_input_container bx_filter_calendar_container">
                                     <? $APPLICATION->IncludeComponent(
@@ -585,40 +585,41 @@ $templateData = array(
                                     ); ?>
                                 </div>
                             </div>
-                            <?
-                            break;
+                        <?
+                        break;
                         default://CHECKBOXES
                         ?>
-                        <div class="filter-title pl-2"
-                             onclick="smartFilter.hideFilterProps(this)"><?= $arItem["NAME"] ?></div>
-                        <ul class="filter-list pl-2 mb-0">
-                            <? foreach ($arItem["VALUES"] as $val => $ar): ?>
-                                <li class="custom-control custom-checkbox">
-                                    <input class="custom-control-input"
-                                           type="checkbox"
-                                           value="<? echo $ar["HTML_VALUE"] ?>"
-                                           name="<? echo $ar["CONTROL_NAME"] ?>"
-                                           id="<? echo $ar["CONTROL_ID"] ?>"
-                                        <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
-                                           onclick="smartFilter.click(this)"
-                                    />
-                                    <label data-role="label_<?= $ar["CONTROL_ID"] ?>"
-                                           class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled' : '' ?>"
-                                           for="<? echo $ar["CONTROL_ID"] ?>">
-                                        <span class="bx_filter_param_text"
-                                              title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?><?
-                                            if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-                                                ?> (<span
-                                                    data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
-                                            endif; ?></span>
-                                    </label>
-                                </li>
+                            <div class="filter-title pl-2"
+                                 onclick="smartFilter.hideFilterProps(this)"><?= $arItem["NAME"] ?></div>
+                            <ul class="filter-list pl-2 mb-0">
+                                <? foreach ($arItem["VALUES"] as $val => $ar): ?>
+                                    <li class="custom-control custom-checkbox">
+                                        <input class="custom-control-input <? echo $ar["DISABLED"] ? 'disabled': '' ?>"
+                                               type="checkbox"
+                                                <? echo $ar["DISABLED"] ? 'disabled="disabled"' : '' ?>
+                                               value="<? echo $ar["HTML_VALUE"] ?>"
+                                               name="<? echo $ar["CONTROL_NAME"] ?>"
+                                               id="<? echo $ar["CONTROL_ID"] ?>"
+                                            <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
+                                               onclick="smartFilter.click(this)"
+                                        />
+                                        <label data-role="label_<?= $ar["CONTROL_ID"] ?>"
+                                               class="custom-control-label bx-filter-param-label"
+                                               for="<? echo $ar["CONTROL_ID"] ?>">
+                                            <span class="bx_filter_param_text"
+                                                  title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?><?
+                                                if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
+                                                    ?> (<span
+                                                        data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
+                                                endif; ?></span>
+                                        </label>
+                                    </li>
 
-                            <? endforeach; ?>
-                        </ul>
-                            <? } ?>
+                                <? endforeach; ?>
+                            </ul>
+                        <? } ?>
 
-                            <div class="clb"></div>
+                        <div class="clb"></div>
                     </div>
                     <?
                 }
