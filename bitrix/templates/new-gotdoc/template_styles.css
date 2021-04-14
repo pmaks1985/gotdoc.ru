@@ -374,6 +374,11 @@ ul.dropdown-menu {
     margin-bottom: 14px;
 }
 
+.product-list_text__title-link, .product-list_text__title-link:hover {
+    color: #343a40;
+    text-decoration: none;
+}
+
 .product-list_text__description {
     font-size: 14px;
     color: #989898;
@@ -386,6 +391,7 @@ ul.dropdown-menu {
 
 .price {
     padding-top: 10px;
+    width: 51%;
 }
 
 .price-new {
@@ -393,7 +399,7 @@ ul.dropdown-menu {
     font-size: 23px;
     font-weight: 800;
     color: #dc3545;
-    padding-right: 8px;
+    padding-right: 5px;
 }
 
 .price-old {

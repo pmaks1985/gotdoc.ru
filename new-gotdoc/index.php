@@ -447,7 +447,8 @@
                                     утверждении правил противопожарного режима в Российской Федерации»</p>
                             </div>
                             <div class="price w-50">
-                                <span class="price-new">2499 руб.</span><span class="price-old">3500 руб.</span>
+                                <span class="price-new">2499 руб.</span>
+                                <span class="price-old">3500 руб.</span>
                                 <div class="buy-button">
                                     <a href="#" class="btn-outline-danger text-decoration-none buy-button_link">Заказать</a>
                                 </div>
