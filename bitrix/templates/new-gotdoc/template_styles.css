@@ -218,9 +218,9 @@ ul.dropdown-menu {
 .dropdown-submenu .dropdown-menu {
     top: -0.55rem !important;
     left: 100% !important;
-    margin-left: .1rem;
+    margin-left: .6rem;
     margin-right: .1rem;
-    padding: 0;
+    padding: 10px;
 }
 
 .dropdown-item_li {

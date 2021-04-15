@@ -29,10 +29,11 @@ foreach ($arResult
     </a>
     <ul class="dropdown-menu">
     <? else: ?>
-    <li class="second-level dropdown-submenu"><a href="<?= $arItem["LINK"] ?>"
-                     class="dropdown-item dropdown-toggle d-flex align-items-center justify-content-between"><?= $arItem["TEXT"] ?><i class="bi bi-chevron-right"></i></a>
+    <li class="second-level dropright"><a href="<?= $arItem["LINK"] ?>"
+                                          class="dropdown-item dropdown-toggle d-flex align-items-center justify-content-between"><div class="text-normal"><?= $arItem["TEXT"] ?></div>
+        <i class="bi bi-chevron-right"></i></a>
 
-    <ul class="first-level_ul pl-3">
+    <ul class="first-level_ul dropdown-menu pl-3">
     <? endif ?>
 
     <? else: ?>
@@ -41,12 +42,13 @@ foreach ($arResult
 
             <? if ($arItem["DEPTH_LEVEL"] == 1): ?>
                 <li class="dropdown-submenu"><a href="<?= $arItem["LINK"] ?>"
-                                                class="dropdown-item dropdown-toggle d-flex align-items-center justify-content-between"><?= $arItem["TEXT"] ?></a>
+                                                class="dropdown-item dropdown-toggle d-flex align-items-center justify-content-between"><?= $arItem["TEXT"] ?>
+                    </a>
                 </li>
             <? else: ?>
 
                 <li class="first-level"><a href="<?= $arItem["LINK"] ?>"
-                                 class="dropdown-item"><?= $arItem["TEXT"] ?></a></li>
+                                           class="dropdown-item"><?= $arItem["TEXT"] ?></a></li>
             <? endif ?>
 
         <? else: ?>
