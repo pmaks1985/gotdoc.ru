@@ -3,8 +3,8 @@
 
 <div class="sort d-flex">
     <p class="sort-title">Сортировать:</p>
-    <a class="sort-link" href="#">По популярности</a>
-    <a class="sort-link" href="#">По цене</a>
+    <a class="sort-link" href="<?=$arResult["SECTION_PAGE_URL"]?>?sort=show_counter&method=desc">По популярности</a>
+    <a class="sort-link" href="<?=$arResult["SECTION_PAGE_URL"]?>?sort=catalog_PRICE_3&method=asc">По цене</a>
     <a class="sort-link" href="<?=$arResult["SECTION_PAGE_URL"]?>?sort=name&method=asc">По алфавиту</a>
 </div>
 
