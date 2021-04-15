@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?//print_r($arResult);?>
 <?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
 		<?
 		$this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -26,7 +27,6 @@
                         <p class="product-list_text__title"><a class="product-list_text__title-link" href="<?=$arElement["DETAIL_PAGE_URL"]?>"><?=$arElement["NAME"]?></a></p>
                         <p class="product-list_text__description"><?=$arElement["PREVIEW_TEXT"]?></p>
                     </div>
-
 			<?if(is_array($arElement["OFFERS"]) && !empty($arElement["OFFERS"])):?>
 				<?foreach($arElement["OFFERS"] as $arOffer):?>
 					<?foreach($arParams["OFFERS_FIELD_CODE"] as $field_code):?>
@@ -207,6 +207,11 @@
 			<?endwhile;?>
 			</tr>
 		<?endif?>
+    <div class="text">
+        <span>
+            <?=$arResult["DESCRIPTION"]?>
+        </span>
+    </div>
 
 
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>

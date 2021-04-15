@@ -1,5 +1,4 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
-<div class="col-lg-9 pr-0">
     <? $APPLICATION->IncludeComponent(
         "bitrix:catalog.section",
         "",
@@ -98,4 +97,4 @@
         $component
     );*/ ?>
     <? endif ?>
-</div>
+
