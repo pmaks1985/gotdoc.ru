@@ -207,14 +207,15 @@
 			<?endwhile;?>
 			</tr>
 		<?endif?>
-    <div class="text">
-        <span>
-            <?=$arResult["DESCRIPTION"]?>
-        </span>
-    </div>
+
 
 
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
 	<br /><?=$arResult["NAV_STRING"]?>
 <?endif;?>
 
+<div class="text">
+        <span>
+            <?=$arResult["DESCRIPTION"]?>
+        </span>
+</div>

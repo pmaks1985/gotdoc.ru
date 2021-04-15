@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Title");
+$APPLICATION->SetTitle("Каталог товаров");
 ?>
 
 <? $APPLICATION->IncludeComponent(
@@ -314,6 +314,10 @@ $APPLICATION->SetTitle("Title");
                 ),
                 false
             ); ?>
+            <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
+                <? $APPLICATION->IncludeFile('/catalog/include/main.php'); ?>
+            <? endif; ?>
         </div>
     </div>
+
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
