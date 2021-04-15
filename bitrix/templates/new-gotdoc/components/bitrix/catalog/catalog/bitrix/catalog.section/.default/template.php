@@ -1,5 +1,13 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?//print_r($arResult);?>
+
+<div class="sort d-flex">
+    <p class="sort-title">Сортировать:</p>
+    <a class="sort-link" href="#">По популярности</a>
+    <a class="sort-link" href="#">По цене</a>
+    <a class="sort-link" href="<?=$arResult["SECTION_PAGE_URL"]?>?sort=name&method=asc">По алфавиту</a>
+</div>
+
 <?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
 		<?
 		$this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
