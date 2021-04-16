@@ -4,13 +4,15 @@ $APPLICATION->SetTitle("Каталог товаров");
 ?>
 
 <? $APPLICATION->IncludeComponent(
-    "bitrix:breadcrumb",
-    "breadcrump",
-    array(
-        "PATH" => "",
-        "SITE_ID" => "s1",
-        "START_FROM" => "0"
-    )
+	"bitrix:breadcrumb", 
+	"breadcrump", 
+	array(
+		"PATH" => "",
+		"SITE_ID" => "s1",
+		"START_FROM" => "0",
+		"COMPONENT_TEMPLATE" => "breadcrump"
+	),
+	false
 ); ?>
     <div class="row mx-0">
         <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
