@@ -1,14 +1,5 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-<?if ($_GET["sort"] == "name" ||
-    $_GET["sort"] == "catalog_PRICE_3" ||
-    $_GET["sort"] == "property_PRODUCT_TYPE" ||
-    $_GET["sort"] == "show_counter" ||
-    $_GET["sort"] == "timestamp_x"){
-    $arParams["ELEMENT_SORT_FIELD"] = $_GET["sort"];
-    $arParams["ELEMENT_SORT_ORDER"] = $_GET["method"];
-}else{}?>
-
 <?
 if (CModule::IncludeModule("iblock")) {
     $arFilter = array(

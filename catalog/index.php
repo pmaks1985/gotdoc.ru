@@ -4,15 +4,15 @@ $APPLICATION->SetTitle("Каталог товаров");
 ?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:breadcrumb", 
-	"breadcrump", 
-	array(
-		"PATH" => "",
-		"SITE_ID" => "s1",
-		"START_FROM" => "0",
-		"COMPONENT_TEMPLATE" => "breadcrump"
-	),
-	false
+    "bitrix:breadcrumb",
+    "breadcrump",
+    array(
+        "PATH" => "",
+        "SITE_ID" => "s1",
+        "START_FROM" => "0",
+        "COMPONENT_TEMPLATE" => "breadcrump"
+    ),
+    false
 ); ?>
     <div class="row mx-0">
         <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
@@ -51,6 +51,22 @@ $APPLICATION->SetTitle("Каталог товаров");
         <div class="col-lg-9 pr-0">
             <h1 class="title"><? $APPLICATION->ShowTitle(false) ?></h1>
             <? endif; ?>
+
+            <?
+            $sortField = 'ID'; // поле сортировки по умолчанию
+            $sortOrder = 'ASC'; // направление сортировки по умолчанию
+
+            if (
+                isset($_GET["sort"]) && isset($_GET["method"]) && (
+                    $_GET["sort"] == "name" ||
+                    $_GET["sort"] == "catalog_PRICE_3" ||
+                    $_GET["sort"] == "property_PRODUCT_TYPE" ||
+                    $_GET["sort"] == "timestamp_x")) {
+                $sortField = $_GET["sort"];
+                $sortOrder = $_GET["method"];
+            }
+            ?>
+
             <? $APPLICATION->IncludeComponent(
                 "bitrix:catalog",
                 "catalog",
@@ -123,8 +139,8 @@ $APPLICATION->SetTitle("Каталог товаров");
                     "DISABLE_INIT_JS_IN_COMPONENT" => "N",
                     "DISPLAY_BOTTOM_PAGER" => "Y",
                     "DISPLAY_TOP_PAGER" => "N",
-                    "ELEMENT_SORT_FIELD" => "sort",
-                    "ELEMENT_SORT_FIELD2" => "id",
+                    "ELEMENT_SORT_FIELD" => $sortField,
+                    "ELEMENT_SORT_FIELD2" => $sortOrder,
                     "ELEMENT_SORT_ORDER" => "asc",
                     "ELEMENT_SORT_ORDER2" => "desc",
                     "FILTER_FIELD_CODE" => array(
