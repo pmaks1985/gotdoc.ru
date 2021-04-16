@@ -60,6 +60,7 @@ $APPLICATION->SetTitle("Каталог товаров");
                 isset($_GET["sort"]) && isset($_GET["method"]) && (
                     $_GET["sort"] == "name" ||
                     $_GET["sort"] == "catalog_PRICE_3" ||
+                    $_GET["sort"] == "show_counter" ||
                     $_GET["sort"] == "property_PRODUCT_TYPE" ||
                     $_GET["sort"] == "timestamp_x")) {
                 $sortField = $_GET["sort"];
@@ -140,8 +141,8 @@ $APPLICATION->SetTitle("Каталог товаров");
                     "DISPLAY_BOTTOM_PAGER" => "Y",
                     "DISPLAY_TOP_PAGER" => "N",
                     "ELEMENT_SORT_FIELD" => $sortField,
-                    "ELEMENT_SORT_FIELD2" => $sortOrder,
-                    "ELEMENT_SORT_ORDER" => "asc",
+                    "ELEMENT_SORT_FIELD2" => "ID",
+                    "ELEMENT_SORT_ORDER" => "$sortOrder",
                     "ELEMENT_SORT_ORDER2" => "desc",
                     "FILTER_FIELD_CODE" => array(
                         0 => "",
