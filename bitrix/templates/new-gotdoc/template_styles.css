@@ -435,8 +435,8 @@ ul.dropdown-menu {
 
 .page-navidation_numbers {
     background-color: #ffffff;
-    border: 2px solid #f5efe9;
-    border-radius: 8px;
+    border: 2px solid #f5efe9 !important;
+    border-radius: 8px !important;
     color: #989898;
     padding: 5px 10px;
     margin-right: 7px;
