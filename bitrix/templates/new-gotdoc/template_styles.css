@@ -163,6 +163,7 @@ body {
     background-position: center;
     border: 2px solid #dc3545;
     padding: 20px;
+    margin-left: -5px;
 }
 
 .backet {
@@ -441,11 +442,22 @@ ul.dropdown-menu {
     padding: 5px 10px;
     margin-right: 7px;
     text-decoration: none !important;
+    cursor: pointer;
 }
 
 .page-navidation_numbers:hover {
     background-color: #f9f5f1;
-    color: #989898;
+    color: #989898 !important;
+}
+
+.page-navidation_numbers__link {
+    color: #343a40;
+}
+
+.page-navidation_numbers__link:hover {
+    text-decoration: none;
+    color: #343a40;
+
 }
 
 .text {

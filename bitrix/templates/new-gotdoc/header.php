@@ -103,13 +103,35 @@
 
                 </div>
                 <div>
-                    <nav class="navbar py-0">
-                        <form class="form-inline">
-                            <input class="form-control form-control_input" type="search"
-                                   placeholder="Введите название документа" aria-label="Введите название документа">
-                            <button class="search_btn" type="submit"></button>
-                        </form>
-                    </nav>
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:search.title",
+                        "catalog-search-title",
+                        Array(
+                            "CATEGORY_0" => array(0=>"iblock_newgotdoc",),
+                            "CATEGORY_0_TITLE" => "",
+                            "CATEGORY_0_iblock_newgotdoc" => array(0=>"32",),
+                            "CHECK_DATES" => "Y",
+                            "COMPONENT_TEMPLATE" => "catalog",
+                            "CONTAINER_ID" => "title-search",
+                            "CONVERT_CURRENCY" => "N",
+                            "INPUT_ID" => "title-search-input",
+                            "NUM_CATEGORIES" => "1",
+                            "ORDER" => "date",
+                            "PAGE" => "#SITE_DIR#/catalog/#SECTION_CODE_PATH#/",
+                            "PREVIEW_HEIGHT" => "75",
+                            "PREVIEW_TRUNCATE_LEN" => "",
+                            "PREVIEW_WIDTH" => "75",
+                            "PRICE_CODE" => "",
+                            "PRICE_VAT_INCLUDE" => "Y",
+                            "SHOW_INPUT" => "Y",
+                            "SHOW_OTHERS" => "N",
+                            "SHOW_PREVIEW" => "Y",
+                            "TEMPLATE_THEME" => "blue",
+                            "TOP_COUNT" => "5",
+                            "USE_LANGUAGE_GUESS" => "Y"
+                        )
+                    );?>
+
                 </div>
             </div>
             <div class="btn backet d-flex align-items-center">
