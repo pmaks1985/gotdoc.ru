@@ -40,11 +40,3 @@ if($arParams["SHOW_INPUT"] !== "N"):?>
 		});
 	});
 </script>
-
-<!--<nav class="navbar py-0">-->
-<!--    <form class="form-inline">-->
-<!--        <input class="form-control form-control_input" type="search"-->
-<!--               placeholder="Введите название документа" aria-label="Введите название документа">-->
-<!--        <button class="search_btn" type="submit"></button>-->
-<!--    </form>-->
-<!--</nav>-->
