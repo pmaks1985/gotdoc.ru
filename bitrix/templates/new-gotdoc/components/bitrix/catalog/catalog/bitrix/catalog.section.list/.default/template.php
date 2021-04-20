@@ -11,8 +11,7 @@
         <a href="<?= $arSection["SECTION_PAGE_URL"] ?>" class="text-decoration-none">
             <div class="card mr-3">
                 <? if (strlen($arSection["PICTURE"]["SRC"]) > 0): ?>
-                    <img class="card-img-top" src="<?= $arSection["PICTURE"]["SRC"] ?>"
-                         alt="<?= $arSection["PICTURE"]["ALT"] ?>" title="<?= $arSection["PICTURE"]["TITLE"] ?>">
+                    <div class="card-img-top" style="background-image: url('<?= $arSection["PICTURE"]["SRC"] ?>')"></div>
                 <? else: ?>
                     нет картинки
                 <? endif ?>

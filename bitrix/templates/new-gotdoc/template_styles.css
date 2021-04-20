@@ -320,16 +320,21 @@ ul.dropdown-menu {
     background-color: #ffffff;
     border: 2px solid #f5efe9;
     border-radius: 8px;
+    width: 12rem;
+    height: 12rem;
 }
 
-.card-body {
-    padding-top: 0;
+.card-body{
+    padding: 0;
+    margin: 0px auto 20px auto;
 }
 
 .card-img-top {
-    padding: 13px 25px 11px 25px;
-    max-height: 150px;
-    width: auto;
+    margin: 10px auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 8rem;
 }
 
 .card-text {
