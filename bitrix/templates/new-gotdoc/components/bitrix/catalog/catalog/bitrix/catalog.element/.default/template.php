@@ -2,8 +2,7 @@
 
 <div class="col-lg-5 pl-0 pr-4">
     <div class="goods">
-        <img class="goods-img" src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>"
-             title="<?= $arResult["NAME"] ?>">
+        <div class="goods-img" style="background-image: url('<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>')"></div>
     </div>
 </div>
 <div class="col-lg-7 px-0">

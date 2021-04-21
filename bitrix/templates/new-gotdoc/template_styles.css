@@ -541,7 +541,11 @@ footer {
 }
 
 .goods-img {
-    padding: 55px 70px 35px 55px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 19rem;
+    margin: 54px 70px 34px 54px;
 }
 
 .goods_price-new {
