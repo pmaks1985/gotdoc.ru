@@ -115,3 +115,63 @@ echo '</pre>';
         </div>
     </div>
 </div>
+
+<!--Купить В корзину-->
+<div class="cart d-none">
+    <? if ($arResult["CAN_BUY"]): ?>
+        <? if ($arParams["USE_PRODUCT_QUANTITY"] || count($arResult["PRODUCT_PROPERTIES"])): ?>
+            <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data">
+                <table border="0" cellspacing="0" cellpadding="2">
+                    <? if ($arParams["USE_PRODUCT_QUANTITY"]): ?>
+                        <tr valign="top">
+                            <td><? echo GetMessage("CT_BCE_QUANTITY") ?>:</td>
+                            <td>
+                                <input type="text" name="<? echo $arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1"
+                                       size="5">
+                            </td>
+                        </tr>
+                    <? endif; ?>
+                    <? foreach ($arResult["PRODUCT_PROPERTIES"] as $pid => $product_property): ?>
+                        <tr valign="top">
+                            <td><? echo $arResult["PROPERTIES"][$pid]["NAME"] ?>:</td>
+                            <td>
+                                <? if (
+                                    $arResult["PROPERTIES"][$pid]["PROPERTY_TYPE"] == "L"
+                                    && $arResult["PROPERTIES"][$pid]["LIST_TYPE"] == "C"
+                                ): ?>
+                                    <? foreach ($product_property["VALUES"] as $k => $v): ?>
+                                        <label><input type="radio"
+                                                      name="<? echo $arParams["PRODUCT_PROPS_VARIABLE"] ?>[<? echo $pid ?>]"
+                                                      value="<? echo $k ?>" <? if ($k == $product_property["SELECTED"]) echo '"checked"' ?>><? echo $v ?>
+                                        </label><br>
+                                    <? endforeach; ?>
+                                <? else: ?>
+                                    <select name="<? echo $arParams["PRODUCT_PROPS_VARIABLE"] ?>[<? echo $pid ?>]">
+                                        <? foreach ($product_property["VALUES"] as $k => $v): ?>
+                                            <option value="<? echo $k ?>" <? if ($k == $product_property["SELECTED"]) echo '"selected"' ?>><? echo $v ?></option>
+                                        <? endforeach; ?>
+                                    </select>
+                                <? endif; ?>
+                            </td>
+                        </tr>
+                    <? endforeach; ?>
+                </table>
+                <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
+                <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>"
+                       value="<? echo $arResult["ID"] ?>">
+                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>"
+                       value="<? echo GetMessage("CATALOG_BUY") ?>">
+                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>"
+                       value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>">
+            </form>
+        <? else: ?>
+            <noindex>
+                <a href="<? echo $arResult["BUY_URL"] ?>" rel="nofollow"><? echo GetMessage("CATALOG_BUY") ?></a>
+                &nbsp;<a href="<? echo $arResult["ADD_URL"] ?>"
+                         rel="nofollow"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?></a>
+            </noindex>
+        <? endif; ?>
+    <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
+        <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
+    <? endif ?>
+</div>
