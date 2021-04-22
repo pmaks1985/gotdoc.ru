@@ -26,6 +26,9 @@
 <body>
 <? $APPLICATION->ShowPanel(); ?>
 
+<?
+$userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
+?>
 <div class="container">
     <header>
         <div class="align-items-center banner">
@@ -59,7 +62,8 @@
                     <div class="mr-3">
                         <span class="select-region_text">Ваш регион:</span>
                         <span class="select-region_city">
-								<span class="dottedUnderline">Москва</span><i class="bi bi-caret-down-fill"></i>
+								<span class="dottedUnderline"><?= $userCity; ?></span><i
+                                    class="bi bi-caret-down-fill"></i>
 							</span>
                     </div>
                     <div>
