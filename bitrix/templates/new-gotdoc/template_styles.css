@@ -322,6 +322,8 @@ ul.dropdown-menu {
     border-radius: 8px;
     width: 12rem;
     height: 12rem;
+    margin-right: 0.7rem;
+    margin-bottom: 0.7rem;
 }
 
 .card-body{

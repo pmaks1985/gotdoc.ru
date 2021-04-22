@@ -1,5 +1,5 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
-<div class="d-flex align-items-center pt-3">
+<div class="d-flex align-items-center pt-3 flex-wrap">
     <?
     $TOP_DEPTH = $arResult["SECTION"]["DEPTH_LEVEL"];
     $CURRENT_DEPTH = $TOP_DEPTH;
@@ -9,7 +9,7 @@
         ?>
 
         <a href="<?= $arSection["SECTION_PAGE_URL"] ?>" class="text-decoration-none">
-            <div class="card mr-3">
+            <div class="card">
                 <? if (strlen($arSection["PICTURE"]["SRC"]) > 0): ?>
                     <div class="card-img-top" style="background-image: url('<?= $arSection["PICTURE"]["SRC"] ?>')"></div>
                 <? else: ?>
