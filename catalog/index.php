@@ -142,7 +142,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"DISPLAY_TOP_PAGER" => "N",
 		"ELEMENT_SORT_FIELD" => $sortField,
 		"ELEMENT_SORT_FIELD2" => "ID",
-		"ELEMENT_SORT_ORDER" => "\$sortOrder",
+		"ELEMENT_SORT_ORDER" => $sortOrder,
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"FILTER_FIELD_CODE" => array(
 			0 => "",
