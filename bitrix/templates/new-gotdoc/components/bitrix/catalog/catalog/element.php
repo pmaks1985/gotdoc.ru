@@ -69,7 +69,7 @@
 <?endif?>
 <?if($arParams["USE_ALSO_BUY"] == "Y" && IsModuleInstalled("sale") && $ElementID):?>
 
-<?$APPLICATION->IncludeComponent("bitrix:sale.recommended.products", ".default", array(
+<?$APPLICATION->IncludeComponent("bitrix:sale.recommended.products", "sale-recomm", array(
 	"ID" => $ElementID,
 	"MIN_BUYES" => $arParams["ALSO_BUY_MIN_BUYES"],
 	"ELEMENT_COUNT" => $arParams["ALSO_BUY_ELEMENT_COUNT"],
@@ -91,3 +91,42 @@
 
 ?>
 <?endif?>
+
+<? if ($arParams["SHOW_TOP_ELEMENTS"] != "N"): ?>
+
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:catalog.top",
+        "",
+        Array(
+            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+            "ELEMENT_SORT_FIELD" => $arParams["TOP_ELEMENT_SORT_FIELD"],
+            "ELEMENT_SORT_ORDER" => $arParams["TOP_ELEMENT_SORT_ORDER"],
+            "SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+            "DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+            "BASKET_URL" => $arParams["BASKET_URL"],
+            "ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
+            "PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
+            "SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
+            "DISPLAY_COMPARE" => $arParams["USE_COMPARE"],
+            "ELEMENT_COUNT" => $arParams["TOP_ELEMENT_COUNT"],
+            "LINE_ELEMENT_COUNT" => $arParams["TOP_LINE_ELEMENT_COUNT"],
+            "PROPERTY_CODE" => $arParams["TOP_PROPERTY_CODE"],
+            "PRICE_CODE" => $arParams["PRICE_CODE"],
+            "USE_PRICE_COUNT" => $arParams["USE_PRICE_COUNT"],
+            "SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
+            "PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
+            "PRICE_VAT_SHOW_VALUE" => $arParams["PRICE_VAT_SHOW_VALUE"],
+            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+            "CACHE_TIME" => $arParams["CACHE_TIME"],
+            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+            "OFFERS_CART_PROPERTIES" => $arParams["OFFERS_CART_PROPERTIES"],
+            "OFFERS_FIELD_CODE" => $arParams["TOP_OFFERS_FIELD_CODE"],
+            "OFFERS_PROPERTY_CODE" => $arParams["TOP_OFFERS_PROPERTY_CODE"],
+            "OFFERS_SORT_FIELD" => $arParams["OFFERS_SORT_FIELD"],
+            "OFFERS_SORT_ORDER" => $arParams["OFFERS_SORT_ORDER"],
+            "OFFERS_LIMIT" => $arParams["TOP_OFFERS_LIMIT"],
+        ),
+        $component
+    );?>
+<? endif ?>

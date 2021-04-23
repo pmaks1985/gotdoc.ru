@@ -339,7 +339,7 @@ $APPLICATION->SetTitle("Каталог товаров");
             <? endif; ?>
         </div>
 
-    </div>
+
 
     <div class="those-involved those-involved-goods">
         <div class="those-involted_title">
