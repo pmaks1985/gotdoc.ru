@@ -120,8 +120,7 @@ echo '</pre>';
 <div class="questions d-flex justify-content-between align-items-center">
     <div class="questions-text">Появились вопросы?</div>
     <div><span class="questions-text mr-3">8 (800) 550-49-08</span><span>Бесплатно по РФ</span></div>
-    <div><a href="#" class="btn text-decoration-none goods_buy-button questions-button">Написать
-            сообщение</a></div>
+    <div><a href="#" class="btn text-decoration-none goods_buy-button questions-button">Написать сообщение</a></div>
 </div>
 
 <!--Купить В корзину-->
