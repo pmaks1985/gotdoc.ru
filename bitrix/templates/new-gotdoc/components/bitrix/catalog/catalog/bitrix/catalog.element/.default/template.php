@@ -21,7 +21,7 @@
         <div>
         <? if ($arResult["CAN_BUY"]): ?>
             <noindex>
-                <a href="<? echo $arResult["ADD_URL"] ?>" class="btn text-decoration-none goods_buy-button"
+                <a href="<? echo $arResult["ADD_URL"] ?>" class="btn text-decoration-none goods_buy-button add_form"
                    rel="nofollow"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?></a>
             </noindex>
         <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>

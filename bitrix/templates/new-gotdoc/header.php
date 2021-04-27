@@ -68,11 +68,12 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
 							</span>
                     </div>
                     <div>
-                        <?if($USER->IsAuthorized()):?>
-                            <?= $USER->GetFullName();?>
-                        <?else:?>
-                        <a href="/personal/auth/" class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
-                        <?endif;?>
+                        <? if ($USER->IsAuthorized()): ?>
+                            <?= $USER->GetFullName(); ?>
+                        <? else: ?>
+                            <a href="/personal/auth/"
+                               class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
+                        <? endif; ?>
                     </div>
                 </div>
             </div>
@@ -148,9 +149,19 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
 
                 </div>
             </div>
-            <div class="btn backet d-flex align-items-center">
-                <img class="pr-3" src="/bitrix/templates/new-gotdoc/img/backet.png" alt="backet">
-                <span class="backet_text"><a class="text-decoration-none text-white" href="/personal/cart/"> Корзина пуста</a></span>
+            <div id="basket-container">
+            <? $APPLICATION->IncludeComponent(
+                "bazarow:basket.small.bazarow",
+                "ajax",
+                array(
+                    "COMPONENT_TEMPLATE" => "ajax",
+                    "PATH_TO_BASKET" => "/personal/cart",
+                    "PATH_TO_ORDER" => "/personal/cart",
+                    "SHOW_DELAY" => "N",
+                    "SHOW_NOTAVAIL" => "Y",
+                    "SHOW_SUBSCRIBE" => "Y"
+                )
+            ); ?>
             </div>
         </div>
     </header>
