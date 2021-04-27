@@ -1,8 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Title");
-?>
-<?php
+?><?php
     $userLat = \Bitrix\Main\Service\GeoIp\Manager::getGeoPositionLatitude();
     $userLon = \Bitrix\Main\Service\GeoIp\Manager::getGeoPositionLongitude();
     $userCity = 'Вы в городе: ' . \Bitrix\Main\Service\GeoIp\Manager::getCityName();
@@ -32,19 +31,14 @@ $APPLICATION->SetTitle("Title");
     "MAP_ID" => "",
     )
     );
-?>
-
-<?$APPLICATION->IncludeComponent(
-    "reaspekt:reaspekt.geoip",
-    "template3",
-    array(
-        "COMPONENT_TEMPLATE" => "template3",
-        "CHANGE_CITY_MANUAL" => "Y",
-        "COMPOSITE_FRAME_MODE" => "A",
-        "COMPOSITE_FRAME_TYPE" => "AUTO"
-    ),
-    false
-);?>
-
-
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+?> <?$APPLICATION->IncludeComponent(
+	"reaspekt:reaspekt.geoip",
+	"template3",
+	Array(
+		"CHANGE_CITY_MANUAL" => "Y",
+		"COMPONENT_TEMPLATE" => "template3",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	)
+);?> <br>
+ <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
