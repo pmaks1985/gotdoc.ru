@@ -198,6 +198,7 @@ ul.dropdown-menu {
     font-size: 16px;
     line-height: 15px;
     padding: 0.5rem;
+    white-space: normal;
 }
 
 .dropdown-item:hover,

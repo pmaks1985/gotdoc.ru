@@ -1,5 +1,5 @@
 <?
-$MESS["CATALOG_ADD_TO_BASKET"] = "В корзину";
+$MESS["CATALOG_ADD_TO_BASKET"] = "Заказать";
 $MESS["CATALOG_MORE_PHOTO"] = "Еще фото";
 $MESS["CATALOG_DOWNLOAD"] = "Скачать";
 $MESS["CATALOG_BACK"] = "Назад в раздел";

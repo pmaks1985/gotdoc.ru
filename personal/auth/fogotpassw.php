@@ -5,15 +5,15 @@ $APPLICATION->SetTitle("Авторизация");
 ?>
 
 
-<? if (CUser::IsAuthorized()) { ?>
+<? if (CUser::IsAuthorized()) : ?>
 
-<? } else { ?>
+<? else : ?>
     <? $APPLICATION->IncludeComponent("bitrix:system.auth.forgotpasswd",
         ".default",
-        Array()
+        array()
     ); ?>
 
-<? } ?>
+<? endif; ?>
 
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

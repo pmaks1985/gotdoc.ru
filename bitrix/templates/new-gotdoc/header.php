@@ -1,4 +1,5 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -67,7 +68,11 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
 							</span>
                     </div>
                     <div>
-                        <a href="#" class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
+                        <?if($USER->IsAuthorized()):?>
+                            <?= $USER->GetFullName();?>
+                        <?else:?>
+                        <a href="/personal/auth/" class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
+                        <?endif;?>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,14 @@
             </span>
         </div>
         <div>
-            <a href="#" class="btn text-decoration-none goods_buy-button">Заказать</a>
+        <? if ($arResult["CAN_BUY"]): ?>
+            <noindex>
+                <a href="<? echo $arResult["ADD_URL"] ?>" class="btn text-decoration-none goods_buy-button"
+                   rel="nofollow"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?></a>
+            </noindex>
+        <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
+            <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
+        <? endif ?>
         </div>
     </div>
     <div class="goods-content">
@@ -69,16 +76,18 @@ echo '</pre>';
         <div class="col-lg-10 px-0">
             <div class="collapse multi-collapse" id="description3" data-parent="#description">
                 <div class="d-flex goods-description_list">
-                    <div class="goods-description_list__frame">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe width="410" height="280"
-                                    src="<?= $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_LINK"]["VALUE"] ?>"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                    <? if ($arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_LINK"]["VALUE"] && $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_TEXT_LINK"]["VALUE"]): ?>
+                        <div class="goods-description_list__frame">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe width="410" height="280"
+                                        src="<?= $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_LINK"]["VALUE"] ?>"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                            <p class="goods-description_list__text goods-content_text"><?= $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_TEXT_LINK"]["VALUE"] ?></p>
                         </div>
-                        <p class="goods-description_list__text goods-content_text"><?= $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_TEXT_LINK"]["VALUE"] ?></p>
-                    </div>
+                    <? endif; ?>
                     <div>
                         <?= $arResult["DISPLAY_PROPERTIES"]["HOW_TO_ORDER_TEXT"]["~VALUE"]["TEXT"] ?>
                     </div>
@@ -121,64 +130,4 @@ echo '</pre>';
     <div class="questions-text">Появились вопросы?</div>
     <div><span class="questions-text mr-3">8 (800) 550-49-08</span><span>Бесплатно по РФ</span></div>
     <div><a href="#" class="btn text-decoration-none goods_buy-button questions-button">Написать сообщение</a></div>
-</div>
-
-<!--Купить В корзину-->
-<div class="cart d-none">
-    <? if ($arResult["CAN_BUY"]): ?>
-        <? if ($arParams["USE_PRODUCT_QUANTITY"] || count($arResult["PRODUCT_PROPERTIES"])): ?>
-            <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data">
-                <table border="0" cellspacing="0" cellpadding="2">
-                    <? if ($arParams["USE_PRODUCT_QUANTITY"]): ?>
-                        <tr valign="top">
-                            <td><? echo GetMessage("CT_BCE_QUANTITY") ?>:</td>
-                            <td>
-                                <input type="text" name="<? echo $arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1"
-                                       size="5">
-                            </td>
-                        </tr>
-                    <? endif; ?>
-                    <? foreach ($arResult["PRODUCT_PROPERTIES"] as $pid => $product_property): ?>
-                        <tr valign="top">
-                            <td><? echo $arResult["PROPERTIES"][$pid]["NAME"] ?>:</td>
-                            <td>
-                                <? if (
-                                    $arResult["PROPERTIES"][$pid]["PROPERTY_TYPE"] == "L"
-                                    && $arResult["PROPERTIES"][$pid]["LIST_TYPE"] == "C"
-                                ): ?>
-                                    <? foreach ($product_property["VALUES"] as $k => $v): ?>
-                                        <label><input type="radio"
-                                                      name="<? echo $arParams["PRODUCT_PROPS_VARIABLE"] ?>[<? echo $pid ?>]"
-                                                      value="<? echo $k ?>" <? if ($k == $product_property["SELECTED"]) echo '"checked"' ?>><? echo $v ?>
-                                        </label><br>
-                                    <? endforeach; ?>
-                                <? else: ?>
-                                    <select name="<? echo $arParams["PRODUCT_PROPS_VARIABLE"] ?>[<? echo $pid ?>]">
-                                        <? foreach ($product_property["VALUES"] as $k => $v): ?>
-                                            <option value="<? echo $k ?>" <? if ($k == $product_property["SELECTED"]) echo '"selected"' ?>><? echo $v ?></option>
-                                        <? endforeach; ?>
-                                    </select>
-                                <? endif; ?>
-                            </td>
-                        </tr>
-                    <? endforeach; ?>
-                </table>
-                <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
-                <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>"
-                       value="<? echo $arResult["ID"] ?>">
-                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>"
-                       value="<? echo GetMessage("CATALOG_BUY") ?>">
-                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>"
-                       value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>">
-            </form>
-        <? else: ?>
-            <noindex>
-                <a href="<? echo $arResult["BUY_URL"] ?>" rel="nofollow"><? echo GetMessage("CATALOG_BUY") ?></a>
-                &nbsp;<a href="<? echo $arResult["ADD_URL"] ?>"
-                         rel="nofollow"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?></a>
-            </noindex>
-        <? endif; ?>
-    <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
-        <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
-    <? endif ?>
 </div>
