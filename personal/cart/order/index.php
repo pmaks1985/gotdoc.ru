@@ -2,9 +2,9 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
 ?><?$APPLICATION->IncludeComponent(
-	"bitrix:sale.order.ajax",
-	"",
-	Array(
+	"bitrix:sale.order.ajax", 
+	"bootstrap_v4", 
+	array(
 		"ACTION_VARIABLE" => "soa-action",
 		"ADDITIONAL_PICT_PROP_30" => "-",
 		"ALLOW_APPEND_ORDER" => "Y",
@@ -31,10 +31,16 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"PAY_SYSTEMS_PER_PAGE" => "9",
 		"PICKUPS_PER_PAGE" => "5",
 		"PICKUP_MAP_TYPE" => "yandex",
-		"PRODUCT_COLUMNS_HIDDEN" => array(),
-		"PRODUCT_COLUMNS_VISIBLE" => array("PREVIEW_PICTURE","PROPS"),
-		"PROPS_FADE_LIST_1" => array(),
-		"PROPS_FADE_LIST_2" => array(),
+		"PRODUCT_COLUMNS_HIDDEN" => array(
+		),
+		"PRODUCT_COLUMNS_VISIBLE" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "PROPS",
+		),
+		"PROPS_FADE_LIST_1" => array(
+		),
+		"PROPS_FADE_LIST_2" => array(
+		),
 		"SEND_NEW_USER_NOTIFY" => "Y",
 		"SERVICES_IMAGES_SCALING" => "adaptive",
 		"SET_TITLE" => "Y",
@@ -58,7 +64,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"SKIP_USELESS_BLOCK" => "Y",
 		"SPOT_LOCATION_BY_GEOIP" => "Y",
 		"TEMPLATE_LOCATION" => "popup",
-		"TEMPLATE_THEME" => "site",
+		"TEMPLATE_THEME" => "blue",
 		"USER_CONSENT" => "N",
 		"USER_CONSENT_ID" => "0",
 		"USER_CONSENT_IS_CHECKED" => "Y",
@@ -69,6 +75,18 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"USE_PRELOAD" => "Y",
 		"USE_PREPAYMENT" => "N",
-		"USE_YM_GOALS" => "N"
-	)
+		"USE_YM_GOALS" => "N",
+		"COMPONENT_TEMPLATE" => "bootstrap_v4",
+		"SHOW_COUPONS" => "Y",
+		"EMPTY_BASKET_HINT_PATH" => "/",
+		"USE_PHONE_NORMALIZATION" => "Y",
+		"ADDITIONAL_PICT_PROP_17" => "-",
+		"ADDITIONAL_PICT_PROP_23" => "-",
+		"ADDITIONAL_PICT_PROP_25" => "-",
+		"ADDITIONAL_PICT_PROP_26" => "-",
+		"ADDITIONAL_PICT_PROP_27" => "-",
+		"ADDITIONAL_PICT_PROP_32" => "-",
+		"HIDE_ORDER_DESCRIPTION" => "N"
+	),
+	false
 );?><br><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>

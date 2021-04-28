@@ -1,7 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Мои заказы");
-?><?$APPLICATION->IncludeComponent(
+?>
+	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.personal.order",
 	"",
 	Array(
@@ -34,4 +35,5 @@ $APPLICATION->SetTitle("Мои заказы");
 		"STATUS_COLOR_P" => "yellow",
 		"STATUS_COLOR_PSEUDO_CANCELLED" => "red"
 	)
-);?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
+);?>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
