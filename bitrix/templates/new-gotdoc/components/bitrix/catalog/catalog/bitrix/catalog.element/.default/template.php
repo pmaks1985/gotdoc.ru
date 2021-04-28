@@ -20,13 +20,19 @@
         </div>
         <div>
         <? if ($arResult["CAN_BUY"]): ?>
-            <noindex>
-                <a href="<? echo $arResult["ADD_URL"] ?>" class="btn text-decoration-none goods_buy-button add_form"
-                   rel="nofollow"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?></a>
-            </noindex>
+            <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data" class="add_form">
+                <input type="hidden" name="QUANTITY" value="1" id="QUANTITY<?= $arElement['ID'] ?>"/>
+                <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
+                <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>" value="<? echo $arResult["ID"] ?>">
+                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>" value="<? echo GetMessage("CATALOG_BUY") ?>" style="display: none;">
+                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>" value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>" class="btn text-decoration-none goods_buy-button">
+            </form>
         <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
             <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
         <? endif ?>
+
+
+
         </div>
     </div>
     <div class="goods-content">

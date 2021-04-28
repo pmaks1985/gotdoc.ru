@@ -77,6 +77,11 @@ body {
     color: #212529;
 }
 
+.site-name:hover{
+    color: #212529;
+    text-decoration: none;
+}
+
 .site-name_explanation {
     font-size: 16px;
     color: #212529;

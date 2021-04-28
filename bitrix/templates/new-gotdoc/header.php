@@ -80,7 +80,7 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
         </div>
         <div class="d-flex justify-content-between mt-3">
             <div>
-                <div class="site-name">Готовые документы</div>
+                <div><a class="site-name" href="/">Готовые документы</a></div>
                 <div class="site-name_explanation">Автоматизированный помощник для подготовки к проверкам</div>
             </div>
             <div class="text-right">
