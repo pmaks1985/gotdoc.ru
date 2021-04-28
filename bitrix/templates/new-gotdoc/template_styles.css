@@ -338,11 +338,11 @@ ul.dropdown-menu {
 }
 
 .card-img-top {
-    margin: 10px auto;
+    margin: 1.7rem auto;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 8rem;
+    min-height: 6rem;
 }
 
 .card-text {
