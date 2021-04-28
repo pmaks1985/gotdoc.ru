@@ -9,37 +9,37 @@
             "GET" => $templateFolder . "/ajax_geobase_get.php",
             "SAVE" => $templateFolder . "/ajax_geobase_save.php",
         ),
-		"CLASS" => array(
-			"WRAP_QUESTION_REASAPEKT" => "wrapQuestionReaspekt"
-		)
+        "CLASS" => array(
+            "WRAP_QUESTION_REASAPEKT" => "wrapQuestionReaspekt"
+        )
     );
 
     if ($arResult["SET_LOCAL_DB"] == "local_db") :?>
         <div class="wrapGeoIpReaspekt">
             Ваш регион: <span data-reaspektmodalbox-href="<?=$templateFolder?>/ajax_popup_city.php" class="cityLinkPopupReaspekt linkReaspekt"><?=$arResult["GEO_CITY"]["REGION"]?></span>
             <?if (
-				$arParams["CHANGE_CITY_MANUAL"] == "Y"
-				&& $arResult["CHANGE_CITY"] == "N"
-			) :?>
-			<div class="<?=$arJSParams["CLASS"]["WRAP_QUESTION_REASAPEKT"]?>">
-                <div class="questionYourCityReaspekt">Ваш регион:</div>
-                <div class="questionCityReaspekt"><strong><?=$arResult["GEO_CITY"]["REGION"]?></div>
-                <div class="questionButtonReaspekt reaspekt_clearfix">
-                    <div class="questionNoReaspekt cityLinkPopupReaspekt" data-reaspektmodalbox-href="<?=$templateFolder?>/ajax_popup_city.php"><?=GetMessage("REASPEKT_GEOIP_BUTTON_N");?></div>
-                    <div class="questionYesReaspekt" onClick="objJCReaspektGeobase.onClickReaspektSaveCity('N');"><?=GetMessage("REASPEKT_GEOIP_BUTTON_Y");?></div>
+                $arParams["CHANGE_CITY_MANUAL"] == "Y"
+                && $arResult["CHANGE_CITY"] == "N"
+            ) :?>
+                <div class="<?=$arJSParams["CLASS"]["WRAP_QUESTION_REASAPEKT"]?>">
+                    <div class="questionYourCityReaspekt">Ваш регион:</div>
+                    <div class="questionCityReaspekt"><strong><?=$arResult["GEO_CITY"]["REGION"]?></div>
+                    <div class="questionButtonReaspekt reaspekt_clearfix">
+                        <div class="questionNoReaspekt cityLinkPopupReaspekt" data-reaspektmodalbox-href="<?=$templateFolder?>/ajax_popup_city.php"><?=GetMessage("REASPEKT_GEOIP_BUTTON_N");?></div>
+                        <div class="questionYesReaspekt" onClick="objJCReaspektGeobase.onClickReaspektSaveCity('N');"><?=GetMessage("REASPEKT_GEOIP_BUTTON_Y");?></div>
+                    </div>
                 </div>
-            </div>
-			<?endif;?>
+            <?endif;?>
         </div>
-        
+
         <script type="text/javascript">
-        $('.cityLinkPopupReaspekt').ReaspektModalBox();
-        var objJCReaspektGeobase = new JCReaspektGeobase(<? echo CUtil::PhpToJSObject($arJSParams, false, true); ?>);
+            $('.cityLinkPopupReaspekt').ReaspektModalBox();
+            var objJCReaspektGeobase = new JCReaspektGeobase(<? echo CUtil::PhpToJSObject($arJSParams, false, true); ?>);
         </script>
     <?else:?>
-		<div class="wrapGeoIpReaspekt">
-			<strong><?=$arResult["GEO_CITY"]["CITY"]?></strong>
-		</div>
+        <div class="wrapGeoIpReaspekt">
+            <strong><?=$arResult["GEO_CITY"]["CITY"]?></strong>
+        </div>
     <?endif;
 endif;?>
 <?$frame->beginStub();?>

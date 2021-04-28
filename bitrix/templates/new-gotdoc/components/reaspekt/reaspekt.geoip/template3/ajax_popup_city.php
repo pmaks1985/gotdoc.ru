@@ -52,7 +52,7 @@ $arResult["DEFAULT_CITY"] = ReaspGeoIP::DefaultCityList();
 	<div class="reaspektGeobaseTitle"><?=Loc::getMessage("REASPEKT_TITLE_ENTER_CITY");?>:</div>	-->			
 	<div class="reaspektGeobaseCities reaspekt_clearfix">
 		<div class="reaspekt_row selectboxss">
-		<div class="selectboxssvalue"><span>Выберите регион</span><img src="/bitrix/templates/portal/components/reaspekt/reaspekt.geoip/template3/arrow.png" class="arrowselect" /></div>
+		<div class="selectboxssvalue"><span>Выберите регион</span><img src="/bitrix/templates/new-gotdoc/components/reaspekt/reaspekt.geoip/template3/arrow.png" class="arrowselect" /></div>
 		<ul class="selectboxssmenu">
 			<?$arResult["DEFAULT_CITY"]?>
 		<?

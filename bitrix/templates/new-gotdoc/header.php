@@ -63,8 +63,17 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
                     <div class="mr-3">
                         <span class="select-region_text">Ваш регион:</span>
                         <span class="select-region_city">
-								<span class="dottedUnderline"><?= $userCity; ?></span><i
-                                    class="bi bi-caret-down-fill"></i>
+                                <span class="dottedUnderline">
+                                <? $APPLICATION->IncludeComponent("reaspekt:reaspekt.geoip", "template", array(
+                                    "COMPONENT_TEMPLATE" => ".default",
+                                    "CHANGE_CITY_MANUAL" => "Y",    // Подтверждение города
+                                    "COMPOSITE_FRAME_MODE" => "A",
+                                    "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                ),
+                                    false
+                                ); ?>
+                                </span>
+                                <i class="bi bi-caret-down-fill"></i>
 							</span>
                     </div>
                     <div>
@@ -150,18 +159,18 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
                 </div>
             </div>
             <div id="basket-container">
-            <? $APPLICATION->IncludeComponent(
-                "bazarow:basket.small.bazarow",
-                "ajax",
-                array(
-                    "COMPONENT_TEMPLATE" => "ajax",
-                    "PATH_TO_BASKET" => "/personal/cart",
-                    "PATH_TO_ORDER" => "/personal/cart",
-                    "SHOW_DELAY" => "N",
-                    "SHOW_NOTAVAIL" => "Y",
-                    "SHOW_SUBSCRIBE" => "Y"
-                )
-            ); ?>
+                <? $APPLICATION->IncludeComponent(
+                    "bazarow:basket.small.bazarow",
+                    "ajax",
+                    array(
+                        "COMPONENT_TEMPLATE" => "ajax",
+                        "PATH_TO_BASKET" => "/personal/cart",
+                        "PATH_TO_ORDER" => "/personal/cart",
+                        "SHOW_DELAY" => "N",
+                        "SHOW_NOTAVAIL" => "Y",
+                        "SHOW_SUBSCRIBE" => "Y"
+                    )
+                ); ?>
             </div>
         </div>
     </header>
