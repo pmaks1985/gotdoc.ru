@@ -372,11 +372,11 @@ ul.dropdown-menu {
 }
 
 .product-list_img {
-    padding-right: 37px;
-}
-
-.product-list_img__src {
-    max-width: 119px;
+    width: 17rem;
+    background-size: contain;
+    margin-right: 37px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .product-list_text__title {

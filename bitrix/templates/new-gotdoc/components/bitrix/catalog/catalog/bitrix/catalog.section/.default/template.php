@@ -23,18 +23,15 @@
 
     <div class="product-list d-flex">
     <? if (is_array($arElement["PREVIEW_PICTURE"])): ?>
-    <div class="product-list_img">
-        <img src="<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arElement["NAME"] ?>"
-             title="<?= $arElement["NAME"] ?>" class="product-list_img__src">
+    <div class="product-list_img" style="background-image: url('<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>')">
+        <!--img src="<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arElement["NAME"] ?>"
+             title="<?= $arElement["NAME"] ?>" class="product-list_img__src"-->
     </div>
 <? elseif (is_array($arElement["DETAIL_PICTURE"])): ?>
-    <td valign="top">
-        <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"><img border="0" src="<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>"
-                                                            width="<?= $arElement["DETAIL_PICTURE"]["WIDTH"] ?>"
-                                                            height="<?= $arElement["DETAIL_PICTURE"]["HEIGHT"] ?>"
-                                                            alt="<?= $arElement["NAME"] ?>"
-                                                            title="<?= $arElement["NAME"] ?>"/></a><br/>
-    </td>
+    <div class="product-list_img" style="background-image: url('<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>')">
+        <!--img src="<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arElement["NAME"] ?>"
+             title="<?= $arElement["NAME"] ?>" class="product-list_img__src"-->
+    </div>
 <? endif ?>
 
     <div class="product-list_text">
@@ -118,7 +115,7 @@
         <? endif; ?>
         <div class="buy-button">
             <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
-               class="btn-outline-danger text-decoration-none buy-button_link">Заказать</a>
+               class="btn-outline-danger text-decoration-none buy-button_link 1">Заказать</a>
         </div>
     </div>
     <?endif;?>
