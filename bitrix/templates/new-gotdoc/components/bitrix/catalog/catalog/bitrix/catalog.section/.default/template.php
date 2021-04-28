@@ -23,15 +23,9 @@
 
     <div class="product-list d-flex">
     <? if (is_array($arElement["PREVIEW_PICTURE"])): ?>
-    <div class="product-list_img" style="background-image: url('<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>')">
-        <!--img src="<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arElement["NAME"] ?>"
-             title="<?= $arElement["NAME"] ?>" class="product-list_img__src"-->
-    </div>
+    <div class="product-list_img" style="background-image: url('<?= $arElement["PREVIEW_PICTURE"]["SRC"] ?>')"></div>
 <? elseif (is_array($arElement["DETAIL_PICTURE"])): ?>
-    <div class="product-list_img" style="background-image: url('<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>')">
-        <!--img src="<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arElement["NAME"] ?>"
-             title="<?= $arElement["NAME"] ?>" class="product-list_img__src"-->
-    </div>
+    <div class="product-list_img" style="background-image: url('<?= $arElement["DETAIL_PICTURE"]["SRC"] ?>')"></div>
 <? endif ?>
 
     <div class="product-list_text">
