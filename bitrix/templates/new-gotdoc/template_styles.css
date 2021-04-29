@@ -46,6 +46,14 @@ body {
     color: #dc3545;
 }
 
+.wrapGeoIpReaspekt{
+    font-family: MyriadPro-Regular;
+}
+
+.select-region_city:hover{
+    cursor: pointer;
+}
+
 .select-region_text {
     font-size: 16px;
     color: #212529;
@@ -64,6 +72,10 @@ body {
     border-radius: 5px;
 }
 
+.user-name{
+    color: #212529;
+}
+
 .bi-caret-down-fill {
     font-size: 10pt;
     vertical-align: bottom;
@@ -77,7 +89,7 @@ body {
     color: #212529;
 }
 
-.site-name:hover{
+.site-name:hover, .user-name:hover{
     color: #212529;
     text-decoration: none;
 }
