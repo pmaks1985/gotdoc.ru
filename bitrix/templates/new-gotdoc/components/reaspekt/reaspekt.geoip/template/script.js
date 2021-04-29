@@ -86,7 +86,7 @@
         }
         
         if(this.letters.length < 2){
-            //list.html("ничего не найдено");
+            //list.html("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
             //list.animate({ height: 'hide' }, "fast");
             return;
         }

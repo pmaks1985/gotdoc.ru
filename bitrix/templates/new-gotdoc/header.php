@@ -65,23 +65,23 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
                         <span class="select-region_city">
                                 <span class="dottedUnderline">
                                 <? $APPLICATION->IncludeComponent(
-	"reaspekt:reaspekt.geoip", 
-	"template", 
-	array(
-		"COMPONENT_TEMPLATE" => "template",
-		"CHANGE_CITY_MANUAL" => "N",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
-	),
-	false
-); ?>
+                                    "reaspekt:reaspekt.geoip",
+                                    "template",
+                                    array(
+                                        "COMPONENT_TEMPLATE" => "template",
+                                        "CHANGE_CITY_MANUAL" => "N",
+                                        "COMPOSITE_FRAME_MODE" => "A",
+                                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                    ),
+                                    false
+                                ); ?>
                                 </span>
                                 <i class="bi bi-caret-down-fill"></i>
 							</span>
                     </div>
                     <div>
                         <? if ($USER->IsAuthorized()): ?>
-                            <?= $USER->GetFullName(); ?>
+                            <a href="/personal/" class="user-name text-decoration-none"><?= $USER->GetFullName(); ?></a>
                         <? else: ?>
                             <a href="/personal/auth/"
                                class="btn-outline-danger select-region_button text-decoration-none">Войти</a>

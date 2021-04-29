@@ -17,7 +17,7 @@
     if ($arResult["SET_LOCAL_DB"] == "local_db") :?>
         <div class="wrapGeoIpReaspekt">
             <span data-reaspektmodalbox-href="<?= $templateFolder ?>/ajax_popup_city.php"
-                  class=""><?= $arResult["GEO_CITY"]["CITY"] ?></span>
+                  class="cityLinkPopupReaspekt"><?= $arResult["GEO_CITY"]["CITY"] ?></span>
             <? if (
                 $arParams["CHANGE_CITY_MANUAL"] == "Y"
                 && $arResult["CHANGE_CITY"] == "N"
