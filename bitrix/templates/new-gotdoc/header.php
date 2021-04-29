@@ -64,14 +64,17 @@ $userCity = \Bitrix\Main\Service\GeoIp\Manager::getCityName();
                         <span class="select-region_text">Ваш регион:</span>
                         <span class="select-region_city">
                                 <span class="dottedUnderline">
-                                <? $APPLICATION->IncludeComponent("reaspekt:reaspekt.geoip", "template", array(
-                                    "COMPONENT_TEMPLATE" => ".default",
-                                    "CHANGE_CITY_MANUAL" => "Y",    // Подтверждение города
-                                    "COMPOSITE_FRAME_MODE" => "A",
-                                    "COMPOSITE_FRAME_TYPE" => "AUTO"
-                                ),
-                                    false
-                                ); ?>
+                                <? $APPLICATION->IncludeComponent(
+	"reaspekt:reaspekt.geoip", 
+	"template", 
+	array(
+		"COMPONENT_TEMPLATE" => "template",
+		"CHANGE_CITY_MANUAL" => "N",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+); ?>
                                 </span>
                                 <i class="bi bi-caret-down-fill"></i>
 							</span>
