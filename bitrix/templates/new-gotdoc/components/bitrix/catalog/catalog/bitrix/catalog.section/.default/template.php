@@ -1,11 +1,22 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 <? //print_r($arResult);?>
+<? //направление сортировки
+if (isset($_REQUEST['orderBy'])) {
+    if ($_REQUEST['orderBy'] == 'asc') {
+        $orderBy = 'desc';
+    } else {
+        $orderBy = 'asc';
+    }
+} else {
+    $orderBy = 'asc';
+}
+?>
 
 <div class="sort d-flex">
     <p class="sort-title">Сортировать:</p>
-    <a class="sort-link" href="<?= $arResult["SECTION_PAGE_URL"] ?>?sort=show_counter&method=desc">По популярности</a>
-    <a class="sort-link" href="<?= $arResult["SECTION_PAGE_URL"] ?>?sort=catalog_PRICE_3&method=asc">По цене</a>
-    <a class="sort-link" href="<?= $arResult["SECTION_PAGE_URL"] ?>?sort=name&method=asc">По алфавиту</a>
+        <a class="sort-link" href="<?= $APPLICATION->GetCurPageParam('sortBy=show&orderBy='.$orderBy, array('sortBy', 'orderBy')) ?>">По популярности</a>
+        <a class="sort-link" href="<?= $APPLICATION->GetCurPageParam('sortBy=price&orderBy='.$orderBy, array('sortBy', 'orderBy')) ?>">По цене</a>
+        <a class="sort-link" href="<?= $APPLICATION->GetCurPageParam('sortBy=name&orderBy='.$orderBy, array('sortBy', 'orderBy')) ?>">По алфавиту</a>
 </div>
 
 <? foreach ($arResult["ITEMS"] as $cell => $arElement): ?>
