@@ -161,17 +161,18 @@
             </div>
             <div id="basket-container">
                 <? $APPLICATION->IncludeComponent(
-                    "bazarow:basket.small.bazarow",
-                    "ajax",
-                    array(
-                        "COMPONENT_TEMPLATE" => "ajax",
-                        "PATH_TO_BASKET" => "/personal/cart",
-                        "PATH_TO_ORDER" => "/personal/cart",
-                        "SHOW_DELAY" => "N",
-                        "SHOW_NOTAVAIL" => "Y",
-                        "SHOW_SUBSCRIBE" => "Y"
-                    )
-                ); ?>
+	"bazarow:basket.small.bazarow", 
+	"ajax", 
+	array(
+		"COMPONENT_TEMPLATE" => "ajax",
+		"PATH_TO_BASKET" => "/personal/cart/",
+		"PATH_TO_ORDER" => "/personal/cart/",
+		"SHOW_DELAY" => "N",
+		"SHOW_NOTAVAIL" => "N",
+		"SHOW_SUBSCRIBE" => "N"
+	),
+	false
+); ?>
             </div>
         </div>
     </header>
