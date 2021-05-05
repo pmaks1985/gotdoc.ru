@@ -1,44 +1,40 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Title");
-?><?php
-    $userLat = \Bitrix\Main\Service\GeoIp\Manager::getGeoPositionLatitude();
-    $userLon = \Bitrix\Main\Service\GeoIp\Manager::getGeoPositionLongitude();
-    $userCity = 'Вы в городе: ' . \Bitrix\Main\Service\GeoIp\Manager::getCityName();
-
-    $arPlacemarks[] = array(
-    "LAT" => $userLat,
-    "LON" => $userLon,
-    "TEXT" => $userCity,
-    );
-
-    $APPLICATION->IncludeComponent(
-    "bitrix:map.yandex.view",
-    ".default",
-    Array(
-    "INIT_MAP_TYPE" => "MAP",
-    "MAP_DATA" =>  serialize(
-    array(
-    'yandex_scale' => 5,
-    'yandex_lat' => $userLat,
-    'yandex_lon' => $userLon,
-    'PLACEMARKS' => $arPlacemarks
-    )),
-    "MAP_WIDTH" => "50%",
-    "MAP_HEIGHT" => "300",
-    "CONTROLS" => "",
-    "OPTIONS" => array(0=>"ENABLE_SCROLL_ZOOM",1=>"ENABLE_DRAGGING",),
-    "MAP_ID" => "",
-    )
-    );
-?> <?$APPLICATION->IncludeComponent(
-	"reaspekt:reaspekt.geoip",
-	"template3",
-	Array(
-		"CHANGE_CITY_MANUAL" => "Y",
-		"COMPONENT_TEMPLATE" => "template3",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
-	)
-);?> <br>
- <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+?>
+<script type="text/javascript">
+$(document).ready(function() {
+$('input.quantity').change(function() {
+var obAddToCartLink = $('a.addtoCart:first', $(this).parent());
+obAddToCartLink.attr('href', obAddToCartLink.attr('href').replace( /(quantity=)[0-9]+/ig, '$1'+$(this).val() ));
+});
+$('input.quantity').keypress(function() {
+$(this).trigger('change');
+});
+$('a.minus1, a.plus1').click(function(e){
+e.preventDefault();
+e.stopPropagation();
+var oThisQuntityInput = $('input.quantity:first', $(this).parent().parent());
+var iThisQuantity = parseInt(oThisQuntityInput.val());
+var iSubtrahend = 1;
+if ($(this).hasClass("minus1"))
+{
+if (iThisQuantity < 2)
+{
+return false;
+}
+iSubtrahend = iSubtrahend * (-1);
+}
+var iThisQuantityNew = iThisQuantity + iSubtrahend;
+oThisQuntityInput.val(iThisQuantityNew);
+oThisQuntityInput.trigger('change');
+});
+});
+</script>
+<input class="quantity" type="text" name="QUANTITY_<?=$arElement['ID']?>" value="1" size="2" id="QUANTITY_<?=$arElement['ID']?>
+">
+<div class="count_nav">
+ <a rel="nofollow" href="#" class="plus1">+</a> <a rel="nofollow" href="#" class="minus1">-</a>
+</div>
+<a href="<?echo $arElement["ADD_URL"]?>&quantity=1" rel="nofollow" class="addtoCart">В заказ</a>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
