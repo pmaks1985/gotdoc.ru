@@ -3,9 +3,9 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Моя корзина");
 ?><div>
 	 <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket",
-	"bootstrap_v4",
-	Array(
+	"bitrix:sale.basket.basket", 
+	"basketnew", 
+	array(
 		"ACTION_VARIABLE" => "basketAction",
 		"ADDITIONAL_PICT_PROP_17" => "-",
 		"ADDITIONAL_PICT_PROP_23" => "-",
@@ -15,9 +15,26 @@ $APPLICATION->SetTitle("Моя корзина");
 		"ADDITIONAL_PICT_PROP_32" => "-",
 		"AUTO_CALCULATION" => "Y",
 		"BASKET_IMAGES_SCALING" => "adaptive",
-		"COLUMNS_LIST" => array(0=>"NAME",1=>"DISCOUNT",2=>"WEIGHT",3=>"DELETE",4=>"DELAY",5=>"TYPE",6=>"PRICE",7=>"QUANTITY",),
-		"COLUMNS_LIST_EXT" => array("PREVIEW_PICTURE","DELETE","SUM"),
-		"COLUMNS_LIST_MOBILE" => array("PREVIEW_PICTURE","DELETE","SUM"),
+		"COLUMNS_LIST" => array(
+			0 => "NAME",
+			1 => "DISCOUNT",
+			2 => "WEIGHT",
+			3 => "DELETE",
+			4 => "DELAY",
+			5 => "TYPE",
+			6 => "PRICE",
+			7 => "QUANTITY",
+		),
+		"COLUMNS_LIST_EXT" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "DELETE",
+			2 => "SUM",
+		),
+		"COLUMNS_LIST_MOBILE" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "DELETE",
+			2 => "SUM",
+		),
 		"COMPATIBLE_MODE" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
@@ -42,8 +59,9 @@ $APPLICATION->SetTitle("Моя корзина");
 		"GIFTS_SHOW_OLD_PRICE" => "N",
 		"GIFTS_TEXT_LABEL_GIFT" => "Подарок",
 		"HIDE_COUPON" => "Y",
-		"LABEL_PROP" => array(),
-		"OFFERS_PROPS" => array(),
+		"LABEL_PROP" => "",
+		"OFFERS_PROPS" => array(
+		),
 		"PATH_TO_ORDER" => "/personal/cart/order/",
 		"PRICE_DISPLAY_MODE" => "Y",
 		"PRICE_VAT_SHOW_VALUE" => "N",
@@ -54,19 +72,20 @@ $APPLICATION->SetTitle("Моя корзина");
 		"SHOW_FILTER" => "N",
 		"SHOW_RESTORE" => "N",
 		"TEMPLATE_THEME" => "red",
-		"TOTAL_BLOCK_DISPLAY" => array("top"),
+		"TOTAL_BLOCK_DISPLAY" => array(
+			0 => "top",
+		),
 		"USE_DYNAMIC_SCROLL" => "Y",
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
-		"USE_PRICE_ANIMATION" => "Y"
-	)
-);?> <?
+		"USE_PRICE_ANIMATION" => "Y",
+		"COMPONENT_TEMPLATE" => "basketnew"
+	),
+	false
+);?>
 
-//print_r($_SESSION); //bar
-
-?>
 </div>
-<div>
- <br>
-</div><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
+
+
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
