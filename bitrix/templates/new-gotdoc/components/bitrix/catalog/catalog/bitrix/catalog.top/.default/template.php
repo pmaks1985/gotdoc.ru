@@ -17,7 +17,11 @@
                         <div class="card-interest_price">
                             <? foreach ($arElement["PRICES"] as $code => $arPrice): ?>
                                 <? $val = substr($arPrice["PRINT_VALUE"], 0, -7); ?>
-                                <span class="price-new"><?= $val ?> руб.</span>
+                                <? if ($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
+                                    <span class="price-new">Бесплатно</span>
+                                <? else: ?>
+                                    <span class="price-new"><?= $val ?> руб.</span>
+                                <? endif; ?>
                                 <? if ($arElement['PROPERTIES']['OLD_PRICE']['VALUE']): ?>
                                     <span class="price-old"><? echo $arElement['PROPERTIES']['OLD_PRICE']['VALUE']; ?> руб.</span>
                                 <? endif; ?>
@@ -25,7 +29,7 @@
                         </div>
                         <div class="card-interest_button">
                             <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
-                               class="btn-outline-danger text-decoration-none buy-button_link card-interest_button__link">Заказать</a>
+                               class="btn-outline-danger text-decoration-none buy-button_link card-interest_button__link">Подробнее</a>
                         </div>
                     </div>
                 </div>

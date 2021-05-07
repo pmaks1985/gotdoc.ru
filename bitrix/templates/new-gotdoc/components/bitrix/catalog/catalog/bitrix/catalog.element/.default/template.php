@@ -10,7 +10,11 @@
     <div class="price">
         <div>
             <? foreach ($arResult["PRICES"] as $code => $arPrice): ?>
-                <span class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
+                <? if ($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
+                    <span class="goods_price-new">Бесплатно</span>
+                <? else: ?>
+                    <span class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
+                <? endif; ?>
             <? endforeach; ?>
             <span class="price-old">
                 <? if ($arResult["PROPERTIES"]["OLD_PRICE"]["VALUE"]): ?>
@@ -19,18 +23,27 @@
             </span>
         </div>
         <div>
-        <? if ($arResult["CAN_BUY"]): ?>
-            <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data" class="add_form">
-                <input type="hidden" name="QUANTITY" value="1" id="QUANTITY<?= $arElement['ID'] ?>"/>
-                <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
-                <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>" value="<? echo $arResult["ID"] ?>">
-                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>" value="<? echo GetMessage("CATALOG_BUY") ?>" style="display: none;">
-                <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>" value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>" class="btn text-decoration-none goods_buy-button">
-            </form>
-        <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
-            <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
-        <? endif ?>
-
+            <? if ($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"] > 0) : ?>
+                <a class="btn text-decoration-none goods_buy-button"
+                   href="<?= CFile::GetPath($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) ?>">Скачать</a>
+            <? else: ?>
+                <? if ($arResult["CAN_BUY"]): ?>
+                    <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data"
+                          class="add_form">
+                        <input type="hidden" name="QUANTITY" value="1" id="QUANTITY<?= $arElement['ID'] ?>"/>
+                        <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
+                        <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>"
+                               value="<? echo $arResult["ID"] ?>">
+                        <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>"
+                               value="<? echo GetMessage("CATALOG_BUY") ?>" style="display: none;">
+                        <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>"
+                               value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>"
+                               class="btn text-decoration-none goods_buy-button">
+                    </form>
+                <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
+                    <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
+                <? endif ?>
+            <? endif; ?>
 
 
         </div>
@@ -40,8 +53,12 @@
             <?= $arResult["PROPERTIES"]["WHAT_CORRESPONDS"]["~VALUE"]["TEXT"] ?>
         </p>
     </div>
-    <div class="goods-banner"><img src="<?= $arResult["DISPLAY_PROPERTIES"]["BONUS"]["FILE_VALUE"]["SRC"] ?>"
-                                   alt="goods-banner"></div>
+    <div class="goods-banner">
+        <? if ($arResult["DISPLAY_PROPERTIES"]["BONUS"]["FILE_VALUE"]["SRC"]): ?>
+            <img src="<?= $arResult["DISPLAY_PROPERTIES"]["BONUS"]["FILE_VALUE"]["SRC"] ?>"
+                 alt="goods-banner">
+        <? endif; ?>
+    </div>
 </div>
 </div>
 

@@ -127,20 +127,20 @@ if (isset($_REQUEST['orderBy'])) {
                                         class="catalog-price"><?= $arPrice["PRINT_DISCOUNT_VALUE"] ?></span>
                             <? else: ?>
                                 <? $val = substr($arPrice["PRINT_VALUE"], 0, -7); ?>
-                                <? if (!$arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
-                                    <span class="price-new"><?= $val; ?> руб.</span><? endif; ?>
-                                <?endif;?>
+                                <? if ($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
+                                    <span class="price-new">Бесплатно</span>
+                                <?else:?>
+                                    <span class="price-new"><?= $val; ?> руб.</span>
+                                <? endif; ?>
+                            <? endif; ?>
                             <? if ($arElement['PROPERTIES']['OLD_PRICE']['VALUE']): ?>
                                 <span class="price-old"><? echo $arElement['PROPERTIES']['OLD_PRICE']['VALUE']; ?> руб.</span>
                             <? endif; ?>
                             <div class="buy-button">
-                                <? if ($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"] > 0) : ?>
-                                    <a href="<?= CFile::GetPath($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) ?>"
-                                       class="btn-outline-danger text-decoration-none buy-button_link">Скачать</a>
-                                <? else: ?>
-                                    <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
-                                       class="btn-outline-danger text-decoration-none buy-button_link">Заказать</a>
-                                <? endif; ?>
+                                <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
+                                   class="btn-outline-danger text-decoration-none buy-button_link">
+                                    Подробнее
+                                </a>
                             </div>
                         </div>
                     <? endif; ?>

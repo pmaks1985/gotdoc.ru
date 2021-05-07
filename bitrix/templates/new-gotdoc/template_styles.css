@@ -397,6 +397,7 @@ ul.dropdown-menu {
     margin-right: 37px;
     background-repeat: no-repeat;
     background-position: center;
+    min-width: 7rem;
 }
 
 .product-list_text__title {
@@ -416,7 +417,7 @@ ul.dropdown-menu {
 .product-list_text {
     padding-right: 37px;
     padding-top: 10px;
-    min-width: 27.3rem;
+    max-width: 27.3rem;
 }
 
 .price {
@@ -440,7 +441,7 @@ ul.dropdown-menu {
 }
 
 .buy-button_link {
-    padding: 10px 40px;
+    padding: 10px 35px;
     background-color: #f9f5f1;
     border: 2px solid #dc3545;
     border-radius: 5px;
@@ -588,6 +589,7 @@ footer {
     border-radius: 5px;
     padding: 13px 45px;
     margin-top: 7px;
+    font-size: 18px;
 }
 
 .goods-content {
@@ -734,7 +736,7 @@ b {
 }
 
 .card-interest_button__link {
-    padding: 12px 70px;
+    padding: 12px 60px;
 }
 
 .those-involved-goods {
