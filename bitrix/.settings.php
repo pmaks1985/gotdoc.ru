@@ -15,6 +15,18 @@ return array (
   ),
   'readonly' => true,
 ),
+
+'http_client_options' =>
+   array (
+     'value' =>
+        array (
+         'redirect' => true,//делаем редиректы, если требуется
+         'redirectMax' => 10,//но не более 10
+         'version' => '1.1'//работаем по протоколу http 1.1
+        ),
+     'readonly' => false,
+   ),
+   
   'utf_mode' => 
   array (
     'value' => true,

@@ -2,8 +2,8 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
 ?><?$APPLICATION->IncludeComponent(
-	"crean:sale.order.ajax", 
-	"template", 
+	"bitrix:sale.order.ajax", 
+	"", 
 	array(
 		"ALLOW_AUTO_REGISTER" => "N",
 		"ALLOW_NEW_PROFILE" => "N",
