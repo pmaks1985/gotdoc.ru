@@ -186,6 +186,7 @@ body {
 .backet {
     background-color: #dc3545;
     border-radius: 5px;
+    padding: .6rem .75rem;
 }
 
 .backet_text {
@@ -361,6 +362,7 @@ ul.dropdown-menu {
     font-size: 16px;
     line-height: 17px;
     color: #343a40;
+    padding: 0 .5rem;
 }
 
 .sort {
@@ -386,6 +388,7 @@ ul.dropdown-menu {
     border-radius: 8px;
     padding: 24px 36px 11px 16px;
     margin-top: 12px;
+    min-height: 10rem;
 }
 
 .product-list_img {
@@ -413,6 +416,7 @@ ul.dropdown-menu {
 .product-list_text {
     padding-right: 37px;
     padding-top: 10px;
+    min-width: 27.3rem;
 }
 
 .price {

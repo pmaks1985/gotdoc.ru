@@ -1,62 +1,68 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Title");
-?><?$APPLICATION->IncludeComponent("bitrix:catalog.search", "search", Array(
-	"ACTION_VARIABLE" => "action",	// Название переменной, в которой передается действие
-		"AJAX_MODE" => "N",	// Включить режим AJAX
-		"AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
-		"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-		"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-		"BASKET_URL" => "/personal/cart/",	// URL, ведущий на страницу с корзиной покупателя
-		"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-		"CACHE_TYPE" => "A",	// Тип кеширования
-		"CHECK_DATES" => "Y",	// Искать только в активных по дате документах
-		"CONVERT_CURRENCY" => "N",	// Показывать цены в одной валюте
-		"DETAIL_URL" => "/catalog/#SECTION_CODE_PATH#/#ELEMENT_CODE#/",	// URL, ведущий на страницу с содержимым элемента раздела
-		"DISPLAY_BOTTOM_PAGER" => "Y",	// Выводить под списком
-		"DISPLAY_COMPARE" => "N",	// Выводить кнопку сравнения
-		"DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-		"ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
-		"ELEMENT_SORT_FIELD2" => "id",	// Поле для второй сортировки элементов
-		"ELEMENT_SORT_ORDER" => "asc",	// Порядок сортировки элементов
-		"ELEMENT_SORT_ORDER2" => "desc",	// Порядок второй сортировки элементов
-		"HIDE_NOT_AVAILABLE" => "Y",	// Недоступные товары
-		"HIDE_NOT_AVAILABLE_OFFERS" => "Y",	// Недоступные торговые предложения
-		"IBLOCK_ID" => "32",	// Инфоблок
-		"IBLOCK_TYPE" => "newgotdoc",	// Тип инфоблока
-		"LINE_ELEMENT_COUNT" => "10",	// Количество элементов выводимых в одной строке таблицы
-		"NO_WORD_LOGIC" => "N",	// Отключить обработку слов как логических операторов
-		"OFFERS_LIMIT" => "5",	// Максимальное количество предложений для показа (0 - все)
-		"PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-		"PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
-		"PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
-		"PAGER_TEMPLATE" => "new-round",	// Шаблон постраничной навигации
-		"PAGER_TITLE" => "Товары",	// Название категорий
-		"PAGE_ELEMENT_COUNT" => "30",	// Количество элементов на странице
-		"PRICE_CODE" => array(	// Тип цены
-			0 => "BASE",
+$APPLICATION->SetPageProperty("description", "Страница поиска");
+$APPLICATION->SetPageProperty("keywords", "Страница поиска");
+$APPLICATION->SetPageProperty("title", "Страница поиска");
+$APPLICATION->SetTitle("Страница поиска");
+?>
+    <h1><?$APPLICATION->ShowTitle()?></h1>
+    <div>
+	 <?$APPLICATION->IncludeComponent(
+	"bitrix:search.page", 
+	"icons", 
+	array(
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "Y",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_TIME" => "3600",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"COLOR_NEW" => "000000",
+		"COLOR_OLD" => "C8C8C8",
+		"COLOR_TYPE" => "Y",
+		"COMPONENT_TEMPLATE" => "icons",
+		"DEFAULT_SORT" => "rank",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FILTER_NAME" => "",
+		"FONT_MAX" => "50",
+		"FONT_MIN" => "10",
+		"NAME_TEMPLATE" => "",
+		"NO_WORD_LOGIC" => "N",
+		"PAGER_SHOW_ALWAYS" => "Y",
+		"PAGER_TEMPLATE" => "",
+		"PAGER_TITLE" => "Результаты поиска",
+		"PAGE_RESULT_COUNT" => "50",
+		"PERIOD_NEW_TAGS" => "",
+		"RESTART" => "N",
+		"SHOW_CHAIN" => "Y",
+		"SHOW_ITEM_DATE_CHANGE" => "Y",
+		"SHOW_ITEM_TAGS" => "Y",
+		"SHOW_LOGIN" => "Y",
+		"SHOW_ORDER_BY" => "Y",
+		"SHOW_TAGS_CLOUD" => "N",
+		"SHOW_WHEN" => "N",
+		"SHOW_WHERE" => "N",
+		"STRUCTURE_FILTER" => "structure",
+		"TAGS_INHERIT" => "Y",
+		"TAGS_PAGE_ELEMENTS" => "150",
+		"TAGS_PERIOD" => "",
+		"TAGS_SORT" => "NAME",
+		"TAGS_URL_SEARCH" => "",
+		"USE_LANGUAGE_GUESS" => "Y",
+		"USE_SUGGEST" => "N",
+		"USE_TITLE_RANK" => "Y",
+		"WIDTH" => "100%",
+		"arrFILTER" => array(
+			0 => "iblock_newgotdoc",
 		),
-		"PRICE_VAT_INCLUDE" => "N",	// Включать НДС в цену
-		"PRODUCT_ID_VARIABLE" => "id",	// Название переменной, в которой передается код товара для покупки
-		"PRODUCT_PROPERTIES" => "",	// Характеристики товара
-		"PRODUCT_PROPS_VARIABLE" => "prop",	// Название переменной, в которой передаются характеристики товара
-		"PRODUCT_QUANTITY_VARIABLE" => "quantity",	// Название переменной, в которой передается количество товара
-		"PROPERTY_CODE" => array(	// Свойства
-			0 => "",
-			1 => "",
+		"arrFILTER_iblock_newgotdoc" => array(
+			0 => "32",
 		),
-		"RESTART" => "N",	// Искать без учета морфологии (при отсутствии результата поиска)
-		"SECTION_ID_VARIABLE" => "SECTION_ID",	// Название переменной, в которой передается код группы
-		"SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
-		"SHOW_PRICE_COUNT" => "1",	// Выводить цены для количества
-		"USE_LANGUAGE_GUESS" => "Y",	// Включить автоопределение раскладки клавиатуры
-		"USE_PRICE_COUNT" => "N",	// Использовать вывод цен с диапазонами
-		"USE_PRODUCT_QUANTITY" => "N",	// Разрешить указание количества товара
-		"USE_SEARCH_RESULT_ORDER" => "N",	// Использовать сортировку результатов по релевантности
-		"USE_TITLE_RANK" => "N",	// При ранжировании результата учитывать заголовки
-		"COMPONENT_TEMPLATE" => "bootstrap_v4"
+		"arrWHERE" => ""
 	),
 	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?>
+</div><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
