@@ -63,6 +63,7 @@ if (CModule::IncludeModule("iblock")) {
 <? } ?>
 <div class="col-lg-9 pr-0">
     <h1 class="title"><? $APPLICATION->ShowTitle(false) ?></h1>
+
     <? $APPLICATION->IncludeComponent(
         "bitrix:catalog.section.list",
         "",
