@@ -141,7 +141,7 @@
 		"INPUT_ID" => "title-search-input",
 		"NUM_CATEGORIES" => "1",
 		"ORDER" => "date",
-		"PAGE" => "",
+		"PAGE" => "#SITE_DIR#search/",
 		"PREVIEW_HEIGHT" => "75",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PREVIEW_WIDTH" => "75",

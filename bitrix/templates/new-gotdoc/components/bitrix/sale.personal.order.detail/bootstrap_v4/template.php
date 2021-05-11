@@ -861,20 +861,24 @@ function post_to_url(path, params, method) {
 <a href="#" onclick="post_to_url('https://ndevelop.ru/api/?class=Market&action=getPrivateId', {'setId':'<?=$basketItem["ID"];?>','customerId':'<?=$user;?>','orderId':'<?=$arResult['ID']?>'}, 'POST')">отправить</a>
 <?
 
-
-$key = "162d3cc7-3da3-b81f-e40e-8eded2764dc8";
 $httpClient = new HttpClient(array(
     "waitResponse" => true
 ));
 $httpClient->setHeader('Content-Type', 'application/json', true);
-$url = "https://ndevelop.ru/api/?class=Market&action=getPrivateId";
-$data = json_encode(array("setId" => 701));
-$response = $httpClient->post('https://ndevelop.ru/api/?class=Market&action=getPrivateId', $data);
-//var_dump($data);
+
+$url1 = "https://ndevelop.ru/api/?class=Market&action=getPrivateId";
+//$url2 = "https://ndevelop.ru/api/?class=Market&action=getSingleUseSetLink";
+
+$data = json_encode(array("setId" => "46ee6af9-ce7c-47e6-639f-1227133bfee2"));
+//$uuid = json_encode(array("privateUUID" => "f587181b-9eb4-c4d6-031c-08656701d2ecuuid")); 
+
+$response = $httpClient->post($url1, $data);
 var_dump($response);
 
 
 
+
+/*
 $apiUrl = "https://ndevelop.ru/api/?class=Market&action=getSingleUseSetLink";
 $post_var = array(
 	'privateUUID' => 'a2fa62f6-03f2-c9b2-1363-56bc4f1d5c3e',
@@ -899,8 +903,8 @@ curl_setopt($ch, CURLOPT_URL, 'https://gotdoc.ru/bitrix/admin/php_info.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $text2 = curl_exec($ch);
 
-echo($text2);
-
+//echo($text2);
+*/
 ?>
 </td>
 													<td class="sale-order-detail-order-item-properties text-right">
