@@ -398,6 +398,7 @@ ul.dropdown-menu {
     background-repeat: no-repeat;
     background-position: center;
     min-width: 7rem;
+    max-width: 7rem;
 }
 
 .product-list_text__title {
@@ -418,6 +419,7 @@ ul.dropdown-menu {
     padding-right: 37px;
     padding-top: 10px;
     max-width: 27.3rem;
+    min-width: 27.3rem;
 }
 
 .price {

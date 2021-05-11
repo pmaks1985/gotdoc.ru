@@ -858,53 +858,92 @@ function post_to_url(path, params, method) {
     form.submit();
 }
 </script>
-<a href="#" onclick="post_to_url('https://ndevelop.ru/api/?class=Market&action=getPrivateId', {'setId':'<?=$basketItem["ID"];?>','customerId':'<?=$user;?>','orderId':'<?=$arResult['ID']?>'}, 'POST')">отправить</a>
+
+<a href="#" onclick="post_to_url('https://service.gotdoc.ru/api/?class=Market&action=getPrivateId', {'setId':'<?=$basketItem["ID"];?>','customerId':'<?=$user;?>','orderId':'<?=$arResult['ID']?>'}, 'POST')">отправить</a>
 <?
+//print_r(Configuration::getValue("http_client_options"));
+echo '<br/>';
 
-$httpClient = new HttpClient(array(
-    "waitResponse" => true
-));
+/*Запрос 1.
+service.gotdoc.ru/api/?class=Market&action=getPrivateId
+Параметры: 
+setId – публичный uuid комплекта
+customerId – uuid покупателя магазина на битриксе
+orderId – номер заказа в магазине битрикса
+Ответ:
+{
+    “uuid”: “приватный_ключ”
+}*/
+
+$httpClient = new HttpClient(array($options = null));
 $httpClient->setHeader('Content-Type', 'application/json', true);
-
-$url1 = "https://ndevelop.ru/api/?class=Market&action=getPrivateId";
-//$url2 = "https://ndevelop.ru/api/?class=Market&action=getSingleUseSetLink";
-
-$data = json_encode(array("setId" => "46ee6af9-ce7c-47e6-639f-1227133bfee2"));
-//$uuid = json_encode(array("privateUUID" => "f587181b-9eb4-c4d6-031c-08656701d2ecuuid")); 
-
-$response = $httpClient->post($url1, $data);
-var_dump($response);
+$url1 = "https://service.gotdoc.ru/api/?class=Market&action=getPrivateId";
+$data1 = json_encode(array("setId" => "98ce3768-3426-2316-0bfe-c8bdc02eb296", "customerId" => $user, "orderId" => $arResult['ID']));
+$response1 = $httpClient->post($url1, $data1);
+$obj = json_decode($response1);
+$response1 = $obj->{'uuid'}; 
+echo 'Запрос 1: '.$response1;
 
 
 
 
-/*
-$apiUrl = "https://ndevelop.ru/api/?class=Market&action=getSingleUseSetLink";
-$post_var = array(
-	'privateUUID' => 'a2fa62f6-03f2-c9b2-1363-56bc4f1d5c3e',
-);			
-$ch = curl_init(); 
-curl_setopt($ch, CURLOPT_COOKIEJAR, $_SERVER['DOCUMENT_ROOT'].'/cookie.txt'); //куда сохранять cookie
-curl_setopt($ch, CURLOPT_COOKIEFILE, $_SERVER['DOCUMENT_ROOT'].'/cookie.txt'); //откуда берем cookie
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);   // возвращаем веб-страницу 
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // следуем за редиректами
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); 
-curl_setopt($ch, CURLOPT_HEADER, false); //не выводим заголовки
-curl_setopt($ch, CURLOPT_URL, $apiUrl); //URL сайта на Битриксе
-curl_setopt($ch, CURLOPT_POST, true); //используем POST-запрос
-curl_setopt($ch, CURLOPT_POSTFIELDS, $post_var); //строка с POST-переменными (значения присвоены выше)
-
-$text = curl_exec($ch); 
-
-curl_close($ch);
-
-curl_setopt($ch, CURLOPT_URL, 'https://gotdoc.ru/bitrix/admin/php_info.php');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$text2 = curl_exec($ch);
-
-//echo($text2);
+/*Запрос 2.
+URL: 
+service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink
+Параметры: 
+privateUUID – приватный uuid анкеты
+Ответ:
+{
+    “link”: “одноразовая_ссылка_на_опросный_лист”
+}
 */
+
+$url2 = "https://service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink";
+$data2 = json_encode(array("privateUUID " => "78a85e9b-6ef9-55ab-59e3-298d32cd4ed7"));
+//$response2 = $httpClient->post($url2, $data2);
+//echo $response2;
+
+/*Запрос 3.
+URL: 
+service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete
+Параметры: 
+privateUUID – приватный uuid анкеты
+Ответ:
+{
+    “result”: true/false
+}*/
+/*Запрос 4.
+URL: 
+service.gotdoc.ru/api/?class=Market&action=getDocsList
+Параметры: 
+privateUUID – приватный uuid анкеты
+Ответ:
+{
+    “docs”: [
+         “документ_1”,
+         “документ_2”,
+         …….
+     ]
+}
+*/
+/*
+Запрос 5.
+URL: 
+service.gotdoc.ru/api/?class=Market&action=getDocs
+Параметры: 
+privateUUID – приватный uuid анкеты
+Ответ:
+*/
+
+//$ch = curl_init($url1);
+//curl_setopt($ch, CURLOPT_POST, true); //используем POST-запрос
+//curl_setopt($html, CURLOPT_USERAGENT, 'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.7.62 Version/11.01');
+//curl_setopt($html, CURLOPT_FOLLOWLOCATION, true);
+//curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+
+//$text = curl_exec($ch);
+//var_dump(curl_error($ch));
+
 ?>
 </td>
 													<td class="sale-order-detail-order-item-properties text-right">
