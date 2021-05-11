@@ -3,7 +3,7 @@
 <? if (!empty($arResult)): ?>
     <a class="catalog_btn d-flex align-items-center dropdown-toggle" href="#"
        id="navbarDropdownMenuLink" aria-haspopup="true" data-toggle="dropdown" aria-expanded="true">
-        <img class="p-3" src="/bitrix/templates/new-gotdoc/img/catalog.png" alt="catalog">
+        <img class="catalog_btn__img" src="/bitrix/templates/new-gotdoc/img/catalog.png" alt="catalog">
         <div>Каталог документов</div>
     </a>
 

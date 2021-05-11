@@ -46,11 +46,11 @@ body {
     color: #dc3545;
 }
 
-.wrapGeoIpReaspekt{
+.wrapGeoIpReaspekt {
     font-family: MyriadPro-Regular;
 }
 
-.select-region_city:hover{
+.select-region_city:hover {
     cursor: pointer;
 }
 
@@ -72,7 +72,7 @@ body {
     border-radius: 5px;
 }
 
-.user-name{
+.user-name {
     color: #212529;
 }
 
@@ -89,7 +89,7 @@ body {
     color: #212529;
 }
 
-.site-name:hover, .user-name:hover{
+.site-name:hover, .user-name:hover {
     color: #212529;
     text-decoration: none;
 }
@@ -124,6 +124,11 @@ body {
     color: #ffffff;
     border: none;
 }
+
+.catalog_btn__img {
+    padding: 16px;
+}
+
 
 .catalog_btn:hover,
 .search_btn:hover,
@@ -345,7 +350,7 @@ ul.dropdown-menu {
     margin-bottom: 0.7rem;
 }
 
-.card-body{
+.card-body {
     padding: 0;
     margin: 0px auto 20px auto;
 }
