@@ -1,7 +1,6 @@
 <?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 <?
 $templateFolder = $this->GetFolder();
-$APPLICATION->AddHeadScript($templateFolder . "/js/jquery-1.8.2.min.js");
 $APPLICATION->AddHeadScript($templateFolder . "/js/jquery.form.js");
 $APPLICATION->AddHeadScript($templateFolder . "/js/jquery.jgrowl.min.js");
 ?>
