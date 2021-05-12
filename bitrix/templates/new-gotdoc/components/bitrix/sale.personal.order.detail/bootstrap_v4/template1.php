@@ -831,7 +831,31 @@ else
 													<td>	
 <?$user = $USER->GetID();
 ?>
+<script>
+function post_to_url(path, params, method) {
+    method = method || "post";
 
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+</script>
 
 <?
 
@@ -852,24 +876,14 @@ $httpClient1->setHeader('Content-Type', 'application/json', true);
 $url1 = "https://service.gotdoc.ru/api/?class=Market&action=getPrivateId";
 $data1 = json_encode(array("setId" => "98ce3768-3426-2316-0bfe-c8bdc02eb296", "customerId" => $user, "orderId" => $arResult['ID']));
 $response1 = $httpClient1->post($url1, $data1);
-
+$response11 = $httpClient1->post($url1, $data1);
 $obj = json_decode($response1);
-$response11 = $obj->{'uuid'}; 
-echo 'Запрос 1: '.$response11;
+$response1 = $obj->{'uuid'}; 
+echo 'Запрос 1: '.$response1;
 echo '<br>';
 
 ?>
-<a href="https://service.gotdoc.ru/questionnaire/<?=$response11;?>">Заполнить анкету</a>
-
-
-<?php
-CJSCore::Init(['ajax']);
-?>
-
-
-
-
-
+<a href="https://service.gotdoc.ru/questionnaire/<?=$response1;?>">Заполнить анкету</a>
 <?
 echo '<br>';
 /*Запрос 2.
@@ -885,7 +899,7 @@ privateUUID – приватный uuid анкеты
 $httpClient2 = new HttpClient(array($options = null));
 $httpClient2->setHeader('Content-Type', 'application/json', true);
 $url2 = "https://service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink";
-$data2 = json_encode(array("privateUUID" => $response11));
+$data2 = json_encode(array("privateUUID " => $response1));
 $response2 = $httpClient2->post($url2, $data2);
 echo 'Запрос 2: '.$response2;
 echo '<br>';
@@ -904,7 +918,7 @@ privateUUID – приватный uuid анкеты
 $httpClient3 = new HttpClient(array($options = null));
 $httpClient3->setHeader('Content-Type', 'application/json', true);
 $url3 = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete";
-$data3 = json_encode(array("privateUUID" => $response11));
+$data3 = json_encode(array("privateUUID " => $response1));
 $response3 = $httpClient3->post($url3, $data3);
 echo 'Запрос 3: '.$response3;
 echo '<br>';
@@ -923,40 +937,49 @@ privateUUID – приватный uuid анкеты
      ]
 }
 */
+
+//$httpClient4 = new HttpClient(array($options = null));
+//$httpClient4->setHeader('Content-Type', 'application/json', true);
+//$url4 = "https://service.gotdoc.ru/api/?class=Market&action=getDocsList";
+//$data4 = json_encode(array("privateUUID" => $response1));
+//$response4 = $httpClient4->post($url4, $data4);
+//echo $response4;
+//echo '<br>';
+
+
 ?>
+<script type="text/javascript">
+    jQuery(function() {
+         jQuery('#post_to_url').click(function() {
+      
 
-<script>
-	jQuery(document).ready(function(){
-	  jQuery("#post_to_url").click(function(){ 
-		var response1js = <?php echo CUtil::PHPToJSObject($response11);?>;
-	    $.ajax({
-	      url: "https://service.gotdoc.ru/api/?class=Market&action=getDocsList",
-		data: { 
-			//"ext_url": "https://service.gotdoc.ru/api/?class=Market&action=getDocsList,
-	        "privateUUID": response1js,
-	      },		 
-		  
-		  method: "POST", 
-		//  dataType: 'jsonp',
-		//	jsonp: 'mycallbackfunction',
-		//	crossDomain: true,	
-		  dataType: "json" ,
-		  success: function(data){   
-				console.log(data); 
-				var obj = jQuery.parseJSON(data);
-				jQuery('#current').text(obj);
-			},
-	    })
-	  });
-	});
-	
-</script>
-<?
 
+var $response1js = <?php echo CUtil::PHPToJSObject($response11);?>
+
+let uuid = $response1js;
+const request = new XMLHttpRequest();
+const url = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete";
+const params = "uuid=" + uuid;
  
-?>
+request.responseType =	"json";
+request.open("POST", url, true);
+request.setRequestHeader("Content-type", "application/json");
+ 
+request.addEventListener("readystatechange", () => {
+ 
+    if (request.readyState === 4 && request.status === 200) {
+        let obj = request.response;
+       
+	console.log(obj);       
+		console.log(obj.url); 
+	}
+});
+
+		request.send(params);
+        });
+    });
+</script>
 <a id="post_to_url">Список документов</a>
-<div id="current"></div>
 <?
 /*
 Запрос 5.
@@ -967,27 +990,54 @@ privateUUID – приватный uuid анкеты
 Ответ: В ответе приходит zip архив с соответствующим заголовком
 */
 
+$httpClient5 = new HttpClient(array($options = null));
+$httpClient5->setHeader('Content-Type', 'application/json', true);
+$url5 = "https://service.gotdoc.ru/api/?class=Market&action=getDocs";
+$data5 = json_encode(array("privateUUID" => $response1));
+$response5 = $httpClient5->post($url5, $data5);
+echo $response5;
+echo '<br>';
 
+//$ch = curl_init($url1);
+//curl_setopt($ch, CURLOPT_POST, true); //используем POST-запрос
+//curl_setopt($html, CURLOPT_USERAGENT, 'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.7.62 Version/11.01');
+//curl_setopt($html, CURLOPT_FOLLOWLOCATION, true);
+//curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
 
+//$text = curl_exec($ch);
+//var_dump(curl_error($ch));
 
 ?>
-<script>
-	jQuery(document).ready(function(){
-	  jQuery("#post_to_url5").click(function(){ 
-		var response1js = <?php echo CUtil::PHPToJSObject($response11);?>;
-	    $.ajax({
-	      url: "https://service.gotdoc.ru/api/?class=Market&action=getDocs&privateUUID="+response1js, 
-		  method: "POST", 
-		  preparePost: true,
-		  dataType: "json" ,
-		  success: function(data){   
-				console.log(data); 
-				jQuery('#current').text(data);
-			},
-	    })
-	  });
-	});
-	
+<script type="text/javascript">
+    jQuery(function() {
+         jQuery('#post_to_url5').click(function() {
+      
+
+
+var $response1js = <?php echo CUtil::PHPToJSObject($response11);?>
+
+let uuid = $response1js;
+const request = new XMLHttpRequest();
+const url = "https://service.gotdoc.ru/api/?class=Market&action=getDocs";
+const params = "uuid=" + uuid;
+ 
+request.responseType =	"json";
+request.open("POST", url, true);
+request.setRequestHeader("Content-type", "application/json");
+ 
+request.addEventListener("readystatechange", () => {
+ 
+    if (request.readyState === 4 && request.status === 200) {
+        let obj = request.response;
+       
+	console.log(obj);       
+		console.log(obj.url); 
+	}
+});
+
+		request.send(params);
+        });
+    });
 </script>
 <a id="post_to_url5">Получить документы</a>
 </td>
