@@ -594,9 +594,9 @@ $templateData = array(
                             <ul class="filter-list pl-2 mb-0">
                                 <? foreach ($arItem["VALUES"] as $val => $ar): ?>
                                     <li class="custom-control custom-checkbox">
-                                        <input class="custom-control-input <? echo $ar["DISABLED"] ? 'disabled': '' ?>"
+                                        <input class="custom-control-input <? echo $ar["DISABLED"] ? 'disabled' : '' ?>"
                                                type="checkbox"
-                                                <? echo $ar["DISABLED"] ? 'disabled="disabled"' : '' ?>
+                                            <? echo $ar["DISABLED"] ? 'disabled="disabled"' : '' ?>
                                                value="<? echo $ar["HTML_VALUE"] ?>"
                                                name="<? echo $ar["CONTROL_NAME"] ?>"
                                                id="<? echo $ar["CONTROL_ID"] ?>"
@@ -627,12 +627,10 @@ $templateData = array(
                 <div class="clb"></div>
                 <div class="bx_filter_button_box active mt-3">
                     <div class="bx_filter_block">
-                        <div class="bx_filter_parameters_box_container">
-                            <input class="bx_filter_search_button" type="submit" id="set_filter" name="set_filter"
+                        <div class="bx_filter_parameters_box_container d-flex justify-content-around pt-3">
+                            <input class="bx_filter_search_button btn btn-danger" type="submit" id="set_filter" name="set_filter"
                                    value="<?= GetMessage("CT_BCSF_SET_FILTER") ?>"/>
-                            <input class="bx_filter_search_reset" type="submit" id="del_filter" name="del_filter"
-                                   value="<?= GetMessage("CT_BCSF_DEL_FILTER") ?>"/>
-
+                            <a class="btn btn-danger" href="/catalog/">Сбросить</a>
                             <div class="bx_filter_popup_result d-none <?= $arParams["POPUP_POSITION"] ?>"
                                  id="modef" <? if (!isset($arResult["ELEMENT_COUNT"])) echo 'style="display:none"'; ?>
                                  style="display: inline-block;">
