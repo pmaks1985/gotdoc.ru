@@ -831,33 +831,10 @@ else
 													<td>	
 <?$user = $USER->GetID();
 ?>
-<script>
-function post_to_url(path, params, method) {
-    method = method || "post";
 
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
-
-            form.appendChild(hiddenField);
-         }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-}
-
-
-</script>
 
 <?
+
 
 /*Запрос 1.
 service.gotdoc.ru/api/?class=Market&action=getPrivateId
@@ -876,170 +853,146 @@ $httpClient1->setHeader('Content-Type', 'application/json', true);
 $url1 = "https://service.gotdoc.ru/api/?class=Market&action=getPrivateId";
 $data1 = json_encode(array("setId" => "98ce3768-3426-2316-0bfe-c8bdc02eb296", "customerId" => $user, "orderId" => $arResult['ID']));
 $response1 = $httpClient1->post($url1, $data1);
-$response11 = $httpClient1->post($url1, $data1);
+
 $obj = json_decode($response1);
-$response1 = $obj->{'uuid'}; 
-echo 'Запрос 1: '.$response1;
+$response11 = $obj->{'uuid'}; 
+//echo 'Запрос 1: '.$response11;
 echo '<br>';
+
+
+$connection = Bitrix\Main\Application::getConnection();
+$query = "SELECT `PRODUCT_ID`, `XML_ID`, `privateUUID`, `FUSER_ID`, `ORDER_ID` FROM `b_sale_basket` WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."'";
+$result = $connection->query($query);
+if($ar=$result->fetch())
+{
+if($ar['privateUUID']>0){
+	$response12 = $ar['privateUUID'];
+	echo 'привытный ключ определен '.$response12;
+} else {
+//	$connection->queryExecute("UPDATE `b_sale_basket` SET  privateUUID='".$response11."' WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."' ");
+}
+}
 
 ?>
-<a href="https://service.gotdoc.ru/questionnaire/<?=$response1;?>">Заполнить анкету</a>
+
+<script>
+	jQuery(document).ready(function(){
+	  jQuery("#post_to_url1").click(function(){ 
+			$.ajax({
+				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax1.php",
+				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>,  "customerId":  <?=$USER->GetID();?>, "setId": "98ce3768-3426-2316-0bfe-c8bdc02eb296"},			
+				method: "POST", 
+				dataType: "json" ,
+				success: function(data){
+					data = JSON.parse(data);
+					console.log(data); // Возвращаемые данные выводим в консоль						
+					if(data.link){
+						window.location.href= data.link;
+					}
+					if(data.uuid){
+						alert(data.uuid);
+					}
+					//alert(data.uuid);
+				},
+			});
+		});
+		});	
+</script>
+
+<?/*Запрос 3.*/?>
+
 <?
-echo '<br>';
-/*Запрос 2.
-URL: 
-service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink
-Параметры: 
-privateUUID – приватный uuid анкеты
-Ответ:
-{
-    “link”: “одноразовая_ссылка_на_опросный_лист”
-}
-*/
-$httpClient2 = new HttpClient(array($options = null));
-$httpClient2->setHeader('Content-Type', 'application/json', true);
-$url2 = "https://service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink";
-$data2 = json_encode(array("privateUUID " => $response1));
-$response2 = $httpClient2->post($url2, $data2);
-echo 'Запрос 2: '.$response2;
-echo '<br>';
-
-
-/*Запрос 3.
-URL: 
-service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete
-Параметры: 
-privateUUID – приватный uuid анкеты
-Ответ:
-{
-    “result”: true/false
-}*/
-
 $httpClient3 = new HttpClient(array($options = null));
 $httpClient3->setHeader('Content-Type', 'application/json', true);
 $url3 = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete";
-$data3 = json_encode(array("privateUUID " => $response1));
+$data3 = json_encode(array("privateUUID" => $response12));
 $response3 = $httpClient3->post($url3, $data3);
-echo 'Запрос 3: '.$response3;
-echo '<br>';
+$response3 = json_decode($response3, true);?>
 
-/*Запрос 4.
-URL: 
-service.gotdoc.ru/api/?class=Market&action=getDocsList
-Параметры: 
-privateUUID – приватный uuid анкеты
-Ответ:
-{
-    “docs”: [
-         “документ_1”,
-         “документ_2”,
-         …….
-     ]
-}
-*/
-
-//$httpClient4 = new HttpClient(array($options = null));
-//$httpClient4->setHeader('Content-Type', 'application/json', true);
-//$url4 = "https://service.gotdoc.ru/api/?class=Market&action=getDocsList";
-//$data4 = json_encode(array("privateUUID" => $response1));
-//$response4 = $httpClient4->post($url4, $data4);
-//echo $response4;
-//echo '<br>';
-
-
-?>
-<script type="text/javascript">
-    jQuery(function() {
-         jQuery('#post_to_url').click(function() {
-      
-
-
-var $response1js = <?php echo CUtil::PHPToJSObject($response11);?>
-
-let uuid = $response1js;
-const request = new XMLHttpRequest();
-const url = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete";
-const params = "uuid=" + uuid;
- 
-request.responseType =	"json";
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
- 
-request.addEventListener("readystatechange", () => {
- 
-    if (request.readyState === 4 && request.status === 200) {
-        let obj = request.response;
-       
-	console.log(obj);       
-		console.log(obj.url); 
-	}
-});
-
-		request.send(params);
-        });
-    });
+<?/*Запрос 4.*/?>
+<script>
+	jQuery(document).ready(function(){
+	  jQuery("#post_to_url4").click(function(){ 
+		var response1js = <?php echo CUtil::PHPToJSObject($response12);?>;
+	  // 	 $.ajax({url: "https://service.gotdoc.ru/api/?class=Market&action=getDocsList",
+			$.ajax({
+				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax.php",
+				//data: { "privateUUID": response1js,},
+				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>},			
+				method: "POST", 
+				dataType: "json" ,
+				success: function(data){
+					data = JSON.parse(data);
+					console.log(data); // Возвращаемые данные выводим в консоль	
+					let select = document.createElement('ul');
+					for (i=0; i<=data.docs.length-1; i++) {
+						obj2 = "Элемент [ "+ i +" ] = " + data.docs[i];
+						let option = document.createElement('li');
+						option.innerText = obj2;
+						select.appendChild(option);
+					}
+					document.getElementById('current').appendChild(select);						
+				},
+			})
+		});
+		});	
 </script>
-<a id="post_to_url">Список документов</a>
-<?
-/*
-Запрос 5.
-URL: 
-service.gotdoc.ru/api/?class=Market&action=getDocs
-Параметры: 
-privateUUID – приватный uuid анкеты
-Ответ: В ответе приходит zip архив с соответствующим заголовком
-*/
 
-$httpClient5 = new HttpClient(array($options = null));
-$httpClient5->setHeader('Content-Type', 'application/json', true);
-$url5 = "https://service.gotdoc.ru/api/?class=Market&action=getDocs";
-$data5 = json_encode(array("privateUUID" => $response1));
-$response5 = $httpClient5->post($url5, $data5);
-echo $response5;
-echo '<br>';
+<br>
 
-//$ch = curl_init($url1);
-//curl_setopt($ch, CURLOPT_POST, true); //используем POST-запрос
-//curl_setopt($html, CURLOPT_USERAGENT, 'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.7.62 Version/11.01');
-//curl_setopt($html, CURLOPT_FOLLOWLOCATION, true);
-//curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+<?/*Запрос 5*/?>
+<script>
+	jQuery(document).ready(function(){
+	  jQuery("#post_to_url5").click(function(){ 
+		var response1js = <?php echo CUtil::PHPToJSObject($response12);?>;
+			$.ajax({
+				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax2.php",
+				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>},			
+				method: "POST", 
+				dataType: 'binary',
+				xhrFields: {
+					'responseType': 'blob'
+				},
+				success: function(data, xhr){
+					console.log('Успех');
+					const file = data;						
+					const blob = new Blob([file]);	
+					const downloadUrl = URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.href = downloadUrl;
+					a.download = "file.zip";					
+					document.body.appendChild(a);
+					a.click();					
+				},
+				error: function(err){
+					console.log('ОШИБКА AJAX запроса');
 
-//$text = curl_exec($ch);
-//var_dump(curl_error($ch));
-
-?>
-<script type="text/javascript">
-    jQuery(function() {
-         jQuery('#post_to_url5').click(function() {
-      
-
-
-var $response1js = <?php echo CUtil::PHPToJSObject($response11);?>
-
-let uuid = $response1js;
-const request = new XMLHttpRequest();
-const url = "https://service.gotdoc.ru/api/?class=Market&action=getDocs";
-const params = "uuid=" + uuid;
- 
-request.responseType =	"json";
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
- 
-request.addEventListener("readystatechange", () => {
- 
-    if (request.readyState === 4 && request.status === 200) {
-        let obj = request.response;
-       
-	console.log(obj);       
-		console.log(obj.url); 
-	}
-});
-
-		request.send(params);
-        });
-    });
+					const file = err.responseText;						
+					const blob = new Blob([file]);	
+					const downloadUrl = URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.href = downloadUrl;
+					a.download = "file.zip";					
+					document.body.appendChild(a);
+					a.click();		
+				}
+			})
+	  });
+	});	
 </script>
-<a id="post_to_url5">Получить документы</a>
+
+
+<?if($response3['result']){?>
+<div style="display:flex;">
+<a class="btn btn-secondary" style="margin:5px;"  id="post_to_url4">Список документов</a>
+<a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
+</div>
+<?} else {?>
+<a class="btn btn-primary"  style="margin:5px;"  id="post_to_url1">Заполнить анкету</a>
+<?} ?>
+<div id="current1"></div>
+<div id="current"></div>
+<div id="current2"></div>
 </td>
 													<td class="sale-order-detail-order-item-properties text-right">
 														<strong class="bx-price"><?=$basketItem['FORMATED_SUM']?></strong>

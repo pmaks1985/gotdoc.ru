@@ -1,7 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Моя корзина");
-?><div>
+?>
+<div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
 	"basketnew", 
@@ -80,7 +81,8 @@ $APPLICATION->SetTitle("Моя корзина");
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
 		"USE_PRICE_ANIMATION" => "Y",
-		"COMPONENT_TEMPLATE" => "basketnew"
+		"COMPONENT_TEMPLATE" => "basketnew",
+		"ADDITIONAL_PICT_PROP_35" => "-"
 	),
 	false
 );?>

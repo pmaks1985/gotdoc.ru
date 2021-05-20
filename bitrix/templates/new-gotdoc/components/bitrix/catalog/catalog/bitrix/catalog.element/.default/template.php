@@ -9,24 +9,76 @@
     <h1 class="title w-75"><?= $arResult["NAME"] ?></h1>
     <div class="price">
         <div>
+			<!-- Если нет предложений -->
+				<!-- Цены без предложений -->
             <? foreach ($arResult["PRICES"] as $code => $arPrice): ?>
                 <? if ($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
                     <span class="goods_price-new">Бесплатно</span>
                 <? else: ?>
                     <span class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
                 <? endif; ?>
+            	<span class="price-old">
+                	<? if ($arResult["PROPERTIES"]["OLD_PRICE"]["VALUE"]): ?>
+                    	<?= $arResult["PROPERTIES"]["OLD_PRICE"]["VALUE"] ?> руб.
+                	<? endif; ?>
+            	</span>
             <? endforeach; ?>
-            <span class="price-old">
+			<!-- Если есть предложения -->
+				<!-- Цены с предложениями -->
+			<? foreach ($arResult["OFFERS"] as $arOffer) : ?>
+				<? foreach ($arOffer["PRICES"] as $code => $arPrice) : ?>
+					<? if ($arPrice["CAN_ACCESS"]) : ?>
+                		<? if ($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]) : ?>
+                			<s><?= $arPrice["PRINT_VALUE"]; ?></s> <?= $arPrice["PRINT_DISCOUNT_VALUE"]; ?>
+                		<? else : ?>
+							<span class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
+                		<? endif; ?>
+            		<? endif; ?>
+				<? endforeach; ?>
+				<span class="price-old">
                 <? if ($arResult["PROPERTIES"]["OLD_PRICE"]["VALUE"]): ?>
                     <?= $arResult["PROPERTIES"]["OLD_PRICE"]["VALUE"] ?> руб.
                 <? endif; ?>
-            </span>
+            	</span>
+				<!-- Покупка с предложениями -->
+				<? if ($arOffer["CAN_BUY"]) : ?>
+				<? foreach ($arOffer["ITEM_MEASURE_RATIOS"] as $code => $arOffers):?>
+            		<form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data" class="add_form">
+                		<input type="text" name="QUANTITY" value="1" size="5" style="display: none;">
+                		<input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
+                		<input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>" value="<?=$arOffers["PRODUCT_ID"]?>"> 
+                		<input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>" value="<? echo GetMessage("CATALOG_BUY") ?>" style="display: none;">
+                		<input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>" value="<? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>" class="btn text-decoration-none goods_buy-button">
+            		</form>
+				<? endforeach; ?>
+        		<? elseif (count($arResult["CAT_PRICES"]) > 0) : ?>
+            		<?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
+        		<? endif; ?>
+
+				<? break; ?>
+			<? endforeach; ?>
+
+			<? if ($arResult["OFFERS"]) :?>
+			<div class="form-group">
+				<label for="kfpo">Выберите класс функциональной пожарной опасности вашего объекта</label>
+				<select class="form-control" id="kfpo">
+    			<? foreach ($arResult["OFFERS"] as $arOffer) : ?>
+					<? foreach ($arOffer["DISPLAY_PROPERTIES"] as $pid => $arProperty) : ?>
+						<option class="1"><div><?= $arProperty["DISPLAY_VALUE"];?></div></option>
+        			<? endforeach; ?>
+    			<? endforeach; ?>
+				</select>
+			</div>
+			<? endif; ?>
+
         </div>
         <div>
+				<!-- Скачать -->
             <? if ($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"] > 0) : ?>
                 <a class="btn text-decoration-none goods_buy-button"
                    href="<?= CFile::GetPath($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) ?>">Скачать</a>
             <? else: ?>
+				<!-- Покупка без предложений -->
                 <? if ($arResult["CAN_BUY"]): ?>
                     <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data"
                           class="add_form">
@@ -63,9 +115,9 @@
 </div>
 
 <?php
-echo '<pre>';
-//print_r($arResult["PROPERTIES"]["QUESTIONS_ANSWERS"]["VALUE"]);
-echo '</pre>';
+//echo '<pre>';
+//print_r($arOffer["PROPERTIES"]);
+//echo '</pre>';
 ?>
 
 <div class="goods-description">

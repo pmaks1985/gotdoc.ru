@@ -58,6 +58,7 @@ if (isset($_REQUEST['orderBy'])) {
                     <p class="product-list_text__description"><?= $arElement["PREVIEW_TEXT"] ?></p>
                 </div>
                 <? if (is_array($arElement["OFFERS"]) && !empty($arElement["OFFERS"])): ?>
+					<div class="price">
                     <? foreach ($arElement["OFFERS"] as $arOffer): ?>
                         <? foreach ($arParams["OFFERS_FIELD_CODE"] as $field_code): ?>
                             <small><? echo GetMessage("IBLOCK_FIELD_" . $field_code) ?>:&nbsp;<?
@@ -70,19 +71,22 @@ if (isset($_REQUEST['orderBy'])) {
                                 else
                                     echo $arProperty["DISPLAY_VALUE"]; ?></small><br/>
                         <? endforeach ?>
+
                         <? foreach ($arOffer["PRICES"] as $code => $arPrice): ?>
                             <? if ($arPrice["CAN_ACCESS"]): ?>
-                                <p class="1"><?= $arResult["PRICES"][$code]["TITLE"]; ?>:&nbsp;&nbsp;
                                     <? if ($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]): ?>
                                         <s><?= $arPrice["PRINT_VALUE"] ?></s> <span
                                                 class="catalog-price"><?= $arPrice["PRINT_DISCOUNT_VALUE"] ?></span>
                                     <? else: ?>
-                                        <span class="catalog-price"><?= $arPrice["PRINT_VALUE"] ?></span>
+									<? $val = substr($arPrice["PRINT_VALUE"], 0, -7); ?>
+                                        <span class="price-new"><?= $val; ?> руб.</span>
+										<? if ($arElement['PROPERTIES']['OLD_PRICE']['VALUE']): ?>
+                                    		<span class="price-old"><? echo $arElement['PROPERTIES']['OLD_PRICE']['VALUE']; ?> руб.</span>
+                                		<? endif; ?>
                                     <? endif ?>
-                                </p>
                             <? endif; ?>
                         <? endforeach; ?>
-                        <p>
+                        <span>
                         <? if ($arParams["DISPLAY_COMPARE"]): ?>
                             <noindex>
                                 <a href="<? echo $arOffer["COMPARE_URL"] ?>"
@@ -111,18 +115,20 @@ if (isset($_REQUEST['orderBy'])) {
                                            value="<? echo GetMessage("CATALOG_ADD") ?>">
                                 </form>
                             <? else: ?>
-                                <noindex>
-                                    <a href="<? echo $arOffer["BUY_URL"] ?>"
-                                       rel="nofollow"><? echo GetMessage("CATALOG_BUY") ?></a>
-                                    &nbsp;<a href="<? echo $arOffer["ADD_URL"] ?>"
-                                             rel="nofollow"><? echo GetMessage("CATALOG_ADD") ?></a>
-                                </noindex>
+								<div class="buy-button">
+                                    <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
+                                       class="btn-outline-danger text-decoration-none buy-button_link">
+                                        Подробнее
+                                    </a>
+                                </div>
                             <? endif; ?>
                         <? elseif (count($arResult["PRICES"]) > 0): ?>
                             <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
                         <? endif ?>
-                        </p>
+                        </span>
+						<? break; ?> <?//останавливаю цикл после перовй итерации?>
                     <? endforeach; ?>
+				</div>
                 <? else: ?>
                     <? foreach ($arElement["PRICES"] as $code => $arPrice): ?>
                         <? if ($arPrice["CAN_ACCESS"]): ?>

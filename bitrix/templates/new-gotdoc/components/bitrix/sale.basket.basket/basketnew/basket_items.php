@@ -322,7 +322,11 @@ if ($normalCount > 0):
             <?
         }
         ?>
-        <a href="javascript:void(0)" onclick="checkOut();" class="checkout"><?= GetMessage("SALE_ORDER") ?></a>
+		<? if ($USER->IsAuthorized()):?>
+        	<a href="javascript:void(0)" onclick="checkOut();" class="checkout"><?= GetMessage("SALE_ORDER") ?></a>
+		<? else: ?>
+			<a href="/personal/auth/" class="checkout"><?= GetMessage("SALE_ORDER") ?></a>
+		<? endif; ?>
     </div>
 
 <?

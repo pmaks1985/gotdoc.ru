@@ -229,7 +229,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "new-round",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "6",
+		"PAGE_ELEMENT_COUNT" => "30",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array(
 			0 => "BASE",
@@ -320,6 +320,54 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"USE_PRODUCT_QUANTITY" => "N",
 		"USE_SALE_BESTSELLERS" => "Y",
 		"USE_STORE" => "N",
+		"FILTER_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"FILTER_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"OFFERS_CART_PROPERTIES" => array(
+			0 => "KFPO",
+			1 => "IDENTIFIER_FOR_DECLARATION",
+		),
+		"TOP_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"TOP_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"TOP_OFFERS_LIMIT" => "5",
+		"LIST_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"LIST_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"LIST_OFFERS_LIMIT" => "5",
+		"DETAIL_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"DETAIL_OFFERS_PROPERTY_CODE" => array(
+			0 => "KFPO",
+			1 => "",
+		),
+		"OFFERS_SORT_FIELD" => "sort",
+		"OFFERS_SORT_ORDER" => "asc",
+		"OFFERS_SORT_FIELD2" => "id",
+		"OFFERS_SORT_ORDER2" => "desc",
+		"PRODUCT_DISPLAY_MODE" => "N",
+		"OFFER_ADD_PICT_PROP" => "-",
+		"OFFER_TREE_PROPS" => "",
+		"SIDEBAR_SECTION_POSITION" => "right",
+		"SIDEBAR_DETAIL_POSITION" => "right",
+		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => "",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE_PATH#/",

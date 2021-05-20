@@ -1,13 +1,15 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
-?><?$APPLICATION->IncludeComponent(
+?>
+<div class="my-4">
+<?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.ajax", 
-	".default", 
+	"bootstrap-cart", 
 	array(
 		"ALLOW_AUTO_REGISTER" => "N",
 		"ALLOW_NEW_PROFILE" => "N",
-		"COMPONENT_TEMPLATE" => ".default",
+		"COMPONENT_TEMPLATE" => "bootstrap-cart",
 		"COUNT_DELIVERY_TAX" => "N",
 		"DELIVERY_NO_AJAX" => "Y",
 		"DELIVERY_NO_SESSION" => "Y",
@@ -29,8 +31,8 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"TEMPLATE_LOCATION" => "popup",
 		"USE_PREPAYMENT" => "N",
 		"ALLOW_APPEND_ORDER" => "Y",
-		"SHOW_NOT_CALCULATED_DELIVERIES" => "L",
-		"SPOT_LOCATION_BY_GEOIP" => "Y",
+		"SHOW_NOT_CALCULATED_DELIVERIES" => "N",
+		"SPOT_LOCATION_BY_GEOIP" => "N",
 		"SHOW_VAT_PRICE" => "N",
 		"COMPATIBLE_MODE" => "Y",
 		"USE_PRELOAD" => "Y",
@@ -49,14 +51,14 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"ADDITIONAL_PICT_PROP_32" => "-",
 		"BASKET_IMAGES_SCALING" => "adaptive",
 		"ALLOW_USER_PROFILES" => "N",
-		"TEMPLATE_THEME" => "red",
+		"TEMPLATE_THEME" => "blue",
 		"SHOW_ORDER_BUTTON" => "final_step",
 		"SHOW_TOTAL_ORDER_BUTTON" => "N",
 		"SHOW_PAY_SYSTEM_LIST_NAMES" => "Y",
 		"SHOW_PAY_SYSTEM_INFO_NAME" => "Y",
-		"SHOW_DELIVERY_LIST_NAMES" => "Y",
-		"SHOW_DELIVERY_INFO_NAME" => "Y",
-		"SHOW_DELIVERY_PARENT_NAMES" => "Y",
+		"SHOW_DELIVERY_LIST_NAMES" => "N",
+		"SHOW_DELIVERY_INFO_NAME" => "N",
+		"SHOW_DELIVERY_PARENT_NAMES" => "N",
 		"SKIP_USELESS_BLOCK" => "Y",
 		"BASKET_POSITION" => "after",
 		"SHOW_BASKET_HEADERS" => "N",
@@ -68,8 +70,9 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"SHOW_PICKUP_MAP" => "N",
 		"SHOW_MAP_IN_PROPS" => "N",
 		"PICKUP_MAP_TYPE" => "yandex",
-		"SHOW_COUPONS" => "N",
+		"SHOW_COUPONS" => "Y",
 		"PROPS_FADE_LIST_1" => array(
+			0 => "1",
 		),
 		"PROPS_FADE_LIST_2" => array(
 		),
@@ -83,13 +86,22 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"USE_CUSTOM_MAIN_MESSAGES" => "N",
 		"USE_CUSTOM_ADDITIONAL_MESSAGES" => "N",
-		"USE_CUSTOM_ERROR_MESSAGES" => "N"
+		"USE_CUSTOM_ERROR_MESSAGES" => "N",
+		"PROPS_FADE_LIST_4" => array(
+			0 => "21",
+		),
+		"SHOW_COUPONS_BASKET" => "N",
+		"SHOW_COUPONS_DELIVERY" => "Y",
+		"SHOW_COUPONS_PAY_SYSTEM" => "Y",
+		"ADDITIONAL_PICT_PROP_35" => "-"
 	),
 	false,
 	array(
 		"ACTIVE_COMPONENT" => "Y"
 	)
-);?><? use Bitrix\Main\Web\HttpClient;
+);?>
+</div>
+<? use Bitrix\Main\Web\HttpClient;
 $key = "ТУТ МОЙ КЛЮЧ ОТ АПИ https://tinypng.com/developers";
 $httpClient = new HttpClient(array(
     "waitResponse" => true

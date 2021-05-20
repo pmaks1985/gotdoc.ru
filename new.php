@@ -17,9 +17,22 @@
 		//	crossDomain: true,	
 		  dataType: "json" ,
 		  success: function(data){   
-				console.log(data); 
+				//console.log(data); 
 				var obj = JSON.stringify(data);
-				jQuery('#current').html(obj);
+				//var obj2[];
+				var person = JSON.parse(obj);
+				let select = document.createElement('ul');
+				for (var i=0; i<=person.docs.length-1; i++) {
+					obj2 = "Элемент [ "+ i +" ] = " + person.docs[i];
+					let option = document.createElement('li');
+					option.innerText = obj2;
+					select.appendChild(option);
+				}
+				document.getElementById('current').appendChild(select);
+				//jQuery('#current').html(obj2);
+				//jQuery('#current').html(obj2);
+				
+				
 			},
 	    })
 	  });

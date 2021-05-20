@@ -848,7 +848,16 @@ orderId – номер заказа в магазине битрикса
 }*/
 
 
+$httpClient1 = new HttpClient(array($options = null));
+$httpClient1->setHeader('Content-Type', 'application/json', true);
+$url1 = "https://service.gotdoc.ru/api/?class=Market&action=getPrivateId";
+$data1 = json_encode(array("setId" => "98ce3768-3426-2316-0bfe-c8bdc02eb296", "customerId" => $user, "orderId" => $arResult['ID']));
+$response1 = $httpClient1->post($url1, $data1);
 
+$obj = json_decode($response1);
+$response11 = $obj->{'uuid'}; 
+//echo 'Запрос 1: '.$response11;
+echo '<br>';
 
 
 $connection = Bitrix\Main\Application::getConnection();
@@ -858,53 +867,16 @@ while($ar=$result->fetch())
 {
 if($ar['privateUUID']>0){
 	$response12 = $ar['privateUUID'];
-	//echo 'привытный ключ определен '.$response12;
+	echo 'привытный ключ определен '.$response12;
 } else {
-	//$connection->queryExecute("UPDATE `b_sale_basket` SET  privateUUID='".$response11."' WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."' ");
+	$connection->queryExecute("UPDATE `b_sale_basket` SET  privateUUID='".$response11."' WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."' ");
 }
 }
 ?>
+
+
 <?
-$arSelect = Array("ID", "IBLOCK_ID", "NAME","PROPERTY_IDENTIFIER");
-$arFilter = Array("ID"=>$basketItem['PRODUCT_ID']);
-$res = CIBlockElement::GetList(Array(), $arFilter, false, Array(), $arSelect);
-if($ob = $res->GetNextElement()){ 
-		$arFields = $ob->GetFields();  
-		$identificator = $arFields['PROPERTY_IDENTIFIER_VALUE'];
-		
-	}
-	//$identificator = "12345";
-
-
-
-?>
-
-<script>
-	jQuery(document).ready(function(){
-	  jQuery("#post_to_url1").click(function(){ 
-			var identificator = <?php echo CUtil::PHPToJSObject($identificator);?>;
-			$.ajax({
-				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax1.php",
-				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>,  "customerId":  <?=$USER->GetID();?>, "setId":"identificator"},			
-				method: "POST", 
-				dataType: "json" ,
-				success: function(data){
-					data = JSON.parse(data);
-					console.log(data); // Возвращаемые данные выводим в консоль						
-					if(data.link){
-						window.location.href= data.link;
-					}
-					//if(data.uuid){
-					//	location.reload(); 
-					//}
-					//alert(data.uuid);
-				},
-			});
-		});
-		});	
-</script>
-<?
-
+echo '<br>';
 /*Запрос 2.*/
 $httpClient2 = new HttpClient(array($options = null));
 $httpClient2->setHeader('Content-Type', 'application/json', true);
@@ -931,6 +903,7 @@ $response3 = json_decode($response3, true);?>
 	jQuery(document).ready(function(){
 	  jQuery("#post_to_url4").click(function(){ 
 		var response1js = <?php echo CUtil::PHPToJSObject($response12);?>;
+	  // 	 $.ajax({url: "https://service.gotdoc.ru/api/?class=Market&action=getDocsList",
 			$.ajax({
 				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax.php",
 				//data: { "privateUUID": response1js,},
@@ -942,7 +915,7 @@ $response3 = json_decode($response3, true);?>
 					console.log(data); // Возвращаемые данные выводим в консоль	
 					let select = document.createElement('ul');
 					for (i=0; i<=data.docs.length-1; i++) {
-						obj2 =  data.docs[i];
+						obj2 = "Элемент [ "+ i +" ] = " + data.docs[i];
 						let option = document.createElement('li');
 						option.innerText = obj2;
 						select.appendChild(option);
@@ -954,7 +927,7 @@ $response3 = json_decode($response3, true);?>
 		});	
 </script>
 
-
+<br>
 
 <?/*Запрос 5*/?>
 <script>
@@ -998,15 +971,14 @@ $response3 = json_decode($response3, true);?>
 </script>
 
 
-<?//if($response3['result']){?>
-<a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
+<?if($response3['result']){?>
 <div style="display:flex;">
 <a class="btn btn-secondary" style="margin:5px;"  id="post_to_url4">Список документов</a>
 <a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
 </div>
-<?//} else {?>
-
-<?//} ?>
+<?} else {?>
+<a class="btn btn-primary"  style="margin:5px;"  href='<?=$response2['link']?>' id="post_to_url1">Заполнить анкету</a>
+<?} ?>
 <div id="current"></div>
 <div id="current2"></div>
 </td>
