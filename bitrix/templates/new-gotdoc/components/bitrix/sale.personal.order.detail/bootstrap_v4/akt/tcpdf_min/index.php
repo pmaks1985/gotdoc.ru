@@ -16,9 +16,10 @@ class MdfPDF extends \TCPDF
 	{
 		// Logo
 		$headerdata = $this->getHeaderData();
-		//$this->Image($headerdata['logo'], 20, 10, $headerdata['logo_width'], '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image($headerdata['logo'], 20, 10, $headerdata['logo_width'], '', 'JPG', '', 'T', false, 300, '', false, 
+				false, 0, false, false, false);
 		// Set font
-		$this->SetFont('dejavusans', '', 8);
+		$this->SetFont('times', '', 14);
 		// Title
 		/*
 		// если нужно в верхнем колонтитуле вывести заголовок или какой-то текст, эти строки нужно раскомментировать 
@@ -26,16 +27,8 @@ class MdfPDF extends \TCPDF
 		$this->Cell(0, 15, $headerdata['title'], 0, false, 'C', 0, '', 0, false, 'M', 'M'); 
 		$this->Cell(0, 15, $headerdata['string'], 0, false, 'C', 0, '', 0, false, 'M', 'M');
 		*/
-		$html = "<br /><br /><br />"; // добавим линию, отделающую колонтитул от текста
-		$this->writeHTML($html, true, false, true, false, '');
 		$this->SetTextColor(85, 85, 85); // цвет шрифта
-		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
-		$this->writeHTML($html, true, false, true, false, '');
-		$html = '<div><b>Заказчик</b>:</div>';
-		$this->writeHTML($html, true, false, true, false, '');
-		$html = "<p>Основание:</p>";
-		$this->writeHTML($html, true, false, true, false, '');
-		$html = "<br /><hr /><br /><br />"; // добавим линию, отделающую колонтитул от текста
+		$html = "<br /><hr />"; // добавим линию, отделающую колонтитул от текста
 		$this->writeHTML($html, true, false, true, false, '');
 	}
 
@@ -45,7 +38,7 @@ class MdfPDF extends \TCPDF
 		// Position at 15 mm from bottom
 		$this->SetY(-15);
 		// Set font
-		$this->SetFont('dejavusans', 'I', 8);
+		$this->SetFont('times', 'I', 8);
 		// Page number
 		$this->SetTextColor(85, 85, 85);
 		$html = "<hr />"; 
@@ -262,22 +255,26 @@ class pdfit
 
 	}
 
-
+	function setTitleByOrderID()
+	{
+		$title = 'Расходная накладная №' . $this->orderID;
+		$this->pdf->SetTitle($title);
+		$this->pdf->SetHeaderData($this->siteLogo, 30, $title, $this->getInvoiceDate());
+	}
 
 	function GetHead()
 	{
 		$this->pdf->AddPage();
 
 		$headerdata = $this->pdf->getHeaderData();
-		$this->pdf->SetFont('dejavusans', '', 12);
-		
+		$this->pdf->SetFont('times', '', 12);
 
 		$this->pdf->Write(0, $headerdata['title'], '', 0, 'C', true,
 			0, false, false, 0);
 		$this->pdf->Write(0, $headerdata['string'], '', 0, 'C', true,
 			0, false, false, 0);
 
-		$this->pdf->SetFont('dejavusans', '', 10);
+		$this->pdf->SetFont('times', '', 10);
 		if ($receiver = $this->getInvoiceReceiver())
 		{
 			$this->pdf->Write(0, 'Покупатель: ' . $receiver, '', 0, 'L', true,
@@ -306,13 +303,6 @@ class pdfit
 		$this->pdf->Write(0, "", '', 0, 'C', true,
 			0, false, false, 0);
 	}
-	
-	function setTitleByOrderID()
-	{
-		$title = 'Акт №' . $this->orderID;
-		$this->pdf->SetTitle($title);
-		$this->pdf->SetHeaderData($this->siteLogo, 80, $title, $this->getInvoiceDate());
-	}
 
 	function GetOrderItems()
 	{
@@ -320,7 +310,7 @@ class pdfit
 		$this->pdf->SetTextColor(255);
 		$this->pdf->SetDrawColor(85, 85, 85);
 		$this->pdf->SetLineWidth(0.3);
-		$this->pdf->SetFont('dejavusans', 'B');
+		$this->pdf->SetFont('times', 'B');
 
 		$coloumns = array(
 			0 => ['t' => 'ID', 'w' => '20'],
@@ -338,17 +328,18 @@ class pdfit
 
 		$this->pdf->SetFillColor(224, 235, 255);
 		$this->pdf->SetTextColor(0);
-		$this->pdf->SetFont('dejavusans', '');
+		$this->pdf->SetFont('times', '');
 
 		$fill = 0;
 		foreach ($this->order->getBasket()->getBasketItems() as $basketItem)
 		{
 			$this->pdf->Cell($coloumns[0]['w'], 6, $basketItem->getProductId(), 'LR', 0, 'C', $fill);
 			$this->pdf->Cell($coloumns[1]['w'], 6, $basketItem->getField('NAME'), 'LR', 0, 'L', $fill);
-			$this->pdf->Cell($coloumns[2]['w'], 6, $basketItem->getPrice(), 
+			$this->pdf->Cell($coloumns[2]['w'], 6, CCurrencyLang::CurrencyFormat($basketItem->getPrice(), 'USD', true), 
 				'LR', 0, 'L', $fill);
-			$this->pdf->Cell($coloumns[3]['w'], 6, number_format($basketItem->getQuantity()), 'LR', 0, 'C', $fill);	
-			$this->pdf->Cell($coloumns[3]['w'], 6, $basketItem->getFinalPrice(), 'LR', 0, 'L', $fill);
+			$this->pdf->Cell($coloumns[3]['w'], 6, number_format($basketItem->getQuantity()), 'LR', 0, 'C', $fill);
+			$this->pdf->Cell($coloumns[4]['w'], 6, CCurrencyLang::CurrencyFormat($basketItem->getFinalPrice(), 'USD', 
+				true), 'LR', 0, 'L', $fill);
 			$this->pdf->Ln();
 			$fill = !$fill;
 		}
@@ -357,8 +348,9 @@ class pdfit
 		}, 0), 0, '', 'T');
 
 		$this->pdf->Ln();
-		$this->pdf->SetFont('dejavusans', 'U',12);
-		$this->pdf->Write(0, 'Товаров на ' . $this->order->getBasket()->getPrice(), '', 0, 'R', true,
+		$this->pdf->SetFont('times', 'U',14);
+		$this->pdf->Write(0, 'Товаров на ' . CCurrencyLang::CurrencyFormat($this->order->getBasket()->getPrice(), 
+				'USD', true), '', 0, 'R', true,
 			0, false, false, 0);
 
 	}

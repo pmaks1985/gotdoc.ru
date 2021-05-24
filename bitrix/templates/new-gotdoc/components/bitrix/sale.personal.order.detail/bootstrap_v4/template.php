@@ -461,9 +461,29 @@ else
 																	<? 
 																	if($payment['PAY_SYSTEM_ID'] == 3){
 																	$link = "/personal/cart/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
-																	<br/>
-																	
+																	<br/>																	
 																	<a href="<?=$link?>">Скачать счет на оплату</a>
+																	<br/>
+																	<a id="btnR">Скачать акт</a>
+																	
+<script>
+	$("#btnR").on('click', function(e) {
+        $.ajax({
+			url: '/act/index.php',
+            type: 'POST',
+			data: {ZAKAZ_ID: <?=$arResult['ID']?>},
+            success: function(result) {
+				console.log(result);
+            },
+            error: function(result) {
+				console.log(result);
+            }
+			});
+
+
+		});
+</script>
+
 																	<?}
 																	
 																}

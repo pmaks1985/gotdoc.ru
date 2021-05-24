@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Моя корзина");
 ?><div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
-	"basketnew", 
+	".default", 
 	array(
 		"ACTION_VARIABLE" => "basketAction",
 		"ADDITIONAL_PICT_PROP_17" => "-",
@@ -31,7 +31,8 @@ $APPLICATION->SetTitle("Моя корзина");
 			1 => "DELETE",
 			2 => "PROPERTY_KFPO",
 		),
-		"COLUMNS_LIST_MOBILE" => "",
+		"COLUMNS_LIST_MOBILE" => array(
+		),
 		"COMPATIBLE_MODE" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
@@ -56,7 +57,8 @@ $APPLICATION->SetTitle("Моя корзина");
 		"GIFTS_SHOW_OLD_PRICE" => "N",
 		"GIFTS_TEXT_LABEL_GIFT" => "Подарок",
 		"HIDE_COUPON" => "Y",
-		"LABEL_PROP" => "",
+		"LABEL_PROP" => array(
+		),
 		"OFFERS_PROPS" => array(
 			0 => "KFPO",
 		),
@@ -78,7 +80,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
 		"USE_PRICE_ANIMATION" => "Y",
-		"COMPONENT_TEMPLATE" => "basketnew"
+		"COMPONENT_TEMPLATE" => ".default"
 	),
 	false
 );?>
