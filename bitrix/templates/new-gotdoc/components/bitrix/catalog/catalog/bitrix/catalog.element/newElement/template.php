@@ -78,7 +78,6 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
 <div class="bx_item_detail w-100 <? echo $templateData['TEMPLATE_CLASS']; ?>" id="<? echo $arItemIDs['ID']; ?>">
 
     <?
-
     reset($arResult['MORE_PHOTO']);
     $arFirstPhoto = current($arResult['MORE_PHOTO']);
     ?>
@@ -144,6 +143,10 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                            class="btn text-decoration-none goods_buy-button" disabled="disabled">
                                 </form>
                             <? endforeach; ?>
+                            <a href="javascript:void(0);"
+                               class="btn text-decoration-none goods_buy-button"
+                               id="<? echo $arItemIDs['ADD_BASKET_LINK']; ?>">Заказать</a>
+
                         <? elseif (count($arResult["CAT_PRICES"]) > 0) : ?>
                             <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
                         <? endif; ?>
@@ -505,7 +508,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
         if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']) && !empty($arResult['OFFERS_PROP'])) {
             $arSkuProps = array();
             ?>
-            <div class="item_info_section 3" style="padding-right:150px;" id="<? echo $arItemIDs['PROP_DIV']; ?>">
+            <div class="item_info_section 3" id="<? echo $arItemIDs['PROP_DIV']; ?>">
                 <?
                 foreach ($arResult['SKU_PROPS'] as &$arProp) {
                     if (!isset($arResult['OFFERS_PROP'][$arProp['CODE']]))
@@ -529,21 +532,38 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                         }
                         ?>
                         <div class="<? echo $strClass; ?>" id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_cont">
-                            <span class="bx_item_section_name_gray"><? echo htmlspecialcharsex($arProp['NAME']); ?></span>
                             <div class="bx_size_scroller_container">
                                 <div class="bx_size">
+
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown"
+                                       role="button" data-toggle="dropdown" aria-expanded="false">
+                                        Выберите класс функциональной пожарной опасности вашего объекта
+                                    </a>
+
+                                    <!--a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Выберите класс функциональной пожарной опасности вашего объекта
+                                    </a-->
                                     <ul id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_list"
-                                        style="width: <? echo $strWidth; ?>;margin-left:0%;">
+                                        style="width: <? echo $strWidth; ?>;margin-left:0%;" class="dropdown-menu"
+                                        aria-labelledby="navbarScrollingDropdown">
                                         <?
                                         foreach ($arProp['VALUES'] as $arOneValue) {
                                             $arOneValue['NAME'] = htmlspecialcharsbx($arOneValue['NAME']);
                                             ?>
+                                            <!--li data-treevalue="<? echo $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
+                                                data-onevalue="<? echo $arOneValue['ID']; ?>"
+                                                style="width: <? echo $strOneWidth; ?>; display: none;"
+                                                class="dropdown-item">
+                                                <i title="<? echo $arOneValue['NAME']; ?>"></i>
+                                                <span class="cnt" title="<? echo $arOneValue['NAME']; ?>">
+                                                    <? echo $arOneValue['NAME']; ?>
+                                                </span>
+                                            </li-->
                                             <li data-treevalue="<? echo $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
                                                 data-onevalue="<? echo $arOneValue['ID']; ?>"
-                                                style="width: <? echo $strOneWidth; ?>; display: none;">
-                                                <i title="<? echo $arOneValue['NAME']; ?>"></i><span class="cnt"
-                                                                                                     title="<? echo $arOneValue['NAME']; ?>"><? echo $arOneValue['NAME']; ?></span>
-                                            </li>
+                                                class="dropdown-item"><span
+                                                        class="cnt"><? echo $arOneValue['NAME']; ?></span></li>
                                             <?
                                         }
                                         ?>
@@ -717,13 +737,13 @@ if ($showSubscribeBtn) {
 <?
 if ($showBuyBtn) {
     ?>
-    <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart"
+    <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart 2"
        id="<? echo $arItemIDs['BUY_LINK']; ?>"><span></span><? echo $buyBtnMessage; ?></a>
     <?
 }
 if ($showAddBtn) {
     ?>
-    <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart"
+    <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart 2"
        id="<? echo $arItemIDs['ADD_BASKET_LINK']; ?>"><span></span><? echo $addToBasketBtnMessage; ?></a>
     <?
 }
