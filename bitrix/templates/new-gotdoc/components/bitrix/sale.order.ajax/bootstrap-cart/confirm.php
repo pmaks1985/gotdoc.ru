@@ -33,7 +33,10 @@ if ($arParams["SET_TITLE"] == "Y")
 	<? if ($arParams['NO_PERSONAL'] !== 'Y'): ?>
 		<div class="row mb-5">
 			<div class="col">
-				<?=Loc::getMessage('SOA_ORDER_SUC1', ['#LINK#' => $arParams['PATH_TO_PERSONAL']])?>
+			<?
+			$orderAccountNumberA = urlencode(urlencode($arResult["ORDER"]["ACCOUNT_NUMBER"]));
+			$orderA =  "/personal/personal/orders/".$orderAccountNumberA;?>
+				<?=Loc::getMessage('SOA_ORDER_SUC1', ['#LINK#' => $orderA])?>
 			</div>
 		</div>
 	<? endif; ?>

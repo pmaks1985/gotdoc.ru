@@ -456,8 +456,16 @@ else
 																else
 																{
 																	?>
+																	
 																	<button class="btn btn-primary btn-sm active-button"><?= Loc::getMessage('SPOD_ORDER_PAY') ?></button>
-																	<?
+																	<? 
+																	if($payment['PAY_SYSTEM_ID'] == 3){
+																	$link = "/personal/cart/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
+																	<br/>
+																	
+																	<a href="<?=$link?>">Скачать счет на оплату</a>
+																	<?}
+																	
 																}
 															}
 															?>
@@ -830,6 +838,7 @@ else
 													</td>
 													<td>	
 <?$user = $USER->GetID();
+//print_r($basketItem['PRODUCT_ID']);
 ?>
 
 
@@ -869,7 +878,8 @@ $arSelect = Array("ID", "IBLOCK_ID", "NAME","PROPERTY_IDENTIFIER");
 $arFilter = Array("ID"=>$basketItem['PRODUCT_ID']);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, Array(), $arSelect);
 if($ob = $res->GetNextElement()){ 
-		$arFields = $ob->GetFields();  
+		$arFields = $ob->GetFields(); 
+		//print_r($arFields);
 		$identificator = $arFields['PROPERTY_IDENTIFIER_VALUE'];
 		
 	}
@@ -929,7 +939,7 @@ $response3 = json_decode($response3, true);?>
 <?/*Запрос 4.*/?>
 <script>
 	jQuery(document).ready(function(){
-	  jQuery("#post_to_url4").click(function(){ 
+	  jQuery("#post_to_url4").one("click", function(){ 
 		var response1js = <?php echo CUtil::PHPToJSObject($response12);?>;
 			$.ajax({
 				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax.php",
