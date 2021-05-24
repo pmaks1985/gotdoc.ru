@@ -1,58 +1,52 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Каталог товаров");
-?>
-
-<? $APPLICATION->IncludeComponent(
-    "bitrix:breadcrumb",
-    "breadcrump",
-    array(
-        "PATH" => "",
-        "SITE_ID" => "s1",
-        "START_FROM" => "0",
-        "COMPONENT_TEMPLATE" => "breadcrump"
-    ),
-    false
-); ?>
-    <div class="row mx-0">
-        <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
-        <div class="col-lg-3 px-0">
-            <? $APPLICATION->IncludeComponent(
-                "bitrix:catalog.smart.filter",
-                "visual_vertical-catalog",
-                array(
-                    "CACHE_GROUPS" => "Y",
-                    "CACHE_TIME" => "36000000",
-                    "CACHE_TYPE" => "N",
-                    "COMPONENT_TEMPLATE" => "visual_vertical-catalog",
-                    "CONVERT_CURRENCY" => "N",
-                    "DISPLAY_ELEMENT_COUNT" => "N",
-                    "FILTER_NAME" => "arrFilter",
-                    "FILTER_VIEW_MODE" => "vertical",
-                    "HIDE_NOT_AVAILABLE" => "Y",
-                    "IBLOCK_ID" => "32",
-                    "IBLOCK_TYPE" => "newgotdoc",
-                    "PAGER_PARAMS_NAME" => "arrPager",
-                    "POPUP_POSITION" => "left",
-                    "PREFILTER_NAME" => "smartPreFilter",
-                    "PRICE_CODE" => array(),
-                    "SAVE_IN_SESSION" => "N",
-                    "SECTION_CODE" => "",
-                    "SECTION_DESCRIPTION" => "-",
-                    "SECTION_ID" => $_REQUEST["SECTION_ID"],
-                    "SECTION_TITLE" => "-",
-                    "SEF_MODE" => "N",
-                    "TEMPLATE_THEME" => "blue",
-                    "XML_EXPORT" => "N"
-                ),
-                false
-            ); ?>
-        </div>
-        <div class="col-lg-9 pr-0">
-            <h1 class="title"><? $APPLICATION->ShowTitle(false) ?></h1>
-            <? endif; ?>
-
-            <?
+?><?$APPLICATION->IncludeComponent(
+	"bitrix:breadcrumb",
+	"breadcrump",
+	Array(
+		"COMPONENT_TEMPLATE" => "breadcrump",
+		"PATH" => "",
+		"SITE_ID" => "s1",
+		"START_FROM" => "0"
+	)
+);?>
+<div class="row mx-0">
+	 <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
+	<div class="col-lg-3 px-0">
+		 <?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.smart.filter",
+	"visual_vertical-catalog",
+	Array(
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "N",
+		"COMPONENT_TEMPLATE" => "visual_vertical-catalog",
+		"CONVERT_CURRENCY" => "N",
+		"DISPLAY_ELEMENT_COUNT" => "N",
+		"FILTER_NAME" => "arrFilter",
+		"FILTER_VIEW_MODE" => "vertical",
+		"HIDE_NOT_AVAILABLE" => "Y",
+		"IBLOCK_ID" => "32",
+		"IBLOCK_TYPE" => "newgotdoc",
+		"PAGER_PARAMS_NAME" => "arrPager",
+		"POPUP_POSITION" => "left",
+		"PREFILTER_NAME" => "smartPreFilter",
+		"PRICE_CODE" => array(),
+		"SAVE_IN_SESSION" => "N",
+		"SECTION_CODE" => "",
+		"SECTION_DESCRIPTION" => "-",
+		"SECTION_ID" => $_REQUEST["SECTION_ID"],
+		"SECTION_TITLE" => "-",
+		"SEF_MODE" => "N",
+		"TEMPLATE_THEME" => "blue",
+		"XML_EXPORT" => "N"
+	)
+);?>
+	</div>
+	<div class="col-lg-9 pr-0">
+		<h1 class="title"><? $APPLICATION->ShowTitle(false) ?></h1>
+		 <? endif; ?> <?
             if (isset($_REQUEST['sortBy'])) {
                 $sortBy = $_REQUEST['sortBy'];
             } else {
@@ -64,9 +58,7 @@ $APPLICATION->SetTitle("Каталог товаров");
             if ($sortBy == 'show') {
                 $sortBy = 'SHOW_COUNTER';
             }
-            ?>
-
-            <? $APPLICATION->IncludeComponent(
+            ?> <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"catalog", 
 	array(
@@ -89,7 +81,6 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"COMMON_ADD_TO_BASKET_ACTION" => "ADD",
 		"COMMON_SHOW_CLOSE_POPUP" => "N",
 		"COMPATIBLE_MODE" => "Y",
-		"COMPONENT_TEMPLATE" => "catalog",
 		"CONVERT_CURRENCY" => "N",
 		"DETAIL_ADD_DETAIL_TO_SLIDER" => "N",
 		"DETAIL_ADD_TO_BASKET_ACTION" => array(
@@ -109,9 +100,18 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"DETAIL_DISPLAY_NAME" => "Y",
 		"DETAIL_DISPLAY_PREVIEW_TEXT_MODE" => "E",
 		"DETAIL_IMAGE_RESOLUTION" => "16by9",
+		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => "",
 		"DETAIL_MAIN_BLOCK_PROPERTY_CODE" => "",
 		"DETAIL_META_DESCRIPTION" => "-",
 		"DETAIL_META_KEYWORDS" => "-",
+		"DETAIL_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"DETAIL_OFFERS_PROPERTY_CODE" => array(
+			0 => "KFPO",
+			1 => "",
+		),
 		"DETAIL_PRODUCT_INFO_BLOCK_ORDER" => "sku,props",
 		"DETAIL_PRODUCT_PAY_BLOCK_ORDER" => "rating,price,priceRanges,quantityLimit,quantity,buttons",
 		"DETAIL_PROPERTY_CODE" => array(
@@ -149,6 +149,14 @@ $APPLICATION->SetTitle("Каталог товаров");
 		),
 		"FILTER_HIDE_ON_MOBILE" => "N",
 		"FILTER_NAME" => "",
+		"FILTER_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"FILTER_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"FILTER_PRICE_CODE" => array(
 			0 => "BASE",
 		),
@@ -199,6 +207,15 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"LIST_ENLARGE_PRODUCT" => "STRICT",
 		"LIST_META_DESCRIPTION" => "-",
 		"LIST_META_KEYWORDS" => "-",
+		"LIST_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"LIST_OFFERS_LIMIT" => "5",
+		"LIST_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"LIST_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
 		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]",
 		"LIST_PROPERTY_CODE" => array(
@@ -222,6 +239,16 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"MESS_NOT_AVAILABLE" => "Нет в наличии",
 		"MESS_PRICE_RANGES_TITLE" => "Цены",
 		"MESS_PROPERTIES_TAB" => "Характеристики",
+		"OFFERS_CART_PROPERTIES" => array(
+			0 => "KFPO",
+			1 => "IDENTIFIER_FOR_DECLARATION",
+		),
+		"OFFERS_SORT_FIELD" => "sort",
+		"OFFERS_SORT_FIELD2" => "id",
+		"OFFERS_SORT_ORDER" => "asc",
+		"OFFERS_SORT_ORDER2" => "desc",
+		"OFFER_ADD_PICT_PROP" => "-",
+		"OFFER_TREE_PROPS" => "",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -229,13 +256,14 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "new-round",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "6",
+		"PAGE_ELEMENT_COUNT" => "30",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array(
 			0 => "BASE",
 		),
 		"PRICE_VAT_INCLUDE" => "Y",
 		"PRICE_VAT_SHOW_VALUE" => "N",
+		"PRODUCT_DISPLAY_MODE" => "N",
 		"PRODUCT_ID_VARIABLE" => "id",
 		"PRODUCT_PROPERTIES" => array(
 		),
@@ -268,8 +296,10 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"SHOW_PRICE_COUNT" => "1",
 		"SHOW_SKU_DESCRIPTION" => "N",
 		"SHOW_TOP_ELEMENTS" => "Y",
+		"SIDEBAR_DETAIL_POSITION" => "right",
 		"SIDEBAR_DETAIL_SHOW" => "N",
 		"SIDEBAR_PATH" => "",
+		"SIDEBAR_SECTION_POSITION" => "right",
 		"SIDEBAR_SECTION_SHOW" => "Y",
 		"TEMPLATE_THEME" => "blue",
 		"TOP_ADD_TO_BASKET_ACTION" => "ADD",
@@ -280,6 +310,15 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"TOP_ELEMENT_SORT_ORDER2" => "asc",
 		"TOP_ENLARGE_PRODUCT" => "STRICT",
 		"TOP_LINE_ELEMENT_COUNT" => "4",
+		"TOP_OFFERS_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"TOP_OFFERS_LIMIT" => "5",
+		"TOP_OFFERS_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"TOP_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
 		"TOP_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]",
 		"TOP_PROPERTY_CODE" => array(
@@ -320,54 +359,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"USE_PRODUCT_QUANTITY" => "N",
 		"USE_SALE_BESTSELLERS" => "Y",
 		"USE_STORE" => "N",
-		"FILTER_OFFERS_FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_OFFERS_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"OFFERS_CART_PROPERTIES" => array(
-			0 => "KFPO",
-			1 => "IDENTIFIER_FOR_DECLARATION",
-		),
-		"TOP_OFFERS_FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"TOP_OFFERS_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"TOP_OFFERS_LIMIT" => "5",
-		"LIST_OFFERS_FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"LIST_OFFERS_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"LIST_OFFERS_LIMIT" => "5",
-		"DETAIL_OFFERS_FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"DETAIL_OFFERS_PROPERTY_CODE" => array(
-			0 => "KFPO",
-			1 => "",
-		),
-		"OFFERS_SORT_FIELD" => "sort",
-		"OFFERS_SORT_ORDER" => "asc",
-		"OFFERS_SORT_FIELD2" => "id",
-		"OFFERS_SORT_ORDER2" => "desc",
-		"PRODUCT_DISPLAY_MODE" => "N",
-		"OFFER_ADD_PICT_PROP" => "-",
-		"OFFER_TREE_PROPS" => "",
-		"SIDEBAR_SECTION_POSITION" => "right",
-		"SIDEBAR_DETAIL_POSITION" => "right",
-		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => "",
+		"COMPONENT_TEMPLATE" => "catalog",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE_PATH#/",
@@ -382,38 +374,38 @@ $APPLICATION->SetTitle("Каталог товаров");
 		)
 	),
 	false
-); ?>
-            <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?>
-            <? $APPLICATION->IncludeFile('/catalog/include/main.php'); ?>
-        </div>
-    <? endif; ?>
-    </div>
-
-
-    <div class="those-involved those-involved-goods">
-        <div class="those-involted_title">
-            В создании и актуализации документов участвуют
-        </div>
-        <div class="those-involted_icons d-flex justify-content-between">
-            <div class="d-flex align-items-center col-lg-3">
-                <div class="pr-3">
-                    <img src="<?= SITE_TEMPLATE_PATH ?>/img/helmet.png" alt="helmet">
-                </div>
-                <p class="mb-0">Специалисты с опытом работы в МЧС</p>
-            </div>
-            <div class="d-flex align-items-center col-lg-4">
-                <div class="pr-3">
-                    <img src="<?= SITE_TEMPLATE_PATH ?>/img/glasses.png" alt="glasses">
-                </div>
-                <p class="mb-0">Эксперты портала PROPB.RU</p>
-            </div>
-            <div class="d-flex align-items-center col-lg-4">
-                <div class="pr-3">
-                    <img src="<?= SITE_TEMPLATE_PATH ?>/img/computer.png" alt="computer">
-                </div>
-                <p class="mb-0">Разработчики ПО в области пожарной безопасности</p>
-            </div>
-        </div>
-    </div>
-
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+);?> <? if ($APPLICATION->GetCurDir() == '/catalog/'): ?> <? $APPLICATION->IncludeFile('/catalog/include/main.php'); ?>
+	</div>
+	 <? endif; ?>
+</div>
+<div class="those-involved those-involved-goods">
+	<div class="those-involted_title">
+		 В создании и актуализации документов участвуют
+	</div>
+	<div class="those-involted_icons d-flex justify-content-between">
+		<div class="d-flex align-items-center col-lg-3">
+			<div class="pr-3">
+ <img alt="helmet" src="/bitrix/templates/new-gotdoc/img/helmet.png">
+			</div>
+			<p class="mb-0">
+				 Специалисты с опытом работы в МЧС
+			</p>
+		</div>
+		<div class="d-flex align-items-center col-lg-4">
+			<div class="pr-3">
+ <img alt="glasses" src="/bitrix/templates/new-gotdoc/img/glasses.png">
+			</div>
+			<p class="mb-0">
+				 Эксперты портала PROPB.RU
+			</p>
+		</div>
+		<div class="d-flex align-items-center col-lg-4">
+			<div class="pr-3">
+ <img alt="computer" src="/bitrix/templates/new-gotdoc/img/computer.png">
+			</div>
+			<p class="mb-0">
+				 Разработчики ПО в области пожарной безопасности
+			</p>
+		</div>
+	</div>
+</div><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

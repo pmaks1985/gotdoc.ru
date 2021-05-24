@@ -44,6 +44,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"EMPTY_BASKET_HINT_PATH" => "/catalog/",
 		"USE_PHONE_NORMALIZATION" => "Y",
 		"PRODUCT_COLUMNS_VISIBLE" => array(
+			0 => "PROPERTY_KFPO",
 		),
 		"ADDITIONAL_PICT_PROP_17" => "-",
 		"ADDITIONAL_PICT_PROP_23" => "-",

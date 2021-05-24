@@ -1,8 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Моя корзина");
-?>
-<div class="my-4">
+?><div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
 	"basketnew", 
@@ -14,6 +13,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"ADDITIONAL_PICT_PROP_26" => "-",
 		"ADDITIONAL_PICT_PROP_27" => "-",
 		"ADDITIONAL_PICT_PROP_32" => "-",
+		"ADDITIONAL_PICT_PROP_35" => "-",
 		"AUTO_CALCULATION" => "Y",
 		"BASKET_IMAGES_SCALING" => "adaptive",
 		"COLUMNS_LIST" => array(
@@ -29,13 +29,9 @@ $APPLICATION->SetTitle("Моя корзина");
 		"COLUMNS_LIST_EXT" => array(
 			0 => "PREVIEW_PICTURE",
 			1 => "DELETE",
-			2 => "SUM",
+			2 => "PROPERTY_KFPO",
 		),
-		"COLUMNS_LIST_MOBILE" => array(
-			0 => "PREVIEW_PICTURE",
-			1 => "DELETE",
-			2 => "SUM",
-		),
+		"COLUMNS_LIST_MOBILE" => "",
 		"COMPATIBLE_MODE" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
@@ -62,6 +58,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"HIDE_COUPON" => "Y",
 		"LABEL_PROP" => "",
 		"OFFERS_PROPS" => array(
+			0 => "KFPO",
 		),
 		"PATH_TO_ORDER" => "/personal/cart/order/",
 		"PRICE_DISPLAY_MODE" => "Y",
@@ -81,13 +78,8 @@ $APPLICATION->SetTitle("Моя корзина");
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
 		"USE_PRICE_ANIMATION" => "Y",
-		"COMPONENT_TEMPLATE" => "basketnew",
-		"ADDITIONAL_PICT_PROP_35" => "-"
+		"COMPONENT_TEMPLATE" => "basketnew"
 	),
 	false
 );?>
-
-</div>
-
-
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
+</div><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>
