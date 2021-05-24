@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 	"bitrix:sale.order.ajax", 
 	"bootstrap-cart", 
 	array(
-		"ALLOW_AUTO_REGISTER" => "N",
+		"ALLOW_AUTO_REGISTER" => "Y",
 		"ALLOW_NEW_PROFILE" => "N",
 		"COMPONENT_TEMPLATE" => "bootstrap-cart",
 		"COUNT_DELIVERY_TAX" => "N",
@@ -70,7 +70,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"SHOW_PICKUP_MAP" => "N",
 		"SHOW_MAP_IN_PROPS" => "N",
 		"PICKUP_MAP_TYPE" => "yandex",
-		"SHOW_COUPONS" => "Y",
+		"SHOW_COUPONS" => "N",
 		"PROPS_FADE_LIST_1" => array(
 			0 => "1",
 		),
