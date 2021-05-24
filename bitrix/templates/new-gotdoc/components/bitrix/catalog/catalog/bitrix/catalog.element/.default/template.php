@@ -81,13 +81,11 @@ Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/select2.min.js");
                         </option>
                         <? foreach ($arResult["OFFERS"] as $arOffer) : ?>
                             <? foreach ($arOffer["DISPLAY_PROPERTIES"] as $pid => $arProperty) : ?>
-
                                 <?php
                                 echo '<pre>';
                                 print_r($arOffer["ITEM_MEASURE_RATIOS"]);
                                 echo '</pre>';
                                 ?>
-
                                 <option value="">
                                     <div><?= $arProperty["DISPLAY_VALUE"]; ?></div>
                                 </option>
@@ -96,49 +94,6 @@ Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/select2.min.js");
                     </select>
                 </div>
             <? endif; ?>
-
-            <div class="my-3">
-                <? if (is_array($arResult["OFFERS"]) && !empty($arResult["OFFERS"])): ?>
-                    <!-- Если есть преддожения -->
-                    <select name="" id="">
-                        <? foreach ($arResult["OFFERS"] as $arOffer): ?>
-                            <!-- Свойства -->
-
-                            <? foreach ($arOffer["DISPLAY_PROPERTIES"] as $pid => $arProperty): ?>
-                                <? if (is_array($arProperty["DISPLAY_VALUE"])) : ?>
-                                    <?= implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]); ?>
-                                <? else: ?>
-                                    <option><?= $arProperty["DISPLAY_VALUE"]; ?></option>
-                                <? endif; ?>
-                            <? endforeach ?>
-                            <!-- Покупка -->
-                            <? if ($arOffer["CAN_BUY"]): ?>
-                                <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data"
-                                      сlass="add_form">
-                                    <a href="javascript:void(0)"
-                                       onclick="if (BX('QUANTITY<?= $arOffer['ID'] ?>').value &gt; 1) BX('QUANTITY<?= $arOffer['ID'] ?>').value--;">-</a>
-                                    <input type="text" name="QUANTITY" value="1" id="QUANTITY<?= $arOffer['ID'] ?>"/>
-                                    <a href="javascript:void(0)"
-                                       onclick="BX('QUANTITY<?= $arOffer['ID'] ?>').value++;">+</a>
-                                    <input type="text" name="<? echo $arParams["PRODUCT_QUANTITY_VARIABLE"] ?>"
-                                           value="1"
-                                           size="5">
-                                    <input type="hidden" name="<? echo $arParams["ACTION_VARIABLE"] ?>" value="BUY">
-                                    <input type="hidden" name="<? echo $arParams["PRODUCT_ID_VARIABLE"] ?>"
-                                           value="<? echo $arOffer["ID"] ?>">
-                                    <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>"
-                                           value="<? echo GetMessage("CATALOG_BUY") ?>">
-                                    <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>"
-                                           value="<? echo GetMessage("CT_BCE_CATALOG_ADD") ?>">
-                                </form>
-                            <? elseif (count($arResult["CAT_PRICES"]) > 0): ?>
-                                <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
-                            <? endif ?>
-                        <? endforeach; ?>
-
-                <? endif; ?>
-            </div>
-
 
         </div>
         <div>
