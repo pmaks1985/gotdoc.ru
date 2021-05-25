@@ -28,7 +28,7 @@ class MdfPDF extends \TCPDF
 		*/
 		$html = "<br /><br /><br />"; // добавим линию, отделающую колонтитул от текста
 		$this->writeHTML($html, true, false, true, false, '');
-		$this->SetTextColor(85, 85, 85); // цвет шрифта
+		$this->SetTextColor(0, 0, 0); // цвет шрифта
 		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
 		$this->writeHTML($html, true, false, true, false, '');
 		$html = '<div><b>Заказчик</b>:</div>';
@@ -68,7 +68,7 @@ class pdfit
 	function __construct($orderID, $siteLogo = false)
 	{
 		\Bitrix\Main\Loader::includeModule('sale');
-		$this->orderID = 345; // идентификатор заказа для обработки
+		$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
 		$this->siteLogo = $siteLogo; // пусть к файлу с логотипом сайта
 	}
 
@@ -83,8 +83,7 @@ class pdfit
 				// определяем файл, в котором будем хранить сгенерированные накладные, если нужно
 				// к стати, при хранении файлов, стоит также написать обработчик, который эти файлы будет удалять 
 				// при удалении заказов
-				$resultfile = $_SERVER['DOCUMENT_ROOT'] .'/upload/invoices/'. $this->siteInfo['SERVER_NAME'] . 
-					'_invoice_' . $this->orderID . '.pdf';
+				$resultfile = $_SERVER['DOCUMENT_ROOT'] .'/upload/invoices/' . $this->orderID . '.pdf';
 
 				if(file_exists($resultfile)){
 					// если файл уже был создан - просто выводим его
@@ -269,7 +268,7 @@ class pdfit
 		$this->pdf->AddPage();
 
 		$headerdata = $this->pdf->getHeaderData();
-		$this->pdf->SetFont('dejavusans', '', 12);
+		$this->pdf->SetFont('dejavusans', '', 8);
 		
 
 		$this->pdf->Write(0, $headerdata['title'], '', 0, 'C', true,
@@ -277,7 +276,7 @@ class pdfit
 		$this->pdf->Write(0, $headerdata['string'], '', 0, 'C', true,
 			0, false, false, 0);
 
-		$this->pdf->SetFont('dejavusans', '', 10);
+		$this->pdf->SetFont('dejavusans', '', 8);
 		if ($receiver = $this->getInvoiceReceiver())
 		{
 			$this->pdf->Write(0, 'Покупатель: ' . $receiver, '', 0, 'L', true,
@@ -316,9 +315,7 @@ class pdfit
 
 	function GetOrderItems()
 	{
-		$this->pdf->SetFillColor(51, 51, 51);
-		$this->pdf->SetTextColor(255);
-		$this->pdf->SetDrawColor(85, 85, 85);
+		$this->pdf->SetTextColor(0);
 		$this->pdf->SetLineWidth(0.3);
 		$this->pdf->SetFont('dejavusans', 'B');
 
@@ -357,13 +354,13 @@ class pdfit
 		}, 0), 0, '', 'T');
 
 		$this->pdf->Ln();
-		$this->pdf->SetFont('dejavusans', 'U',12);
+		$this->pdf->SetFont('dejavusans', 'U',8);
 		$this->pdf->Write(0, 'Товаров на ' . $this->order->getBasket()->getPrice(), '', 0, 'R', true,
 			0, false, false, 0);
 
 	}
 }
-$orderID = 375;
+$orderID = $_POST['ZAKAZ_ID'];
 if($orderID >0){
 	$pdf = new pdfit($orderID, $_SERVER['DOCUMENT_ROOT'] . '/upload/sitelogo.jpg');
 	$pdf->process();

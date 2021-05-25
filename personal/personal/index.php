@@ -18,7 +18,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 			4 => "5000",
 			5 => "",
 		),
-		"ACCOUNT_PAYMENT_SELL_USER_INPUT" => "Y",
+		"ACCOUNT_PAYMENT_SELL_USER_INPUT" => "N",
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "3600",
@@ -30,7 +30,9 @@ $APPLICATION->SetTitle("Персональный раздел");
 		),
 		"NAV_TEMPLATE" => "",
 		"ORDER_HISTORIC_STATUSES" => array(
-			0 => "F",
+			0 => "C",
+			1 => "N",
+			2 => "F",
 		),
 		"PATH_TO_BASKET" => "/personal/cart/",
 		"PATH_TO_CATALOG" => "/catalog/",
@@ -41,7 +43,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 		),
 		"PROP_2" => array(
 		),
-		"SAVE_IN_SESSION" => "Y",
+		"SAVE_IN_SESSION" => "N",
 		"SEF_FOLDER" => "/personal/personal/",
 		"SEF_MODE" => "Y",
 		"SEND_INFO_PRIVATE" => "N",
@@ -66,12 +68,14 @@ $APPLICATION->SetTitle("Персональный раздел");
 		"ORDER_RESTRICT_CHANGE_PAYSYSTEM" => array(
 			0 => "0",
 		),
-		"ORDER_DEFAULT_SORT" => "STATUS",
+		"ORDER_DEFAULT_SORT" => "ID",
 		"ORDER_REFRESH_PRICES" => "N",
 		"ORDER_DISALLOW_CANCEL" => "N",
 		"ORDERS_PER_PAGE" => "20",
 		"PROFILES_PER_PAGE" => "20",
 		"MAIN_CHAIN_NAME" => "Мой кабинет",
+		"PROP_4" => array(
+		),
 		"SEF_URL_TEMPLATES" => array(
 			"index" => "index.php",
 			"orders" => "orders/",

@@ -20,10 +20,12 @@ class MdfPDF extends \TCPDF
 		// Set font
 		$this->SetFont('dejavusans', '', 8);
 		// Title
-		
-		//$propertyCollection = $this->order->getPropertyCollection();
-		//$receiver = $propertyCollection->getPayerName()->getValue();
-		
+		/*
+		// если нужно в верхнем колонтитуле вывести заголовок или какой-то текст, эти строки нужно раскомментировать 
+		// и состыковать
+		$this->Cell(0, 15, $headerdata['title'], 0, false, 'C', 0, '', 0, false, 'M', 'M'); 
+		$this->Cell(0, 15, $headerdata['string'], 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		*/
 		$html = "<br /><br /><br />"; // добавим линию, отделающую колонтитул от текста
 		$this->writeHTML($html, true, false, true, false, '');
 		$this->SetTextColor(0, 0, 0); // цвет шрифта
@@ -31,7 +33,10 @@ class MdfPDF extends \TCPDF
 		$this->writeHTML($html, true, false, true, false, '');
 		$html = '<div><b>Заказчик</b>:</div>';
 		$this->writeHTML($html, true, false, true, false, '');
-
+		$html = "<p>Основание:</p>";
+		$this->writeHTML($html, true, false, true, false, '');
+		$html = "<br /><hr /><br /><br />"; // добавим линию, отделающую колонтитул от текста
+		$this->writeHTML($html, true, false, true, false, '');
 	}
 
 	// Page footer
@@ -305,7 +310,7 @@ class pdfit
 	{
 		$title = 'Акт №' . $this->orderID;
 		$this->pdf->SetTitle($title);
-		$this->pdf->SetHeaderData($this->siteLogo, 0, $title, $this->getInvoiceDate());
+		$this->pdf->SetHeaderData($this->siteLogo, 80, $title, $this->getInvoiceDate());
 	}
 
 	function GetOrderItems()

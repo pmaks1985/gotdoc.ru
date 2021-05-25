@@ -468,12 +468,14 @@ else
 																	
 <script>
 	$("#btnR").on('click', function(e) {
+		event.preventDefault();
         $.ajax({
-			url: '/act/index.php',
+			url: '/akt/index.php',
             type: 'POST',
 			data: {ZAKAZ_ID: <?=$arResult['ID']?>},
             success: function(result) {
 				console.log(result);
+				 window.open('/upload/invoices/' + <?=$arResult['ID']?> + '.pdf','_blank'); //Открываем в новом окне файл, созданный TCPDF
             },
             error: function(result) {
 				console.log(result);
@@ -899,7 +901,6 @@ $arFilter = Array("ID"=>$basketItem['PRODUCT_ID']);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, Array(), $arSelect);
 if($ob = $res->GetNextElement()){ 
 		$arFields = $ob->GetFields(); 
-		//print_r($arFields);
 		$identificator = $arFields['PROPERTY_IDENTIFIER_VALUE'];
 		
 	}
@@ -915,7 +916,7 @@ if($ob = $res->GetNextElement()){
 			var identificator = <?php echo CUtil::PHPToJSObject($identificator);?>;
 			$.ajax({
 				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax1.php",
-				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>,  "customerId":  <?=$USER->GetID();?>, "setId":"identificator"},			
+				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>,  "customerId":  <?=$USER->GetID();?>, "setId":identificator},			
 				method: "POST", 
 				dataType: "json" ,
 				success: function(data){
