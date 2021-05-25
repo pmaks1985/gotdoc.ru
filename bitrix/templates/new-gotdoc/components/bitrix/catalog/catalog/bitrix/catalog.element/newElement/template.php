@@ -81,7 +81,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
     reset($arResult['MORE_PHOTO']);
     $arFirstPhoto = current($arResult['MORE_PHOTO']);
     ?>
-    <div class="bx_item_container row">
+    <div class="bx_item_container row mx-0">
         <div class="col-lg-5 pl-0 pr-4">
             <div class="goods">
                 <div class="goods-img" style="background-image: url('<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>')"></div>
@@ -148,7 +148,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     <? if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']) && !empty($arResult['OFFERS_PROP'])) {
                         $arSkuProps = array();
                         ?>
-                        <div class="item_info_section 3" id="<? echo $arItemIDs['PROP_DIV']; ?>">
+                        <div class="kfp_o" id="<? echo $arItemIDs['PROP_DIV']; ?>">
                             <?
                             foreach ($arResult['SKU_PROPS'] as &$arProp) {
                                 if (!isset($arResult['OFFERS_PROP'][$arProp['CODE']]))
@@ -171,19 +171,18 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                         $strSlideStyle = 'display: none;';
                                     }
                                     ?>
-                                    <div class="<? echo $strClass; ?>"
-                                         id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_cont">
-                                        <div class="bx_size_scroller_container">
-                                            <div class="bx_size">
-
-                                                <a class="nav-link dropdown-toggle" href="#"
-                                                   id="navbarScrollingDropdown"
-                                                   role="button" data-toggle="dropdown" aria-expanded="false">
-                                                    Выберите класс функциональной пожарной опасности вашего объекта
+                                    <div class="px-0 mx-0" id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_cont">
+                                        <div class="">
+                                            <div class="">
+                                                <a class="dropdown-toggle text-danger text-decoration-none" href="#" role="button"
+                                                   id="dropdownMenuLink"
+                                                   data-toggle="dropdown" aria-haspopup="true"
+                                                   aria-expanded="false">
+                                                    <span>Выберите класс функциональной пожарной опасности<br> вашего объекта</span>
+                                                    <i class="bi bi-caret-down-fill"></i>
                                                 </a>
                                                 <ul id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_list"
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="navbarScrollingDropdown">
+                                                    class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                     <?
                                                     foreach ($arProp['VALUES'] as $arOneValue) {
                                                         $arOneValue['NAME'] = htmlspecialcharsbx($arOneValue['NAME']);
@@ -267,11 +266,11 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     $notAvailableMessage = ($arParams['MESS_NOT_AVAILABLE'] != '' ? $arParams['MESS_NOT_AVAILABLE'] : GetMessageJS('CT_BCE_CATALOG_NOT_AVAILABLE'));
                     $showBuyBtn = in_array('BUY', $arParams['ADD_TO_BASKET_ACTION']);
                     $showAddBtn = in_array('ADD', $arParams['ADD_TO_BASKET_ACTION']);
-					print_r();
+                    print_r();
 
                     if ($showBuyBtn && $arOffer["CAN_BUY"]) {
                         ?>
-                        <a href="javascript:void(0);" class="btn text-decoration-none goods_buy-button"
+                        <a href="javascript:void(0);" class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o d-none"
                            id="<? echo $arItemIDs['BUY_LINK']; ?>"><? echo $buyBtnMessage; ?></a>
                         <?
 
@@ -856,7 +855,7 @@ if ($showAddBtn) {
        id="<? echo $arItemIDs['ADD_BASKET_LINK']; ?>"><span></span><? echo $addToBasketBtnMessage; ?></a>
     <?
 }*/
- ?>
+?>
 		</span>
                     <span id="<? echo $arItemIDs['NOT_AVAILABLE_MESS']; ?>" class="bx_notavailable"
                           style="display: <? echo(!$canBuy ? '' : 'none'); ?>;"><? echo $notAvailableMessage; ?></span>

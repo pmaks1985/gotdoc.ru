@@ -2841,3 +2841,9 @@ window.JCCatalogElement.prototype.allowViewedCount = function(update)
 	}
 };
 })(window);
+
+$( document ).ready(function(){
+	$( ".kfp_o" ).click(function(){ // задаем функцию при нажатиии на элемент <button>
+		$( ".goods_buy-button_kfp_o" ).removeClass("d-none"); // вызываем событие click на элементе <div>
+	})
+});

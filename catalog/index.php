@@ -265,7 +265,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "new-round",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "30",
+		"PAGE_ELEMENT_COUNT" => "6",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array(
 			0 => "BASE",
@@ -312,7 +312,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"SIDEBAR_SECTION_SHOW" => "Y",
 		"TEMPLATE_THEME" => "blue",
 		"TOP_ADD_TO_BASKET_ACTION" => "ADD",
-		"TOP_ELEMENT_COUNT" => "9",
+		"TOP_ELEMENT_COUNT" => "4",
 		"TOP_ELEMENT_SORT_FIELD" => "shows",
 		"TOP_ELEMENT_SORT_FIELD2" => "SCALED_PRICE_1",
 		"TOP_ELEMENT_SORT_ORDER" => "asc",
