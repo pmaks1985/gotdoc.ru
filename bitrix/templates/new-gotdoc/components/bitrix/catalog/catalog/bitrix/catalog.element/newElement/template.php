@@ -97,7 +97,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                         <? if ($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
                             <span class="goods_price-new">Бесплатно</span>
                         <? else: ?>
-                            <span class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
+                            <span class="goods_price-new"><?= $arPrice["PRINT_VALUE"]; ?></span>
                         <? endif; ?>
                     <? endforeach; ?>
                     <!-- Если есть предложения -->
@@ -113,7 +113,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                     <s><?= $arPrice["PRINT_VALUE"]; ?></s> <?= $arPrice["PRINT_DISCOUNT_VALUE"]; ?>
                                 <? else : ?>
                                     <span id="<? echo $arItemIDs['PRICE']; ?>"
-                                          class="goods_price-new"><?= substr($arPrice["PRINT_VALUE"], 0, -7); ?> руб.</span>
+                                          class="goods_price-new"></span>
                                 <? endif; ?>
                             <? endif; ?>
                         <? endforeach; ?>
@@ -181,11 +181,6 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                                    role="button" data-toggle="dropdown" aria-expanded="false">
                                                     Выберите класс функциональной пожарной опасности вашего объекта
                                                 </a>
-
-                                                <!--a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Выберите класс функциональной пожарной опасности вашего объекта
-                                                </a-->
                                                 <ul id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_list"
                                                     style="width: <? echo $strWidth; ?>;margin-left:0%;"
                                                     class="dropdown-menu"
@@ -283,11 +278,12 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     $showBuyBtn = in_array('BUY', $arParams['ADD_TO_BASKET_ACTION']);
                     $showAddBtn = in_array('ADD', $arParams['ADD_TO_BASKET_ACTION']);
 
-                    if ($showBuyBtn) {
+                    if ($showBuyBtn && $arOffer["CAN_BUY"]) {
                         ?>
                         <a href="javascript:void(0);" class="btn text-decoration-none goods_buy-button"
                            id="<? echo $arItemIDs['BUY_LINK']; ?>"><? echo $buyBtnMessage; ?></a>
                         <?
+
                     }
                     if ($showAddBtn) {
                         ?>
