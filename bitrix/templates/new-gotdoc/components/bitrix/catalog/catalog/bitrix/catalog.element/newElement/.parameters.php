@@ -1,422 +1,868 @@
 <?
-if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();
-
-use Bitrix\Main\Loader;
-use Bitrix\Main\ModuleManager;
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+/** @var array $arCurrentValues */
+use Bitrix\Main\Config\Option,
+	Bitrix\Main\ModuleManager,
+	Bitrix\Main\Loader,
+	Bitrix\Iblock,
+	Bitrix\Catalog,
+	Bitrix\Currency;
 
 if (!Loader::includeModule('iblock'))
 	return;
-$boolCatalog = Loader::includeModule('catalog');
+$catalogIncluded = Loader::includeModule('catalog');
 
-$arSKU = false;
-$boolSKU = false;
-if ($boolCatalog && (isset($arCurrentValues['IBLOCK_ID']) && 0 < intval($arCurrentValues['IBLOCK_ID'])))
+$usePropertyFeatures = Iblock\Model\PropertyFeature::isEnabledFeatures();
+
+$iblockExists = (!empty($arCurrentValues['IBLOCK_ID']) && (int)$arCurrentValues['IBLOCK_ID'] > 0);
+
+$arIBlockType = CIBlockParameters::GetIBlockTypes();
+
+$offersIblock = array();
+if ($catalogIncluded)
 {
-	$arSKU = CCatalogSKU::GetInfoByProductIBlock($arCurrentValues['IBLOCK_ID']);
-	$boolSKU = !empty($arSKU) && is_array($arSKU);
+	$iterator = Catalog\CatalogIblockTable::getList(array(
+		'select' => array('IBLOCK_ID'),
+		'filter' => array('!=PRODUCT_IBLOCK_ID' => 0)
+	));
+	while ($row = $iterator->fetch())
+		$offersIblock[$row['IBLOCK_ID']] = true;
+	unset($row, $iterator);
 }
-
-$arThemes = array();
-if (ModuleManager::isModuleInstalled('bitrix.eshop'))
-{
-	$arThemes['site'] = GetMessage('CP_BCE_TPL_THEME_SITE');
-}
-
-$arThemesList = array(
-	'blue' => GetMessage('CP_BCE_TPL_THEME_BLUE'),
-	'green' => GetMessage('CP_BCE_TPL_THEME_GREEN'),
-	'red' => GetMessage('CP_BCE_TPL_THEME_RED'),
-	'wood' => GetMessage('CP_BCE_TPL_THEME_WOOD'),
-	'yellow' => GetMessage('CP_BCE_TPL_THEME_YELLOW'),
-	'black' => GetMessage('CP_BCE_TPL_THEME_BLACK')
+$arIBlock = array();
+$iblockFilter = (
+	!empty($arCurrentValues['IBLOCK_TYPE'])
+	? array('TYPE' => $arCurrentValues['IBLOCK_TYPE'], 'ACTIVE' => 'Y')
+	: array('ACTIVE' => 'Y')
 );
-$dir = trim(preg_replace("'[\\\\/]+'", "/", dirname(__FILE__)."/themes/"));
-if (is_dir($dir))
+$rsIBlock = CIBlock::GetList(array('SORT' => 'ASC'), $iblockFilter);
+while ($arr = $rsIBlock->Fetch())
 {
-	foreach ($arThemesList as $themeID => $themeName)
-	{
-		if (!is_file($dir.$themeID.'/style.css'))
-			continue;
-		$arThemes[$themeID] = $themeName;
-	}
+	$id = (int)$arr['ID'];
+	if (isset($offersIblock[$id]))
+		continue;
+	$arIBlock[$id] = '['.$id.'] '.$arr['NAME'];
 }
+unset($id, $arr, $rsIBlock, $iblockFilter);
+unset($offersIblock);
 
-$arTemplateParameters['TEMPLATE_THEME'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage("CP_BCE_TPL_TEMPLATE_THEME"),
-	'TYPE' => 'LIST',
-	'VALUES' => $arThemes,
-	'DEFAULT' => 'blue',
-	'ADDITIONAL_VALUES' => 'Y'
-);
-
-if (isset($arCurrentValues['IBLOCK_ID']) && 0 < intval($arCurrentValues['IBLOCK_ID']))
+$arProperty = array();
+$arProperty_LS = array();
+$arProperty_N = array();
+$arProperty_X = array();
+$arProperty_F = array();
+if ($iblockExists)
 {
-	$arAllPropList = array();
-	$arFilePropList = array(
-		'-' => GetMessage('CP_BCE_TPL_PROP_EMPTY')
-	);
-	$arListPropList = array(
-		'-' => GetMessage('CP_BCE_TPL_PROP_EMPTY')
-	);
-	$arHighloadPropList = array(
-		'-' => GetMessage('CP_BCE_TPL_PROP_EMPTY')
-	);
-	$rsProps = CIBlockProperty::GetList(
-		array('SORT' => 'ASC', 'ID' => 'ASC'),
-		array('IBLOCK_ID' => $arCurrentValues['IBLOCK_ID'], 'ACTIVE' => 'Y')
-	);
-	while ($arProp = $rsProps->Fetch())
+	$propertyIterator = Iblock\PropertyTable::getList(array(
+		'select' => array('ID', 'IBLOCK_ID', 'NAME', 'CODE', 'PROPERTY_TYPE', 'MULTIPLE', 'LINK_IBLOCK_ID', 'USER_TYPE', 'SORT'),
+		'filter' => array('=IBLOCK_ID' => $arCurrentValues['IBLOCK_ID'], '=ACTIVE' => 'Y'),
+		'order' => array('SORT' => 'ASC', 'NAME' => 'ASC')
+	));
+	while ($property = $propertyIterator->fetch())
 	{
-		$strPropName = '['.$arProp['ID'].']'.('' != $arProp['CODE'] ? '['.$arProp['CODE'].']' : '').' '.$arProp['NAME'];
-		if ('' == $arProp['CODE'])
-			$arProp['CODE'] = $arProp['ID'];
-		$arAllPropList[$arProp['CODE']] = $strPropName;
-		if ('F' == $arProp['PROPERTY_TYPE'])
-			$arFilePropList[$arProp['CODE']] = $strPropName;
-		if ('L' == $arProp['PROPERTY_TYPE'])
-			$arListPropList[$arProp['CODE']] = $strPropName;
-		if ('S' == $arProp['PROPERTY_TYPE'] && 'directory' == $arProp['USER_TYPE'] && CIBlockPriceTools::checkPropDirectory($arProp))
-			$arHighloadPropList[$arProp['CODE']] = $strPropName;
-	}
+		$propertyCode = (string)$property['CODE'];
+		if ($propertyCode == '')
+			$propertyCode = $property['ID'];
+		$propertyName = '['.$propertyCode.'] '.$property['NAME'];
 
-	$arTemplateParameters['ADD_PICT_PROP'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_ADD_PICT_PROP'),
-		'TYPE' => 'LIST',
-		'MULTIPLE' => 'N',
-		'ADDITIONAL_VALUES' => 'N',
-		'REFRESH' => 'N',
-		'DEFAULT' => '-',
-		'VALUES' => $arFilePropList
-	);
-
-	$arTemplateParameters['LABEL_PROP'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_LABEL_PROP'),
-		'TYPE' => 'LIST',
-		'MULTIPLE' => 'N',
-		'ADDITIONAL_VALUES' => 'N',
-		'REFRESH' => 'N',
-		'DEFAULT' => '-',
-		'VALUES' => $arListPropList
-	);
-
-	if ($boolSKU)
-	{
-		$arAllOfferPropList = array();
-		$arFileOfferPropList = array(
-			'-' => GetMessage('CP_BCE_TPL_PROP_EMPTY')
-		);
-		$arTreeOfferPropList = array(
-			'-' => GetMessage('CP_BCE_TPL_PROP_EMPTY')
-		);
-		$rsProps = CIBlockProperty::GetList(
-			array('SORT' => 'ASC', 'ID' => 'ASC'),
-			array('IBLOCK_ID' => $arSKU['IBLOCK_ID'], 'ACTIVE' => 'Y')
-		);
-		while ($arProp = $rsProps->Fetch())
+		if ($property['PROPERTY_TYPE'] != Iblock\PropertyTable::TYPE_FILE)
 		{
-			if ($arProp['ID'] == $arSKU['SKU_PROPERTY_ID'])
-				continue;
-			$arProp['USER_TYPE'] = (string)$arProp['USER_TYPE'];
-			$strPropName = '['.$arProp['ID'].']'.('' != $arProp['CODE'] ? '['.$arProp['CODE'].']' : '').' '.$arProp['NAME'];
-			if ('' == $arProp['CODE'])
-				$arProp['CODE'] = $arProp['ID'];
-			$arAllOfferPropList[$arProp['CODE']] = $strPropName;
-			if ('F' == $arProp['PROPERTY_TYPE'])
-				$arFileOfferPropList[$arProp['CODE']] = $strPropName;
-			if ('N' != $arProp['MULTIPLE'])
-				continue;
-			if (
-				'L' == $arProp['PROPERTY_TYPE']
-				|| 'E' == $arProp['PROPERTY_TYPE']
-				|| ('S' == $arProp['PROPERTY_TYPE'] && 'directory' == $arProp['USER_TYPE'] && CIBlockPriceTools::checkPropDirectory($arProp))
-			)
-				$arTreeOfferPropList[$arProp['CODE']] = $strPropName;
+			$arProperty[$propertyCode] = $propertyName;
+
+			if ($property['MULTIPLE'] == 'Y')
+				$arProperty_X[$propertyCode] = $propertyName;
+			elseif ($property['PROPERTY_TYPE'] == Iblock\PropertyTable::TYPE_LIST)
+				$arProperty_X[$propertyCode] = $propertyName;
+			elseif ($property['PROPERTY_TYPE'] == Iblock\PropertyTable::TYPE_ELEMENT && (int)$property['LINK_IBLOCK_ID'] > 0)
+				$arProperty_X[$propertyCode] = $propertyName;
 		}
-		$arTemplateParameters['OFFER_ADD_PICT_PROP'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_OFFER_ADD_PICT_PROP'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'N',
-			'ADDITIONAL_VALUES' => 'N',
-			'REFRESH' => 'N',
-			'DEFAULT' => '-',
-			'VALUES' => $arFileOfferPropList
-		);
-		$arTemplateParameters['OFFER_TREE_PROPS'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_OFFER_TREE_PROPS'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'Y',
-			'ADDITIONAL_VALUES' => 'N',
-			'REFRESH' => 'N',
-			'DEFAULT' => '-',
-			'VALUES' => $arTreeOfferPropList
-		);
+		else
+		{
+			if ($property['MULTIPLE'] == 'N')
+				$arProperty_F[$propertyCode] = $propertyName;
+		}
+
+		if ($property['PROPERTY_TYPE'] == Iblock\PropertyTable::TYPE_LIST || $property['PROPERTY_TYPE'] == Iblock\PropertyTable::TYPE_STRING)
+			$arProperty_LS[$propertyCode] = $propertyName;
+
+		if ($property['PROPERTY_TYPE'] == Iblock\PropertyTable::TYPE_NUMBER)
+			$arProperty_N[$propertyCode] = $propertyName;
+	}
+	unset($propertyCode, $propertyName, $property, $propertyIterator);
+}
+
+$offers = false;
+$arProperty_Offers = array();
+$arProperty_OffersWithoutFile = array();
+if ($catalogIncluded && $iblockExists)
+{
+	$offers = CCatalogSku::GetInfoByProductIBlock($arCurrentValues['IBLOCK_ID']);
+	if (!empty($offers))
+	{
+		$propertyIterator = Iblock\PropertyTable::getList(array(
+			'select' => array('ID', 'IBLOCK_ID', 'NAME', 'CODE', 'PROPERTY_TYPE', 'MULTIPLE', 'LINK_IBLOCK_ID', 'USER_TYPE', 'SORT'),
+			'filter' => array('=IBLOCK_ID' => $offers['IBLOCK_ID'], '=ACTIVE' => 'Y', '!=ID' => $offers['SKU_PROPERTY_ID']),
+			'order' => array('SORT' => 'ASC', 'NAME' => 'ASC')
+		));
+		while ($property = $propertyIterator->fetch())
+		{
+			$propertyCode = (string)$property['CODE'];
+			if ($propertyCode == '')
+				$propertyCode = $property['ID'];
+			$propertyName = '['.$propertyCode.'] '.$property['NAME'];
+
+			$arProperty_Offers[$propertyCode] = $propertyName;
+			if ($property['PROPERTY_TYPE'] != Iblock\PropertyTable::TYPE_FILE)
+				$arProperty_OffersWithoutFile[$propertyCode] = $propertyName;
+		}
+		unset($propertyCode, $propertyName, $property, $propertyIterator);
 	}
 }
 
-$arTemplateParameters['DISPLAY_NAME'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_DISPLAY_NAME'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'Y'
+$arSort = CIBlockParameters::GetElementSortFields(
+	array('SHOWS', 'SORT', 'TIMESTAMP_X', 'NAME', 'ID', 'ACTIVE_FROM', 'ACTIVE_TO'),
+	array('KEY_LOWERCASE' => 'Y')
 );
 
-$detailPictMode = array(
-	'IMG' => GetMessage('DETAIL_PICTURE_MODE_IMG'),
-	'POPUP' => GetMessage('DETAIL_PICTURE_MODE_POPUP'),
-	'MAGNIFIER' => GetMessage('DETAIL_PICTURE_MODE_MAGNIFIER')
-);
-
-$arTemplateParameters['DETAIL_PICTURE_MODE'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_DETAIL_PICTURE_MODE'),
-	'TYPE' => 'LIST',
-	'DEFAULT' => 'IMG',
-	'VALUES' => $detailPictMode
-);
-
-$arTemplateParameters['ADD_DETAIL_TO_SLIDER'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_ADD_DETAIL_TO_SLIDER'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N'
-);
-
-$displayPreviewTextMode = array(
-	'H' => GetMessage('CP_BCE_TPL_DISPLAY_PREVIEW_TEXT_MODE_HIDE'),
-	'E' => GetMessage('CP_BCE_TPL_DISPLAY_PREVIEW_TEXT_MODE_EMPTY_DETAIL'),
-	'S' => GetMessage('CP_BCE_TPL_DISPLAY_PREVIEW_TEXT_MODE_SHOW')
-);
-
-$arTemplateParameters['DISPLAY_PREVIEW_TEXT_MODE'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_DISPLAY_PREVIEW_TEXT_MODE'),
-	'TYPE' => 'LIST',
-	'VALUES' => $displayPreviewTextMode,
-	'DEFAULT' => 'E'
-);
-
-if ($boolCatalog)
+$arPrice = array();
+if ($catalogIncluded)
 {
-	$arTemplateParameters['PRODUCT_SUBSCRIPTION'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_PRODUCT_SUBSCRIPTION'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N'
-	);
-	$arTemplateParameters['SHOW_DISCOUNT_PERCENT'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_SHOW_DISCOUNT_PERCENT'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N'
-	);
-	$arTemplateParameters['SHOW_OLD_PRICE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_SHOW_OLD_PRICE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N'
-	);
-	$arTemplateParameters['SHOW_MAX_QUANTITY'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_SHOW_MAX_QUANTITY'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N'
-	);
-	if (isset($arCurrentValues['USE_PRODUCT_QUANTITY']) && $arCurrentValues['USE_PRODUCT_QUANTITY'] === 'Y')
+	$arSort = array_merge($arSort, CCatalogIBlockParameters::GetCatalogSortFields());
+	if (isset($arSort['CATALOG_AVAILABLE']))
+		unset($arSort['CATALOG_AVAILABLE']);
+	$arPrice = CCatalogIBlockParameters::getPriceTypesList();
+}
+else
+{
+	$arPrice = $arProperty_N;
+}
+
+$arIBlock_LINK = array();
+$iblockFilter = (
+	!empty($arCurrentValues['LINK_IBLOCK_TYPE'])
+	? array('TYPE' => $arCurrentValues['LINK_IBLOCK_TYPE'], 'ACTIVE' => 'Y')
+	: array('ACTIVE' => 'Y')
+);
+$rsIblock = CIBlock::GetList(array('SORT' => 'ASC'), $iblockFilter);
+while ($arr = $rsIblock->Fetch())
+	$arIBlock_LINK[$arr['ID']] = '['.$arr['ID'].'] '.$arr['NAME'];
+unset($iblockFilter);
+
+$arProperty_LINK = array();
+if (!empty($arCurrentValues['LINK_IBLOCK_ID']) && (int)$arCurrentValues['LINK_IBLOCK_ID'] > 0)
+{
+	$propertyIterator = Iblock\PropertyTable::getList(array(
+		'select' => array('ID', 'IBLOCK_ID', 'NAME', 'CODE', 'PROPERTY_TYPE', 'MULTIPLE', 'LINK_IBLOCK_ID', 'USER_TYPE', 'SORT'),
+		'filter' => array('=IBLOCK_ID' => $arCurrentValues['LINK_IBLOCK_ID'], '=PROPERTY_TYPE' => Iblock\PropertyTable::TYPE_ELEMENT, '=ACTIVE' => 'Y'),
+		'order' => array('SORT' => 'ASC', 'NAME' => 'ASC')
+	));
+	while ($property = $propertyIterator->fetch())
 	{
-		$arTemplateParameters['SHOW_BASIS_PRICE'] = array(
-			"PARENT" => "BASKET",
-			"NAME" => GetMessage("CP_BCE_TPL_SHOW_BASIS_PRICE"),
+		$propertyCode = (string)$property['CODE'];
+		if ($propertyCode == '')
+			$propertyCode = $property['ID'];
+		$arProperty_LINK[$propertyCode] = '['.$propertyCode.'] '.$property['NAME'];
+	}
+	unset($propertyCode, $property, $propertyIterator);
+}
+
+$arAscDesc = array(
+	"asc" => GetMessage("IBLOCK_SORT_ASC"),
+	"desc" => GetMessage("IBLOCK_SORT_DESC"),
+);
+$arComponentParameters = array(
+	"GROUPS" => array(
+		"ACTION_SETTINGS" => array(
+			"NAME" => GetMessage('IBLOCK_ACTIONS')
+		),
+		"COMPARE" => array(
+			"NAME" => GetMessage("IBLOCK_COMPARE")
+		),
+		"PRICES" => array(
+			"NAME" => GetMessage("IBLOCK_PRICES"),
+		),
+		"BASKET" => array(
+			"NAME" => GetMessage("IBLOCK_BASKET"),
+		),
+		"LINK" => array(
+			"NAME" => GetMessage("IBLOCK_LINK"),
+		),
+		"GIFTS_SETTINGS" => array(
+			"NAME" => GetMessage("SALE_T_DESC_GIFTS_SETTINGS"),
+		),
+		"ANALYTICS_SETTINGS" => array(
+			"NAME" => GetMessage("ANALYTICS_SETTINGS")
+		),
+		"EXTENDED_SETTINGS" => array(
+			"NAME" => GetMessage("IBLOCK_EXTENDED_SETTINGS"),
+			"SORT" => 10000
+		)
+	),
+	"PARAMETERS" => array(
+		"SEF_MODE" => array(),
+		"SEF_RULE" => array(
+			"VALUES" => array(
+				"SECTION_ID" => array(
+					"TEXT" => GetMessage("IBLOCK_SECTION_ID"),
+					"TEMPLATE" => "#SECTION_ID#",
+					"PARAMETER_LINK" => "SECTION_ID",
+					"PARAMETER_VALUE" => '={$_REQUEST["SECTION_ID"]}',
+				),
+				"SECTION_CODE" => array(
+					"TEXT" => GetMessage("IBLOCK_SECTION_CODE"),
+					"TEMPLATE" => "#SECTION_CODE#",
+					"PARAMETER_LINK" => "SECTION_CODE",
+					"PARAMETER_VALUE" => '={$_REQUEST["SECTION_CODE"]}',
+				),
+				"SECTION_CODE_PATH" => array(
+					"TEXT" => GetMessage("CP_BCE_SECTION_CODE_PATH"),
+					"TEMPLATE" => "#SECTION_CODE_PATH#",
+					"PARAMETER_LINK" => "SECTION_CODE_PATH",
+					"PARAMETER_VALUE" => '={$_REQUEST["SECTION_CODE_PATH"]}',
+				),
+				"ELEMENT_ID" => array(
+					"TEXT" => GetMessage("IBLOCK_ELEMENT_ID"),
+					"TEMPLATE" => "#ELEMENT_ID#",
+					"PARAMETER_LINK" => "ELEMENT_ID",
+					"PARAMETER_VALUE" => '={$_REQUEST["ELEMENT_ID"]}',
+				),
+				"ELEMENT_CODE" => array(
+					"TEXT" => GetMessage("IBLOCK_ELEMENT_CODE"),
+					"TEMPLATE" => "#ELEMENT_CODE#",
+					"PARAMETER_LINK" => "ELEMENT_CODE",
+					"PARAMETER_VALUE" => '={$_REQUEST["ELEMENT_CODE"]}',
+				)
+			),
+		),
+		"IBLOCK_TYPE" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_TYPE"),
+			"TYPE" => "LIST",
+			"VALUES" => $arIBlockType,
+			"REFRESH" => "Y",
+		),
+		"IBLOCK_ID" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_IBLOCK"),
+			"TYPE" => "LIST",
+			"ADDITIONAL_VALUES" => "Y",
+			"VALUES" => $arIBlock,
+			"REFRESH" => "Y",
+		),
+		"ELEMENT_ID" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_ELEMENT_ID"),
+			"TYPE" => "STRING",
+			"DEFAULT" => '={$_REQUEST["ELEMENT_ID"]}',
+		),
+		"ELEMENT_CODE" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_ELEMENT_CODE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => '',
+		),
+		"SECTION_ID" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_SECTION_ID"),
+			"TYPE" => "STRING",
+			"DEFAULT" => '={$_REQUEST["SECTION_ID"]}',
+		),
+		"SECTION_CODE" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("IBLOCK_SECTION_CODE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => '',
+		),
+		"SECTION_URL" => CIBlockParameters::GetPathTemplateParam(
+			"SECTION",
+			"SECTION_URL",
+			GetMessage("IBLOCK_SECTION_URL"),
+			"",
+			"URL_TEMPLATES"
+		),
+		"DETAIL_URL" => CIBlockParameters::GetPathTemplateParam(
+			"DETAIL",
+			"DETAIL_URL",
+			GetMessage("IBLOCK_DETAIL_URL"),
+			"",
+			"URL_TEMPLATES"
+		),
+		"SECTION_ID_VARIABLE" => array(
+			"PARENT" => "URL_TEMPLATES",
+			"NAME" => GetMessage("IBLOCK_SECTION_ID_VARIABLE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "SECTION_ID",
+		),
+		"CHECK_SECTION_ID_VARIABLE" => array(
+			"PARENT" => "URL_TEMPLATES",
+			"NAME" => GetMessage("CP_BCE_CHECK_SECTION_ID_VARIABLE"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N"
+		),
+		'ALLOW_SEO_DATA' => array(
+			'PARENT' => 'ADDITIONAL_SETTINGS',
+			'NAME' => GetMessage('CP_BCE_ALLOW_SEO_DATA'),
+			'TYPE' => 'CHECKBOX',
+			'DEFAULT' => 'N',
+		),
+		"SET_TITLE" => array(),
+		"SET_CANONICAL_URL" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_SET_CANONICAL_URL"),
 			"TYPE" => "CHECKBOX",
 			"DEFAULT" => "N",
-			"REFRESH" => "N",
-		);
-	}
-	$addToBasketActions = array(
-		'BUY' => GetMessage('ADD_TO_BASKET_ACTION_BUY'),
-		'ADD' => GetMessage('ADD_TO_BASKET_ACTION_ADD')
-	);
-	$arTemplateParameters['ADD_TO_BASKET_ACTION'] = array(
-		'PARENT' => 'BASKET',
-		'NAME' => GetMessage('CP_BCE_TPL_ADD_TO_BASKET_ACTION'),
-		'TYPE' => 'LIST',
-		'MULTIPLE' => 'Y',
-		'VALUES' => $addToBasketActions,
-		'DEFAULT' => 'BUY',
-		'REFRESH' => 'N'
-	);
-	$arTemplateParameters['SHOW_CLOSE_POPUP'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_SHOW_CLOSE_POPUP'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N'
-	);
-}
-
-$arTemplateParameters['MESS_BTN_BUY'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_MESS_BTN_BUY'),
-	'TYPE' => 'STRING',
-	'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_BTN_BUY_DEFAULT')
-);
-$arTemplateParameters['MESS_BTN_ADD_TO_BASKET'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_MESS_BTN_ADD_TO_BASKET'),
-	'TYPE' => 'STRING',
-	'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_BTN_ADD_TO_BASKET_DEFAULT')
-);
-$arTemplateParameters['MESS_BTN_SUBSCRIBE'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_MESS_BTN_SUBSCRIBE'),
-	'TYPE' => 'STRING',
-	'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_BTN_SUBSCRIBE_DEFAULT')
-);
-if (isset($arCurrentValues['DISPLAY_COMPARE']) && 'Y' == isset($arCurrentValues['DISPLAY_COMPARE']))
-{
-	$arTemplateParameters['MESS_BTN_COMPARE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_MESS_BTN_COMPARE'),
-		'TYPE' => 'STRING',
-		'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_BTN_COMPARE_DEFAULT')
-	);
-}
-$arTemplateParameters['MESS_NOT_AVAILABLE'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_MESS_NOT_AVAILABLE'),
-	'TYPE' => 'STRING',
-	'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_NOT_AVAILABLE_DEFAULT')
-);
-
-$arTemplateParameters['USE_VOTE_RATING'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_USE_VOTE_RATING'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'REFRESH' => 'Y'
-);
-if (isset($arCurrentValues['USE_VOTE_RATING']) && 'Y' == $arCurrentValues['USE_VOTE_RATING'])
-{
-	$arTemplateParameters['VOTE_DISPLAY_AS_RATING'] = array(
-		'NAME' => GetMessage('CP_BCE_TPL_VOTE_DISPLAY_AS_RATING'),
-		'TYPE' => 'LIST',
-		'VALUES' => array(
-			'rating' => GetMessage('CP_BCE_TPL_VDAR_RATING'),
-			'vote_avg' => GetMessage('CP_BCE_TPL_VDAR_AVERAGE'),
 		),
-		'DEFAULT' => 'rating'
-	);
-}
-
-$arTemplateParameters['USE_COMMENTS'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_USE_COMMENTS'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'REFRESH' => 'Y'
-);
-
-if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] == 'Y')
-{
-	if (ModuleManager::isModuleInstalled("blog"))
-	{
-		$arTemplateParameters['BLOG_USE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_BLOG_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
-
-		if (isset($arCurrentValues['BLOG_USE']) && $arCurrentValues['BLOG_USE'] == 'Y')
-		{
-			$arTemplateParameters['BLOG_URL'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_BLOG_URL'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'catalog_comments'
-			);
-			$arTemplateParameters['BLOG_EMAIL_NOTIFY'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_BLOG_EMAIL_NOTIFY'),
-				'TYPE' => 'CHECKBOX',
-				'DEFAULT' => 'N'
-			);
-		}
-	}
-
-	$boolRus = false;
-	$langBy = "id";
-	$langOrder = "asc";
-	$rsLangs = CLanguage::GetList($langBy, $langOrder, array('ID' => 'ru',"ACTIVE" => "Y"));
-	if ($arLang = $rsLangs->Fetch())
-	{
-		$boolRus = true;
-	}
-
-	if ($boolRus)
-	{
-		$arTemplateParameters['VK_USE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_VK_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
-
-		if (isset($arCurrentValues['VK_USE']) && 'Y' == $arCurrentValues['VK_USE'])
-		{
-			$arTemplateParameters['VK_API_ID'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_VK_API_ID'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'API_ID'
-			);
-		}
-	}
-
-	$arTemplateParameters['FB_USE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_FB_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
-
-	if (isset($arCurrentValues['FB_USE']) && 'Y' == $arCurrentValues['FB_USE'])
-	{
-		$arTemplateParameters['FB_APP_ID'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_FB_APP_ID'),
-			'TYPE' => 'STRING',
-			'DEFAULT' => ''
-		);
-	}
-}
-
-if (ModuleManager::isModuleInstalled("highloadblock"))
-{
-	$arTemplateParameters['BRAND_USE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_BRAND_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
-
-	if (isset($arCurrentValues['BRAND_USE']) && $arCurrentValues['BRAND_USE'] == 'Y')
-	{
-		$arTemplateParameters['BRAND_PROP_CODE'] = array(
-			'PARENT' => 'VISUAL',
-			"NAME" => GetMessage("CP_BCE_TPL_BRAND_PROP_CODE"),
+		"SET_BROWSER_TITLE" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_SET_BROWSER_TITLE"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y"
+		),
+		"BROWSER_TITLE" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_BROWSER_TITLE"),
 			"TYPE" => "LIST",
-			"VALUES" => $arHighloadPropList,
+			"MULTIPLE" => "N",
+			"DEFAULT" => "-",
+			"VALUES" => array_merge(array("-"=>" ", "NAME" => GetMessage("IBLOCK_FIELD_NAME")), $arProperty_LS),
+			"HIDDEN" => (isset($arCurrentValues['SET_BROWSER_TITLE']) && $arCurrentValues['SET_BROWSER_TITLE'] == 'N' ? 'Y' : 'N')
+		),
+		"SET_META_KEYWORDS" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_SET_META_KEYWORDS"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y",
+		),
+		"META_KEYWORDS" =>array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("T_IBLOCK_DESC_KEYWORDS"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "N",
+			"DEFAULT" => "-",
+			"VALUES" => array_merge(array("-"=>" "),$arProperty_LS),
+			"HIDDEN" => (isset($arCurrentValues['SET_META_KEYWORDS']) && $arCurrentValues['SET_META_KEYWORDS'] == 'N' ? 'Y' : 'N')
+		),
+		"SET_META_DESCRIPTION" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_SET_META_DESCRIPTION"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y"
+		),
+		"META_DESCRIPTION" =>array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("T_IBLOCK_DESC_DESCRIPTION"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "N",
+			"DEFAULT" => "-",
+			"VALUES" => array_merge(array("-"=>" "),$arProperty_LS),
+			"HIDDEN" => (isset($arCurrentValues['SET_META_DESCRIPTION']) && $arCurrentValues['SET_META_DESCRIPTION'] == 'N' ? 'Y' : 'N')
+		),
+		"SET_LAST_MODIFIED" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_SET_LAST_MODIFIED"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
+		"USE_MAIN_ELEMENT_SECTION" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_USE_MAIN_ELEMENT_SECTION"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N"
+		),
+		"STRICT_SECTION_CHECK" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_STRICT_SECTION_CHECK"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
+		"ADD_SECTIONS_CHAIN" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_ADD_SECTIONS_CHAIN"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+		),
+		"ADD_ELEMENT_CHAIN" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_ADD_ELEMENT_CHAIN"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N"
+		),
+		"PROPERTY_CODE" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("IBLOCK_PROPERTY"),
+			"TYPE" => "LIST",
 			"MULTIPLE" => "Y",
-			"ADDITIONAL_VALUES" => "Y"
+			"VALUES" => $arProperty,
+			"SIZE" => (count($arProperty) > 5 ? 8 : 3),
+			"REFRESH" => isset($templateProperties['MAIN_BLOCK_PROPERTY_CODE']) ? "Y" : "N",
+			"ADDITIONAL_VALUES" => "Y",
+		),
+		"OFFERS_FIELD_CODE" => CIBlockParameters::GetFieldCode(GetMessage("CP_BCE_OFFERS_FIELD_CODE"), "VISUAL"),
+		"OFFERS_PROPERTY_CODE" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("CP_BCE_OFFERS_PROPERTY_CODE"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "Y",
+			"VALUES" => $arProperty_Offers,
+			"SIZE" => (count($arProperty_Offers) > 5 ? 8 : 3),
+			"REFRESH" => isset($templateProperties['MAIN_BLOCK_OFFERS_PROPERTY_CODE']) ? "Y" : "N",
+			"ADDITIONAL_VALUES" => "Y",
+		),
+		"OFFERS_SORT_FIELD" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("CP_BCE_OFFERS_SORT_FIELD"),
+			"TYPE" => "LIST",
+			"VALUES" => $arSort,
+			"ADDITIONAL_VALUES" => "Y",
+			"DEFAULT" => "sort",
+		),
+		"OFFERS_SORT_ORDER" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("CP_BCE_OFFERS_SORT_ORDER"),
+			"TYPE" => "LIST",
+			"VALUES" => $arAscDesc,
+			"DEFAULT" => "asc",
+			"ADDITIONAL_VALUES" => "Y",
+		),
+		"OFFERS_SORT_FIELD2" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("CP_BCE_OFFERS_SORT_FIELD2"),
+			"TYPE" => "LIST",
+			"VALUES" => $arSort,
+			"ADDITIONAL_VALUES" => "Y",
+			"DEFAULT" => "id",
+		),
+		"OFFERS_SORT_ORDER2" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("CP_BCE_OFFERS_SORT_ORDER2"),
+			"TYPE" => "LIST",
+			"VALUES" => $arAscDesc,
+			"DEFAULT" => "desc",
+			"ADDITIONAL_VALUES" => "Y",
+		),
+		"OFFERS_LIMIT" => array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage('CP_BCE_OFFERS_LIMIT'),
+			"TYPE" => "STRING",
+			"DEFAULT" => 0,
+		),
+		"PRICE_CODE" => array(
+			"PARENT" => "PRICES",
+			"NAME" => GetMessage("IBLOCK_PRICE_CODE"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "Y",
+			"SIZE" => (count($arPrice) > 5 ? 8 : 3),
+			"VALUES" => $arPrice,
+		),
+		"USE_PRICE_COUNT" => array(
+			"PARENT" => "PRICES",
+			"NAME" => GetMessage("IBLOCK_USE_PRICE_COUNT"),
+			"TYPE" => "CHECKBOX",
+			"REFRESH" => isset($templateProperties['USE_RATIO_IN_RANGES']) ? "Y" : "N",
+			"DEFAULT" => "N",
+			),
+		"SHOW_PRICE_COUNT" => array(
+			"PARENT" => "PRICES",
+			"NAME" => GetMessage("IBLOCK_SHOW_PRICE_COUNT"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "1",
+		),
+		"PRICE_VAT_INCLUDE" => array(
+			"PARENT" => "PRICES",
+			"NAME" => GetMessage("IBLOCK_VAT_INCLUDE"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+		),
+		"PRICE_VAT_SHOW_VALUE" => array(
+			"PARENT" => "PRICES",
+			"NAME" => GetMessage("IBLOCK_VAT_SHOW_VALUE"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
+		"BASKET_URL" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("IBLOCK_BASKET_URL"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "/personal/basket.php",
+		),
+		"SHOW_SKU_DESCRIPTION" => array(
+			"PARENT" => "ADDITIONAL_SETTINGS",
+			"NAME" => GetMessage("IBLOCK_SHOW_SKU_DESCRIPTION"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
+		"ACTION_VARIABLE" => array(
+			"PARENT" => "ACTION_SETTINGS",
+			"NAME" => GetMessage("IBLOCK_ACTION_VARIABLE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "action",
+		),
+		"PRODUCT_ID_VARIABLE" => array(
+			"PARENT" => "ACTION_SETTINGS",
+			"NAME" => GetMessage("IBLOCK_PRODUCT_ID_VARIABLE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "id",
+		),
+		"USE_PRODUCT_QUANTITY" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_USE_PRODUCT_QUANTITY"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+			"REFRESH" => "Y",
+		),
+		"PRODUCT_QUANTITY_VARIABLE" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_PRODUCT_QUANTITY_VARIABLE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "quantity",
+			"HIDDEN" => (isset($arCurrentValues['USE_PRODUCT_QUANTITY']) && $arCurrentValues['USE_PRODUCT_QUANTITY'] == 'Y' ? 'N' : 'Y')
+		),
+		"ADD_PROPERTIES_TO_BASKET" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_ADD_PROPERTIES_TO_BASKET"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y"
+		),
+		"PRODUCT_PROPS_VARIABLE" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_PRODUCT_PROPS_VARIABLE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "prop",
+			"HIDDEN" => (isset($arCurrentValues['ADD_PROPERTIES_TO_BASKET']) && $arCurrentValues['ADD_PROPERTIES_TO_BASKET'] == 'N' ? 'Y' : 'N')
+		),
+		"PARTIAL_PRODUCT_PROPERTIES" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_PARTIAL_PRODUCT_PROPERTIES"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+			"HIDDEN" => (isset($arCurrentValues['ADD_PROPERTIES_TO_BASKET']) && $arCurrentValues['ADD_PROPERTIES_TO_BASKET'] == 'N' ? 'Y' : 'N')
+		),
+		"PRODUCT_PROPERTIES" => array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_PRODUCT_PROPERTIES"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "Y",
+			"VALUES" => $arProperty_X,
+			"SIZE" => (count($arProperty_X) > 5 ? 8 : 3),
+			"HIDDEN" => (isset($arCurrentValues['ADD_PROPERTIES_TO_BASKET']) && $arCurrentValues['ADD_PROPERTIES_TO_BASKET'] == 'N' ? 'Y' : 'N')
+		),
+		"DISPLAY_COMPARE" => array(
+			"PARENT" => "COMPARE",
+			"NAME" => GetMessage('CP_BCE_DISPLAY_COMPARE'),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+			"REFRESH" => "Y"
+		),
+		"LINK_IBLOCK_TYPE" => array(
+			"PARENT" => "LINK",
+			"NAME" => GetMessage("IBLOCK_LINK_IBLOCK_TYPE"),
+			"TYPE" => "LIST",
+			"ADDITIONAL_VALUES" => "Y",
+			"VALUES" => $arIBlockType,
+			"REFRESH" => "Y",
+		),
+		"LINK_IBLOCK_ID" => array(
+			"PARENT" => "LINK",
+			"NAME" => GetMessage("IBLOCK_LINK_IBLOCK_ID"),
+			"TYPE" => "LIST",
+			"ADDITIONAL_VALUES" => "Y",
+			"VALUES" => $arIBlock_LINK,
+			"REFRESH" => "Y",
+		),
+		"LINK_PROPERTY_SID" => array(
+			"PARENT" => "LINK",
+			"NAME" => GetMessage("IBLOCK_LINK_PROPERTY_SID"),
+			"TYPE" => "LIST",
+			"ADDITIONAL_VALUES" => "Y",
+			"VALUES" => $arProperty_LINK,
+		),
+		"LINK_ELEMENTS_URL" => array(
+			"PARENT" => "LINK",
+			"NAME" => GetMessage("IBLOCK_LINK_ELEMENTS_URL"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
+		),
+		"BACKGROUND_IMAGE" =>array(
+			"PARENT" => "VISUAL",
+			"NAME" => GetMessage("T_IBLOCK_BACKGROUND_IMAGE"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "N",
+			"DEFAULT" => "-",
+			"VALUES" => array_merge(array("-"=>" "),$arProperty_F)
+		),
+		"CACHE_TIME"  =>  array("DEFAULT"=>36000000),
+		"CACHE_GROUPS" => array(
+			"PARENT" => "CACHE_SETTINGS",
+			"NAME" => GetMessage("CP_BCE_CACHE_GROUPS"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+		),
+
+		"USE_GIFTS_DETAIL" => array(
+			"PARENT" => "GIFTS_SETTINGS",
+			"NAME" => GetMessage("SALE_T_DESC_USE_GIFTS_DETAIL"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y",
+		),
+
+		"USE_GIFTS_MAIN_PR_SECTION_LIST" => array(
+			"PARENT" => "GIFTS_SETTINGS",
+			"NAME" => GetMessage("SALE_T_DESC_USE_GIFTS_MAIN_PR_DETAIL"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y",
+			"REFRESH" => "Y",
+		),
+		'COMPATIBLE_MODE' => array(
+			'PARENT' => 'EXTENDED_SETTINGS',
+			'NAME' => GetMessage('CP_BCE_COMPATIBLE_MODE'),
+			'TYPE' => 'CHECKBOX',
+			'DEFAULT' => 'Y',
+			'REFRESH' => 'Y'
+		),
+		"USE_ELEMENT_COUNTER" => array(
+			"PARENT" => "EXTENDED_SETTINGS",
+			"NAME" => GetMessage('CP_BCE_USE_ELEMENT_COUNTER'),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "Y"
+		),
+		"SHOW_DEACTIVATED" => array(
+			"PARENT" => "DATA_SOURCE",
+			"NAME" => GetMessage('CP_BCE_SHOW_DEACTIVATED'),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N"
+		),
+		"DISABLE_INIT_JS_IN_COMPONENT" => array(
+			"PARENT" => "EXTENDED_SETTINGS",
+			"NAME" => GetMessage('CP_BCE_DISABLE_INIT_JS_IN_COMPONENT'),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+			"HIDDEN" => (isset($arCurrentValues['COMPATIBLE_MODE']) && $arCurrentValues['COMPATIBLE_MODE'] === 'N' ? 'Y' : 'N')
+		)
+	),
+);
+if (
+	ModuleManager::isModuleInstalled('bitrix24')
+	|| (isset($arCurrentValues['LANDING_MODE']) && $arCurrentValues['LANDING_MODE'] === 'Y')
+)
+{
+	unset($arComponentParameters['PARAMETERS']['SET_TITLE']);
+	unset($arComponentParameters['PARAMETERS']['SET_BROWSER_TITLE']);
+	unset($arComponentParameters['PARAMETERS']['BROWSER_TITLE']);
+	unset($arComponentParameters['PARAMETERS']['SET_META_KEYWORDS']);
+	unset($arComponentParameters['PARAMETERS']['META_KEYWORDS']);
+	unset($arComponentParameters['PARAMETERS']['SET_META_DESCRIPTION']);
+	unset($arComponentParameters['PARAMETERS']['META_DESCRIPTION']);
+}
+else
+{
+	unset($arComponentParameters['PARAMETERS']['ALLOW_SEO_DATA']);
+}
+
+if ($usePropertyFeatures)
+{
+	unset($arComponentParameters["PARAMETERS"]["PROPERTY_CODE"]);
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_PROPERTY_CODE"]);
+	if (isset($arComponentParameters["PARAMETERS"]["PRODUCT_PROPERTIES"]))
+		unset($arComponentParameters["PARAMETERS"]["PRODUCT_PROPERTIES"]);
+}
+
+if ($arCurrentValues["SEF_MODE"] == "Y")
+{
+	$arComponentParameters["PARAMETERS"]["SECTION_CODE_PATH"] = array(
+		"NAME" => GetMessage("CP_BCE_SECTION_CODE_PATH"),
+		"TYPE" => "STRING",
+		"DEFAULT" => "",
+	);
+}
+
+if ($catalogIncluded)
+{
+	$arComponentParameters['PARAMETERS']['HIDE_NOT_AVAILABLE_OFFERS'] = array(
+		'PARENT' => 'DATA_SOURCE',
+		'NAME' => GetMessage('CP_BCE_HIDE_NOT_AVAILABLE_OFFERS'),
+		'TYPE' => 'LIST',
+		'DEFAULT' => 'N',
+		'VALUES' => array(
+			'Y' => GetMessage('CP_BCE_HIDE_NOT_AVAILABLE_OFFERS_HIDE'),
+			'L' => GetMessage('CP_BCE_HIDE_NOT_AVAILABLE_OFFERS_SUBSCRIBE'),
+			'N' => GetMessage('CP_BCE_HIDE_NOT_AVAILABLE_OFFERS_SHOW')
+		)
+	);
+	$arComponentParameters["PARAMETERS"]['CONVERT_CURRENCY'] = array(
+		'PARENT' => 'PRICES',
+		'NAME' => GetMessage('CP_BCE_CONVERT_CURRENCY'),
+		'TYPE' => 'CHECKBOX',
+		'DEFAULT' => 'N',
+		'REFRESH' => 'Y',
+	);
+
+	if (isset($arCurrentValues['CONVERT_CURRENCY']) && $arCurrentValues['CONVERT_CURRENCY'] == 'Y')
+	{
+		$arComponentParameters['PARAMETERS']['CURRENCY_ID'] = array(
+			'PARENT' => 'PRICES',
+			'NAME' => GetMessage('CP_BCE_CURRENCY_ID'),
+			'TYPE' => 'LIST',
+			'VALUES' => Currency\CurrencyManager::getCurrencyList(),
+			'DEFAULT' => Currency\CurrencyManager::getBaseCurrency(),
+			"ADDITIONAL_VALUES" => "Y",
+		);
+	}
+
+	$hiddenParam = 'N';
+	if (
+		(isset($arCurrentValues['COMPATIBLE_MODE']) && $arCurrentValues['COMPATIBLE_MODE'] === 'N')
+		|| ((string)Option::get('catalog', 'enable_viewed_products') === 'N')
+	)
+	{
+		$hiddenParam = 'Y';
+	}
+	$arComponentParameters['PARAMETERS']['SET_VIEWED_IN_COMPONENT'] = array(
+		"PARENT" => "EXTENDED_SETTINGS",
+		"NAME" => GetMessage('CP_BCE_SET_VIEWED_IN_COMPONENT'),
+		"TYPE" => "CHECKBOX",
+		"DEFAULT" => "N",
+		"HIDDEN" => $hiddenParam
+	);
+}
+
+if (isset($arCurrentValues['COMPATIBLE_MODE']) && $arCurrentValues['COMPATIBLE_MODE'] === 'N')
+{
+	unset($arComponentParameters['PARAMETERS']['OFFERS_LIMIT']);
+}
+
+if (empty($offers))
+{
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_FIELD_CODE"]);
+	if (isset($arComponentParameters["PARAMETERS"]["OFFERS_PROPERTY_CODE"]))
+		unset($arComponentParameters["PARAMETERS"]["OFFERS_PROPERTY_CODE"]);
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_SORT_FIELD"]);
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_SORT_ORDER"]);
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_SORT_FIELD2"]);
+	unset($arComponentParameters["PARAMETERS"]["OFFERS_SORT_ORDER2"]);
+}
+else
+{
+	if (!$usePropertyFeatures)
+	{
+		$arComponentParameters["PARAMETERS"]["OFFERS_CART_PROPERTIES"] = array(
+			"PARENT" => "BASKET",
+			"NAME" => GetMessage("CP_BCE_OFFERS_CART_PROPERTIES"),
+			"TYPE" => "LIST",
+			"MULTIPLE" => "Y",
+			"VALUES" => $arProperty_OffersWithoutFile,
+			"SIZE" => (count($arProperty_OffersWithoutFile) > 5 ? 8 : 3),
+			"HIDDEN" => (isset($arCurrentValues['ADD_PROPERTIES_TO_BASKET']) && $arCurrentValues['ADD_PROPERTIES_TO_BASKET'] == 'N' ? 'Y' : 'N')
 		);
 	}
 }
-?>
+
+if (isset($arCurrentValues['DISPLAY_COMPARE']) && $arCurrentValues['DISPLAY_COMPARE'] == 'Y')
+{
+	$arComponentParameters['PARAMETERS']['COMPARE_PATH'] = array(
+		'PARENT' => 'COMPARE',
+		'NAME' => GetMessage('CP_BCE_COMPARE_PATH'),
+		'TYPE' => 'STRING',
+		'DEFAULT' => ''
+	);
+}
+
+if(!\Bitrix\Main\ModuleManager::isModuleInstalled("sale"))
+{
+	unset($arComponentParameters["PARAMETERS"]["USE_GIFTS_DETAIL"]);
+	unset($arComponentParameters["PARAMETERS"]["USE_GIFTS_MAIN_PR_SECTION_LIST"]);
+	unset($arComponentParameters["GROUPS"]["GIFTS_SETTINGS"]);
+}
+else
+{
+	$useGiftsDetail = $arCurrentValues["USE_GIFTS_DETAIL"] === null && $arComponentParameters['PARAMETERS']['USE_GIFTS_DETAIL']['DEFAULT'] == 'Y' || $arCurrentValues["USE_GIFTS_DETAIL"] == "Y";
+	$useGiftsMainPrSectionList = $arCurrentValues["USE_GIFTS_MAIN_PR_SECTION_LIST"] === null && $arComponentParameters['PARAMETERS']['USE_GIFTS_MAIN_PR_SECTION_LIST']['DEFAULT'] == 'Y' || $arCurrentValues["USE_GIFTS_MAIN_PR_SECTION_LIST"] == "Y";
+	if($useGiftsDetail || $useGiftsMainPrSectionList)
+	{
+		if($useGiftsDetail)
+		{
+			$arComponentParameters["PARAMETERS"]["GIFTS_DETAIL_PAGE_ELEMENT_COUNT"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PAGE_ELEMENT_COUNT_DETAIL"),
+				"TYPE" => "STRING",
+				"DEFAULT" => "4",
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_DETAIL_HIDE_BLOCK_TITLE"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PARAMS_HIDE_BLOCK_TITLE_DETAIL"),
+				"TYPE" => "CHECKBOX",
+				"DEFAULT" => "",
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_DETAIL_BLOCK_TITLE"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PARAMS_BLOCK_TITLE"),
+				"TYPE" => "STRING",
+				"DEFAULT" => GetMessage('SGB_PARAMS_BLOCK_TITLE_DEFAULT'),
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_DETAIL_TEXT_LABEL_GIFT"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PARAMS_TEXT_LABEL_GIFT_DETAIL"),
+				"TYPE" => "STRING",
+				"DEFAULT" => GetMessage("SGP_PARAMS_TEXT_LABEL_GIFT_DEFAULT"),
+			);
+
+			$arComponentParameters["PARAMETERS"]["GIFTS_SHOW_DISCOUNT_PERCENT"] = array(
+				'PARENT' => 'GIFTS_SETTINGS',
+				'NAME' => GetMessage('CVP_SHOW_DISCOUNT_PERCENT'),
+				'TYPE' => 'CHECKBOX',
+				'DEFAULT' => 'Y'
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_SHOW_OLD_PRICE"] = array(
+				'PARENT' => 'GIFTS_SETTINGS',
+				'NAME' => GetMessage('CVP_SHOW_OLD_PRICE'),
+				'TYPE' => 'CHECKBOX',
+				'DEFAULT' => 'Y'
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_SHOW_NAME"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("CVP_SHOW_NAME"),
+				"TYPE" => "CHECKBOX",
+				"DEFAULT" => "Y",
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_SHOW_IMAGE"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("CVP_SHOW_IMAGE"),
+				"TYPE" => "CHECKBOX",
+				"DEFAULT" => "Y",
+			);
+			$arComponentParameters["PARAMETERS"]['GIFTS_MESS_BTN_BUY'] = array(
+				'PARENT' => 'GIFTS_SETTINGS',
+				'NAME' => GetMessage('CVP_MESS_BTN_BUY_GIFT'),
+				'TYPE' => 'STRING',
+				'DEFAULT' => GetMessage('CVP_MESS_BTN_BUY_GIFT_DEFAULT')
+			);
+		}
+		if($useGiftsMainPrSectionList)
+		{
+			$arComponentParameters["PARAMETERS"]["GIFTS_MAIN_PRODUCT_DETAIL_PAGE_ELEMENT_COUNT"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PAGE_ELEMENT_COUNT_MAIN_PR_DETAIL"),
+				"TYPE" => "STRING",
+				"DEFAULT" => "4",
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_MAIN_PRODUCT_DETAIL_HIDE_BLOCK_TITLE"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_PARAMS_HIDE_BLOCK_TITLE_MAIN_PR_DETAIL"),
+				"TYPE" => "CHECKBOX",
+				"DEFAULT" => "",
+			);
+			$arComponentParameters["PARAMETERS"]["GIFTS_MAIN_PRODUCT_DETAIL_BLOCK_TITLE"] = array(
+				"PARENT" => "GIFTS_SETTINGS",
+				"NAME" => GetMessage("SGP_MAIN_PRODUCT_PARAMS_BLOCK_TITLE"),
+				"TYPE" => "STRING",
+				"DEFAULT" => GetMessage('SGB_MAIN_PRODUCT_PARAMS_BLOCK_TITLE_DEFAULT'),
+			);
+		}
+	}
+}
+
+CIBlockParameters::Add404Settings($arComponentParameters, $arCurrentValues);

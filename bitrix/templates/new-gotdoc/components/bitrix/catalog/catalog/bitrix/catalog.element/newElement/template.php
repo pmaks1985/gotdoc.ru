@@ -182,26 +182,16 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                                     Выберите класс функциональной пожарной опасности вашего объекта
                                                 </a>
                                                 <ul id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_list"
-                                                    style="width: <? echo $strWidth; ?>;margin-left:0%;"
                                                     class="dropdown-menu"
                                                     aria-labelledby="navbarScrollingDropdown">
                                                     <?
                                                     foreach ($arProp['VALUES'] as $arOneValue) {
                                                         $arOneValue['NAME'] = htmlspecialcharsbx($arOneValue['NAME']);
                                                         ?>
-                                                        <!--li data-treevalue="<? echo $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
-                                                data-onevalue="<? echo $arOneValue['ID']; ?>"
-                                                style="width: <? echo $strOneWidth; ?>; display: none;"
-                                                class="dropdown-item">
-                                                <i title="<? echo $arOneValue['NAME']; ?>"></i>
-                                                <span class="cnt" title="<? echo $arOneValue['NAME']; ?>">
-                                                    <? echo $arOneValue['NAME']; ?>
-                                                </span>
-                                            </li-->
                                                         <li data-treevalue="<? echo $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
                                                             data-onevalue="<? echo $arOneValue['ID']; ?>"
                                                             class="dropdown-item"><span
-                                                                    class="cnt"><? echo $arOneValue['NAME']; ?></span>
+                                                                    class=""><? echo $arOneValue['NAME']; ?></span>
                                                         </li>
                                                         <?
                                                     }
@@ -277,6 +267,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     $notAvailableMessage = ($arParams['MESS_NOT_AVAILABLE'] != '' ? $arParams['MESS_NOT_AVAILABLE'] : GetMessageJS('CT_BCE_CATALOG_NOT_AVAILABLE'));
                     $showBuyBtn = in_array('BUY', $arParams['ADD_TO_BASKET_ACTION']);
                     $showAddBtn = in_array('ADD', $arParams['ADD_TO_BASKET_ACTION']);
+					print_r();
 
                     if ($showBuyBtn && $arOffer["CAN_BUY"]) {
                         ?>
@@ -852,8 +843,8 @@ if ($showSubscribeBtn) {
                 <div class="item_buttons vam">
 		<span class="item_buttons_counter_block" id="<? echo $arItemIDs['BASKET_ACTIONS']; ?>"
               style="display: <? echo($canBuy ? '' : 'none'); ?>;">
-<?/*
-if ($showBuyBtn) {
+<?
+/*if ($showBuyBtn) {
     ?>
     <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart 2"
        id="<? echo $arItemIDs['BUY_LINK']; ?>"><span></span><? echo $buyBtnMessage; ?></a>
@@ -864,8 +855,8 @@ if ($showAddBtn) {
     <a href="javascript:void(0);" class="bx_big bx_bt_button bx_cart 2"
        id="<? echo $arItemIDs['ADD_BASKET_LINK']; ?>"><span></span><? echo $addToBasketBtnMessage; ?></a>
     <?
-}
-*/ ?>
+}*/
+ ?>
 		</span>
                     <span id="<? echo $arItemIDs['NOT_AVAILABLE_MESS']; ?>" class="bx_notavailable"
                           style="display: <? echo(!$canBuy ? '' : 'none'); ?>;"><? echo $notAvailableMessage; ?></span>

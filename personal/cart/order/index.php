@@ -85,7 +85,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"HIDE_ORDER_DESCRIPTION" => "Y",
 		"USE_YM_GOALS" => "N",
 		"USE_ENHANCED_ECOMMERCE" => "N",
-		"USE_CUSTOM_MAIN_MESSAGES" => "N",
+		"USE_CUSTOM_MAIN_MESSAGES" => "Y",
 		"USE_CUSTOM_ADDITIONAL_MESSAGES" => "N",
 		"USE_CUSTOM_ERROR_MESSAGES" => "N",
 		"PROPS_FADE_LIST_4" => array(
@@ -94,7 +94,22 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"SHOW_COUPONS_BASKET" => "N",
 		"SHOW_COUPONS_DELIVERY" => "Y",
 		"SHOW_COUPONS_PAY_SYSTEM" => "Y",
-		"ADDITIONAL_PICT_PROP_35" => "-"
+		"ADDITIONAL_PICT_PROP_35" => "-",
+		"MESS_AUTH_BLOCK_NAME" => "Авторизация",
+		"MESS_REG_BLOCK_NAME" => "Регистрация",
+		"MESS_BASKET_BLOCK_NAME" => "Товары в заказе",
+		"MESS_REGION_BLOCK_NAME" => "Выберите тип плательщика",
+		"MESS_PAYMENT_BLOCK_NAME" => "Оплата",
+		"MESS_DELIVERY_BLOCK_NAME" => "Доставка",
+		"MESS_BUYER_BLOCK_NAME" => "Покупатель",
+		"MESS_BACK" => "Назад",
+		"MESS_FURTHER" => "Далее",
+		"MESS_EDIT" => "изменить",
+		"MESS_ORDER" => "Оформить заказ",
+		"MESS_PRICE" => "Стоимость",
+		"MESS_PERIOD" => "Срок доставки",
+		"MESS_NAV_BACK" => "Назад",
+		"MESS_NAV_FORWARD" => "Вперед"
 	),
 	false,
 	array(

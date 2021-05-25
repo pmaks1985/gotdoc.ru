@@ -29,8 +29,8 @@ class MdfPDF extends \TCPDF
 		$this->SetTextColor(0, 0, 0); // цвет шрифта
 		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
 		$this->writeHTML($html, true, false, true, false, '');
-		$html = '<div><b>Заказчик</b>:</div>';
-		$this->writeHTML($html, true, false, true, false, '');
+		//$html = '<div><b>Заказчик</b>:</div>';
+		//$this->writeHTML($html, true, false, true, false, '');
 
 	}
 
@@ -63,7 +63,8 @@ class pdfit
 	function __construct($orderID, $siteLogo = false)
 	{
 		\Bitrix\Main\Loader::includeModule('sale');
-		$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
+		//$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
+		$this->orderID = 350 ; // идентификатор заказа для обработки
 		$this->siteLogo = $siteLogo; // пусть к файлу с логотипом сайта
 	}
 
@@ -311,7 +312,7 @@ class pdfit
 	function GetOrderItems()
 	{
 		$this->pdf->SetFillColor(51, 51, 51);
-		$this->pdf->SetTextColor(255);
+
 		$this->pdf->SetDrawColor(85, 85, 85);
 		$this->pdf->SetLineWidth(0.3);
 		$this->pdf->SetFont('dejavusans', 'B');
@@ -357,7 +358,8 @@ class pdfit
 
 	}
 }
-$orderID = $_POST['ZAKAZ_ID'];
+//$orderID = $_POST['ZAKAZ_ID'];
+$orderID = 350;
 if($orderID >0){
 	$pdf = new pdfit($orderID, $_SERVER['DOCUMENT_ROOT'] . '/upload/sitelogo.jpg');
 	$pdf->process();

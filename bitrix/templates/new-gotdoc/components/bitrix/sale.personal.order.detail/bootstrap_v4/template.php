@@ -954,7 +954,9 @@ $httpClient3->setHeader('Content-Type', 'application/json', true);
 $url3 = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireComplete";
 $data3 = json_encode(array("privateUUID" => $response12));
 $response3 = $httpClient3->post($url3, $data3);
-$response3 = json_decode($response3, true);?>
+$response3 = json_decode($response3, true);
+//print_r($response3['result'] );
+?>
 
 
 <?/*Запрос 4.*/?>
@@ -1032,8 +1034,12 @@ $response3 = json_decode($response3, true);?>
 <?//if($response3['result']){?>
 <a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
 <div style="display:flex;">
-<a class="btn btn-secondary" style="margin:5px;"  id="post_to_url4">Список документов</a>
+<a class="btn btn-success" style="margin:5px;"  id="post_to_url4">Список документов</a>
+<?if($response3['result']){?>
 <a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
+<?} else {?>
+<a class="btn btn-secondary" style="margin:5px;">Получить документы</a>
+<?} ?>
 </div>
 <?//} else {?>
 

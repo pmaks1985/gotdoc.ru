@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("Каталог товаров");
             if ($sortBy == 'show') {
                 $sortBy = 'SHOW_COUNTER';
             }
-            ?> <?$APPLICATION->IncludeComponent(
+            ?>  <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"catalog", 
 	array(
@@ -81,13 +81,16 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"COMMON_ADD_TO_BASKET_ACTION" => "ADD",
 		"COMMON_SHOW_CLOSE_POPUP" => "N",
 		"COMPATIBLE_MODE" => "Y",
+		"COMPONENT_TEMPLATE" => "catalog",
 		"CONVERT_CURRENCY" => "N",
 		"DETAIL_ADD_DETAIL_TO_SLIDER" => "N",
 		"DETAIL_ADD_TO_BASKET_ACTION" => array(
 			0 => "BUY",
+			1 => "ADD",
 		),
 		"DETAIL_ADD_TO_BASKET_ACTION_PRIMARY" => array(
 			0 => "BUY",
+			1 => "ADD",
 		),
 		"DETAIL_BACKGROUND_IMAGE" => "-",
 		"DETAIL_BRAND_USE" => "N",
@@ -99,8 +102,10 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"DETAIL_DISPLAY_NAME" => "Y",
 		"DETAIL_DISPLAY_PREVIEW_TEXT_MODE" => "E",
 		"DETAIL_IMAGE_RESOLUTION" => "16by9",
-		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => "",
-		"DETAIL_MAIN_BLOCK_PROPERTY_CODE" => "",
+		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => array(
+		),
+		"DETAIL_MAIN_BLOCK_PROPERTY_CODE" => array(
+		),
 		"DETAIL_META_DESCRIPTION" => "-",
 		"DETAIL_META_KEYWORDS" => "-",
 		"DETAIL_OFFERS_FIELD_CODE" => array(
@@ -196,7 +201,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"IBLOCK_TYPE" => "newgotdoc",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"INSTANT_RELOAD" => "N",
-		"LABEL_PROP" => "",
+		"LABEL_PROP" => array(
+		),
 		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "top-left",
 		"LAZY_LOAD" => "N",
@@ -225,7 +231,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 			1 => "FILE_FOR_FREE",
 			2 => "",
 		),
-		"LIST_PROPERTY_CODE_MOBILE" => "",
+		"LIST_PROPERTY_CODE_MOBILE" => array(
+		),
 		"LIST_SHOW_SLIDER" => "Y",
 		"LIST_SLIDER_INTERVAL" => "3000",
 		"LIST_SLIDER_PROGRESS" => "N",
@@ -249,7 +256,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"OFFERS_SORT_ORDER" => "asc",
 		"OFFERS_SORT_ORDER2" => "desc",
 		"OFFER_ADD_PICT_PROP" => "-",
-		"OFFER_TREE_PROPS" => "",
+		"OFFER_TREE_PROPS" => array(
+		),
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -257,7 +265,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "new-round",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "6",
+		"PAGE_ELEMENT_COUNT" => "30",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array(
 			0 => "BASE",
@@ -304,7 +312,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"SIDEBAR_SECTION_SHOW" => "Y",
 		"TEMPLATE_THEME" => "blue",
 		"TOP_ADD_TO_BASKET_ACTION" => "ADD",
-		"TOP_ELEMENT_COUNT" => "4",
+		"TOP_ELEMENT_COUNT" => "9",
 		"TOP_ELEMENT_SORT_FIELD" => "shows",
 		"TOP_ELEMENT_SORT_FIELD2" => "SCALED_PRICE_1",
 		"TOP_ELEMENT_SORT_ORDER" => "asc",
@@ -336,7 +344,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 			10 => "FILE_FOR_FREE",
 			11 => "",
 		),
-		"TOP_PROPERTY_CODE_MOBILE" => "",
+		"TOP_PROPERTY_CODE_MOBILE" => array(
+		),
 		"TOP_SHOW_SLIDER" => "Y",
 		"TOP_SLIDER_INTERVAL" => "3000",
 		"TOP_SLIDER_PROGRESS" => "N",
@@ -360,7 +369,6 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"USE_PRODUCT_QUANTITY" => "N",
 		"USE_SALE_BESTSELLERS" => "Y",
 		"USE_STORE" => "N",
-		"COMPONENT_TEMPLATE" => "catalog",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE_PATH#/",
