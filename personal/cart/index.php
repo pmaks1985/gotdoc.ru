@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Моя корзина");
 ?><div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
-	".default", 
+	"defaultBasket",
 	array(
 		"ACTION_VARIABLE" => "basketAction",
 		"ADDITIONAL_PICT_PROP_17" => "-",

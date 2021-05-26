@@ -146,6 +146,7 @@ body {
     border-radius: 5px 0px 0px 5px;
     min-width: 324px;
     padding: 20px 0 20px 24px;
+    margin-bottom: 5px;
 }
 
 .form-control_input::-webkit-input-placeholder {
@@ -186,12 +187,13 @@ body {
     border: 2px solid #dc3545;
     padding: 20px;
     margin-left: -5px;
+    margin-bottom: 5px;
 }
 
 .backet {
-    background-color: #dc3545;
+    background-color: #dc3545 !important;
     border-radius: 5px;
-    padding: .6rem .75rem;
+    padding: 10px 12px;
 }
 
 .backet_text {
