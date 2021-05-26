@@ -1,7 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
 <? if (!empty($arResult)): ?>
-    <a class="catalog_btn d-flex align-items-center dropdown-toggle" href="#"
+    <a class="catalog_btn d-flex align-items-center dropdown-toggle text-decoration-none" href="#"
        id="navbarDropdownMenuLink" aria-haspopup="true" data-toggle="dropdown" aria-expanded="true">
         <img class="catalog_btn__img" src="/bitrix/templates/new-gotdoc/img/catalog.png" alt="catalog">
         <div>Каталог документов</div>
