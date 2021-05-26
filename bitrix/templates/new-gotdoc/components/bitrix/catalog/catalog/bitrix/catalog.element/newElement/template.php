@@ -173,7 +173,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                     ?>
                                     <div class="px-0 mx-0" id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_cont">
                                         <div class="">
-                                            <div class="">
+                                            <div class="dropdown">
                                                 <a class="dropdown-toggle text-danger text-decoration-none" href="#" role="button"
                                                    id="dropdownMenuLink"
                                                    data-toggle="dropdown" aria-haspopup="true"
@@ -197,10 +197,10 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                                     ?>
                                                 </ul>
                                             </div>
-                                            <div class="bx_slide_left" style="<? echo $strSlideStyle; ?>"
+                                            <div class="bx_slide_left d-none" style="<? echo $strSlideStyle; ?>"
                                                  id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_left"
                                                  data-treevalue="<? echo $arProp['ID']; ?>"></div>
-                                            <div class="bx_slide_right" style="<? echo $strSlideStyle; ?>"
+                                            <div class="bx_slide_right d-none" style="<? echo $strSlideStyle; ?>"
                                                  id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_right"
                                                  data-treevalue="<? echo $arProp['ID']; ?>"></div>
                                         </div>
