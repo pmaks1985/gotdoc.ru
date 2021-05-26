@@ -11,11 +11,15 @@
 	
 class MdfPDF extends \TCPDF
 {
+	
+	
 	//Page header
 	public function Header()
 	{
 		// Logo
 		$headerdata = $this->getHeaderData();
+		
+		
 		//$this->Image($headerdata['logo'], 20, 10, $headerdata['logo_width'], '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
 		$this->SetFont('dejavusans', '', 8);
@@ -27,10 +31,11 @@ class MdfPDF extends \TCPDF
 		$html = "<br /><br /><br />"; // добавим линию, отделающую колонтитул от текста
 		$this->writeHTML($html, true, false, true, false, '');
 		$this->SetTextColor(0, 0, 0); // цвет шрифта
-		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
-		$this->writeHTML($html, true, false, true, false, '');
-		//$html = '<div><b>Заказчик</b>:</div>';
+		//$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
 		//$this->writeHTML($html, true, false, true, false, '');
+		//$html = '<div><b>Заказчик</b>:' .$this->arUserData['WORK_COMPANY']. '</div>';
+		//$this->writeHTML($html, true, false, true, false, '');
+		
 
 	}
 
@@ -63,8 +68,8 @@ class pdfit
 	function __construct($orderID, $siteLogo = false)
 	{
 		\Bitrix\Main\Loader::includeModule('sale');
-		//$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
-		$this->orderID = 350 ; // идентификатор заказа для обработки
+		$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
+		//$this->orderID = 355 ; // идентификатор заказа для обработки
 		$this->siteLogo = $siteLogo; // пусть к файлу с логотипом сайта
 	}
 
@@ -171,10 +176,10 @@ class pdfit
 
 	function getInvoiceReceiver()
 	{
-		$propertyCollection = $this->order->getPropertyCollection();
-		$receiver = $propertyCollection->getPayerName()->getValue();
-		if (!$receiver && !empty($this->arUserData))
-		{
+		//$propertyCollection = $this->order->getPropertyCollection();
+		//$receiver = $propertyCollection->getPayerName()->getValue();
+		//if (!$receiver && !empty($this->arUserData))
+		//{
 			$resline = [];
 
 			if (strlen($this->arUserData['WORK_COMPANY']) > 0)
@@ -207,9 +212,9 @@ class pdfit
 			{
 				return implode(' ', $resline);
 			}
-		}
+		//}
 
-		return false;
+		//return false;
 
 	}
 
@@ -273,13 +278,16 @@ class pdfit
 			0, false, false, 0);
 
 		$this->pdf->SetFont('dejavusans', '', 8);
+		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div><br/>';
+		$this->pdf->writeHTML($html, true, false, true, false, '');
+		
 		if ($receiver = $this->getInvoiceReceiver())
 		{
-			$this->pdf->Write(0, 'Покупатель: ' . $receiver, '', 0, 'L', true,
-				0, false, false, 0);
+			$html = '<div><b>Заказчик</b>: ' .$receiver. '</div><br/>';
+			$this->pdf->writeHTML($html, true, false, true, false, '');	
 		}
 
-		$receiverContacts = $this->getInvoceContacts();
+		/*$receiverContacts = $this->getInvoceContacts();
 		if ($receiverContacts['phone'] && strlen($receiverContacts['phone']) > 0)
 		{
 			$this->pdf->Write(0, 'Тел: ' . $receiverContacts['phone'], '', 0, 'L', true,
@@ -296,7 +304,7 @@ class pdfit
 		{
 			$this->pdf->Write(0, 'Адрес: ' . $receiverContacts['address'], '', 0, 'L', true,
 				0, false, false, 0);
-		}
+		}*/
 
 		$this->pdf->Write(0, "", '', 0, 'C', true,
 			0, false, false, 0);
@@ -306,15 +314,16 @@ class pdfit
 	{
 		$title = 'Акт №' . $this->orderID;
 		$this->pdf->SetTitle($title);
-		$this->pdf->SetHeaderData($this->siteLogo, 0, $title, $this->getInvoiceDate());
+		//$this->pdf->SetHeaderData($this->siteLogo, 0, $title, $this->getInvoiceDate());
 	}
 
 	function GetOrderItems()
 	{
-		$this->pdf->SetFillColor(51, 51, 51);
+		
+		$html = '<h1>Акт № '.$this->orderID.' от '.$this->getInvoiceDate().'</h1><br>';
+		$this->pdf->writeHTML($html, true, false, true, false, '');
 
-		$this->pdf->SetDrawColor(85, 85, 85);
-		$this->pdf->SetLineWidth(0.3);
+		$this->pdf->SetFillColor(224, 235, 255);
 		$this->pdf->SetFont('dejavusans', 'B');
 
 		$coloumns = array(
@@ -353,13 +362,47 @@ class pdfit
 
 		$this->pdf->Ln();
 		$this->pdf->SetFont('dejavusans', 'U',8);
-		$this->pdf->Write(0, 'Товаров на ' . $this->order->getBasket()->getPrice(), '', 0, 'R', true,
-			0, false, false, 0);
+			
+		$html = "Итого: ".$this->order->getBasket()->getPrice()." руб.";
+		$this->pdf->writeHTML($html, true, false, true, false, '');
+		
+		$html = "Без налога (НДС)";
+		$this->pdf->writeHTML($html, true, false, true, false, '');
+	
+		$html = "Всего: ".$this->order->getBasket()->getPrice()." руб.";
+		$this->pdf->writeHTML($html, true, false, true, false, '');
+		
+		$html = '<br><p>Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг не имеет.</p><br>';
+		$this->pdf->writeHTML($html, true, false, true, false, '');
+		
+		if (strlen($this->arUserData['LAST_NAME']) > 0)
+		{
+			$resline2 = $this->arUserData['LAST_NAME'];
+		}
+		if (strlen($this->arUserData['NAME']) > 0)
+		{
+			$resline3 = $this->arUserData['NAME'];
+		}
+		if (strlen($this->arUserData['SECOND_NAME']) > 0)
+		{
+			$resline4 = $this->arUserData['SECOND_NAME'];
+		}
+			
 
+		$html = '<table border="0">
+		<tr>
+		<td>
+			<b>ИСПОЛНИТЕЛЬ</b><br>ИП Чернова Наталья Викторовна<br>
+			<br>Чернова Н. В. <img src="/akt/pp.png" width="70">
+		</td>
+		<td><b>ЗАКАЗЧИК</b><br>'.$resline2.' '.$resline3.' '.$resline4.'</td>
+		</tr>
+		</table>';
+		$this->pdf->writeHTML($html, true, false, true, false, '');
 	}
 }
-//$orderID = $_POST['ZAKAZ_ID'];
-$orderID = 350;
+$orderID = $_POST['ZAKAZ_ID'];
+//$orderID = 355;
 if($orderID >0){
 	$pdf = new pdfit($orderID, $_SERVER['DOCUMENT_ROOT'] . '/upload/sitelogo.jpg');
 	$pdf->process();

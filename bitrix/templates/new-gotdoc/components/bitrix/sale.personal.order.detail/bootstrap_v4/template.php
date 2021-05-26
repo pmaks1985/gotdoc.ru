@@ -463,8 +463,21 @@ else
 																	$link = "/personal/cart/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
 																	<br/>																	
 																	<a href="<?=$link?>">Скачать счет на оплату</a>
-																	<br/>
+																	
+
+																	<?}
+																	
+																}
+															}
+															?>
+														</div>
+														<?
+													}
+													?>
+													<br/>
+																	<?if($payment['PAID']  ===  "Y"){?>
 																	<a id="btnR">Скачать акт</a>
+																	<?}?>
 																	
 <script>
 	$("#btnR").on('click', function(e) {
@@ -485,16 +498,6 @@ else
 
 		});
 </script>
-
-																	<?}
-																	
-																}
-															}
-															?>
-														</div>
-														<?
-													}
-													?>
 													<div class="sale-order-detail-payment-inner-row-template col-12">
 														<a href="" onclick="return false" class="sale-order-list-cancel-payment">
 															<i class="fa fa-long-arrow-left"></i> <?=Loc::getMessage('SPOD_CANCEL_PAYMENT')?>
@@ -1031,11 +1034,18 @@ $response3 = json_decode($response3, true);
 </script>
 
 
-<?//if($response3['result']){?>
-<a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
-<div style="display:flex;">
-<a class="btn btn-success" style="margin:5px;"  id="post_to_url4">Список документов</a>
 <?if($response3['result']){?>
+<a class="btn btn-secondary" style="margin:5px;">Анкета заполнена</a>
+<?} else {?>
+<a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
+<?} ?>
+<div style="display:flex;">
+<?if($response3['result']){?>
+<a class="btn btn-success" style="margin:5px;"  id="post_to_url4">Список документов</a>
+<?} else {?>
+<a class="btn btn-secondary" style="margin:5px;">Список документов</a>
+<?} ?>
+<?if($response3['result'] && $payment['PAID'] === 'Y'){?>
 <a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
 <?} else {?>
 <a class="btn btn-secondary" style="margin:5px;">Получить документы</a>
