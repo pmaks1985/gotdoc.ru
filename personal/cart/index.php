@@ -3,9 +3,9 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Моя корзина");
 ?><div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket", 
-	"defaultBasket", 
-	array(
+	"bitrix:sale.basket.basket",
+	"",
+	Array(
 		"ACTION_VARIABLE" => "basketAction",
 		"ADDITIONAL_PICT_PROP_17" => "-",
 		"ADDITIONAL_PICT_PROP_23" => "-",
@@ -16,23 +16,9 @@ $APPLICATION->SetTitle("Моя корзина");
 		"ADDITIONAL_PICT_PROP_35" => "-",
 		"AUTO_CALCULATION" => "Y",
 		"BASKET_IMAGES_SCALING" => "adaptive",
-		"COLUMNS_LIST" => array(
-			0 => "NAME",
-			1 => "DISCOUNT",
-			2 => "WEIGHT",
-			3 => "DELETE",
-			4 => "DELAY",
-			5 => "TYPE",
-			6 => "PRICE",
-			7 => "QUANTITY",
-		),
-		"COLUMNS_LIST_EXT" => array(
-			0 => "PREVIEW_PICTURE",
-			1 => "DELETE",
-			2 => "PROPERTY_KFPO",
-		),
-		"COLUMNS_LIST_MOBILE" => array(
-		),
+		"COLUMNS_LIST" => array(0=>"NAME",1=>"DISCOUNT",2=>"WEIGHT",3=>"DELETE",4=>"DELAY",5=>"TYPE",6=>"PRICE",7=>"QUANTITY",),
+		"COLUMNS_LIST_EXT" => array("PREVIEW_PICTURE","DELETE","PROPERTY_KFPO"),
+		"COLUMNS_LIST_MOBILE" => array(),
 		"COMPATIBLE_MODE" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
@@ -57,31 +43,24 @@ $APPLICATION->SetTitle("Моя корзина");
 		"GIFTS_SHOW_OLD_PRICE" => "N",
 		"GIFTS_TEXT_LABEL_GIFT" => "Подарок",
 		"HIDE_COUPON" => "Y",
-		"LABEL_PROP" => array(
-		),
-		"OFFERS_PROPS" => array(
-			0 => "KFPO",
-		),
+		"LABEL_PROP" => array(),
+		"OFFERS_PROPS" => array("KFPO"),
 		"PATH_TO_ORDER" => "/personal/cart/order/",
 		"PRICE_DISPLAY_MODE" => "Y",
 		"PRICE_VAT_SHOW_VALUE" => "N",
-		"PRODUCT_BLOCKS_ORDER" => "props,sku,columns",
+		"PRODUCT_BLOCKS_ORDER" => "sku,props,columns",
 		"QUANTITY_FLOAT" => "N",
 		"SET_TITLE" => "Y",
 		"SHOW_DISCOUNT_PERCENT" => "N",
 		"SHOW_FILTER" => "N",
 		"SHOW_RESTORE" => "N",
 		"TEMPLATE_THEME" => "red",
-		"TOTAL_BLOCK_DISPLAY" => array(
-			0 => "top",
-		),
+		"TOTAL_BLOCK_DISPLAY" => array("top"),
 		"USE_DYNAMIC_SCROLL" => "Y",
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
-		"USE_PRICE_ANIMATION" => "Y",
-		"COMPONENT_TEMPLATE" => "defaultBasket"
-	),
-	false
+		"USE_PRICE_ANIMATION" => "Y"
+	)
 );?>
 </div><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");?>

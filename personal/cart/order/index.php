@@ -52,7 +52,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"ADDITIONAL_PICT_PROP_32" => "-",
 		"BASKET_IMAGES_SCALING" => "adaptive",
 		"ALLOW_USER_PROFILES" => "N",
-		"TEMPLATE_THEME" => "blue",
+		"TEMPLATE_THEME" => "red",
 		"SHOW_ORDER_BUTTON" => "final_step",
 		"SHOW_TOTAL_ORDER_BUTTON" => "N",
 		"SHOW_PAY_SYSTEM_LIST_NAMES" => "Y",
@@ -76,6 +76,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 			0 => "1",
 		),
 		"PROPS_FADE_LIST_2" => array(
+			0 => "7",
 		),
 		"ADDITIONAL_PICT_PROP_26" => "-",
 		"ADDITIONAL_PICT_PROP_27" => "-",
