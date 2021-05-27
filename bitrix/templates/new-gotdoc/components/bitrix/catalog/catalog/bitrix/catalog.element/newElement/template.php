@@ -174,7 +174,8 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                     <div class="px-0 mx-0" id="<? echo $arItemIDs['PROP'] . $arProp['ID']; ?>_cont">
                                         <div class="">
                                             <div class="dropdown">
-                                                <a class="dropdown-toggle text-danger text-decoration-none" href="#" role="button"
+                                                <a class="dropdown-toggle text-danger text-decoration-none" href="#"
+                                                   role="button"
                                                    id="dropdownMenuLink"
                                                    data-toggle="dropdown" aria-haspopup="true"
                                                    aria-expanded="false">
@@ -270,7 +271,8 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
 
                     if ($showBuyBtn && $arOffer["CAN_BUY"]) {
                         ?>
-                        <a href="javascript:void(0);" class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o d-none"
+                        <a href="javascript:void(0);"
+                           class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o d-none"
                            id="<? echo $arItemIDs['BUY_LINK']; ?>"><? echo $buyBtnMessage; ?></a>
                         <?
 
@@ -293,6 +295,29 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                            href="<?= CFile::GetPath($arResult["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) ?>">Скачать</a>
                     <? else: ?>
                         <!-- Покупка без предложений -->
+
+                        <?
+                        $dbBasketItems = CSaleBasket::GetList(
+                            array(
+                                "NAME" => "ASC",
+                                "ID" => "ASC"
+                            ),
+                            array(
+                                "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+                                "LID" => SITE_ID,
+                                "PRODUCT_ID" => $arResult['ID'], //ID текущего товара
+                                "ORDER_ID" => "NULL",
+                                "DELAY" => "N" //Исключая отложенные
+                            ),
+                            false,
+                            false,
+                            array("PRODUCT_ID")
+                        );
+                        while ($arItemsBasket = $dbBasketItems->Fetch()) {
+                            $itInBasket = $arItemsBasket['PRODUCT_ID'];
+                        }
+                        ?>
+
                         <? if ($arResult["CAN_BUY"]): ?>
                             <form action="<?= POST_FORM_ACTION_URI ?>" method="post" enctype="multipart/form-data"
                                   class="add_form">
@@ -303,8 +328,14 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                                 <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "BUY" ?>"
                                        value="<? echo GetMessage("CATALOG_BUY") ?>" style="display: none;">
                                 <input type="submit" name="<? echo $arParams["ACTION_VARIABLE"] . "ADD2BASKET" ?>"
-                                       value="Заказать"
-                                       class="btn text-decoration-none goods_buy-button">
+                                       class="btn text-decoration-none goods_buy-button"
+                                    <? if (isset($itInBasket)) : ?>
+                                        value="В корзине" disabled
+                                    <? else: ?>
+                                        value="Заказать"
+                                    <? endif; ?>
+                                       onclick="if (this.value === 'Заказать') {this.value = 'В корзине';}"/>
+
                             </form>
                         <? elseif ((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])): ?>
                             <?= GetMessage("CATALOG_NOT_AVAILABLE") ?>
