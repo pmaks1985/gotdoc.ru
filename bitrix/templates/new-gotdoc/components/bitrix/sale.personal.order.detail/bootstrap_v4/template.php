@@ -890,13 +890,14 @@ $query = "SELECT `PRODUCT_ID`, `XML_ID`, `privateUUID`, `FUSER_ID`, `ORDER_ID` F
 $result = $connection->query($query);
 while($ar=$result->fetch())
 {
-if($ar['privateUUID']>0){
-	$response12 = $ar['privateUUID'];
+if($ar['privateUUID']){
+	$response12 = $ar['privateUUID'];	
 	//echo 'привытный ключ определен '.$response12;
 } else {
 	//$connection->queryExecute("UPDATE `b_sale_basket` SET  privateUUID='".$response11."' WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."' ");
 }
 }
+
 ?>
 <?
 $arSelect = Array("ID", "IBLOCK_ID", "NAME","PROPERTY_IDENTIFIER");
@@ -928,10 +929,6 @@ if($ob = $res->GetNextElement()){
 					if(data.link){
 						window.location.href= data.link;
 					}
-					//if(data.uuid){
-					//	location.reload(); 
-					//}
-					//alert(data.uuid);
 				},
 			});
 		});
@@ -958,7 +955,7 @@ $url3 = "https://service.gotdoc.ru/api/?class=Market&action=isQuestionnaireCompl
 $data3 = json_encode(array("privateUUID" => $response12));
 $response3 = $httpClient3->post($url3, $data3);
 $response3 = json_decode($response3, true);
-print_r($response3);
+//print_r($response12);
 ?>
 
 
