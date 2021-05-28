@@ -738,6 +738,7 @@ b {
 
 .card-interest_price {
     padding: 20px 0;
+    min-height: 4.5rem;
 }
 
 .card-interest_button {
