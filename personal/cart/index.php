@@ -1,7 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Моя корзина");
-?><div class="my-4">
+?><h1>Корзина</h1>
+<div class="my-4">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket",
 	"",
@@ -16,6 +17,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"ADDITIONAL_PICT_PROP_35" => "-",
 		"AUTO_CALCULATION" => "Y",
 		"BASKET_IMAGES_SCALING" => "adaptive",
+		"BRAND_PROPERTY" => "PROPERTY_DOCUMENT_TYPE",
 		"COLUMNS_LIST" => array(0=>"NAME",1=>"DISCOUNT",2=>"WEIGHT",3=>"DELETE",4=>"DELAY",5=>"TYPE",6=>"PRICE",7=>"QUANTITY",),
 		"COLUMNS_LIST_EXT" => array("PREVIEW_PICTURE","DELETE","PROPERTY_KFPO"),
 		"COLUMNS_LIST_MOBILE" => array(),
@@ -23,6 +25,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"CORRECT_RATIO" => "N",
+		"DATA_LAYER_NAME" => "dataLayer",
 		"DEFERRED_REFRESH" => "N",
 		"DISCOUNT_PERCENT_POSITION" => "bottom-right",
 		"DISPLAY_MODE" => "compact",
@@ -57,7 +60,7 @@ $APPLICATION->SetTitle("Моя корзина");
 		"TEMPLATE_THEME" => "red",
 		"TOTAL_BLOCK_DISPLAY" => array("top"),
 		"USE_DYNAMIC_SCROLL" => "Y",
-		"USE_ENHANCED_ECOMMERCE" => "N",
+		"USE_ENHANCED_ECOMMERCE" => "Y",
 		"USE_GIFTS" => "N",
 		"USE_PREPAYMENT" => "N",
 		"USE_PRICE_ANIMATION" => "Y"

@@ -191,7 +191,7 @@ body {
 }
 
 .backet {
-    background-color: #dc3545 !important;
+    background-color: #dc3545;
     border-radius: 5px;
     padding: 10px 12px;
 }
@@ -752,5 +752,35 @@ b {
 .those-involved-goods {
     margin-top: 70px;
 }
+
+/*Backet*/
+
+.basket-item-block-amount {
+	display: none;
+}
+
+.basket-item-property {
+	display: none !important;
+}
+
+.basket-btn-checkout {
+	font-family: MyriadPro-Bold_0;
+	font-size: 16px;
+	font-weight: 700;
+	color: #ffffff;
+	background-color: #dc3545 !important;
+	padding: 10px 12px;
+	border-radius: 5px;
+}
+
+.basket-btn-checkout:hover {
+	background-color: #EE6673 !important;
+	border-color: #EE6673 !important;
+}
+
+.bx-soa-pp-desc-container {
+	display: none;
+}
+
 
 /*# sourceMappingURL=template_styles.css.map */

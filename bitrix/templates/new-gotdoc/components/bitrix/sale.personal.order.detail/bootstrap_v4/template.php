@@ -460,9 +460,9 @@ else
 																	<button class="btn btn-primary btn-sm active-button"><?= Loc::getMessage('SPOD_ORDER_PAY') ?></button>
 																	<? 
 																	if($payment['PAY_SYSTEM_ID'] == 3){
-																	$link = "/personal/cart/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
+																	$link = "/personal/personal/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
 																	<br/>																	
-																	<a href="<?=$link?>">Скачать счет на оплату</a>
+																	<a class="btn btn-primary" id="btnL">Скачать счет на оплату</a>
 																	
 
 																	<?}
@@ -476,7 +476,7 @@ else
 													?>
 													<br/>
 																	<?if($payment['PAID']  ===  "Y"){?>
-																	<a id="btnR">Скачать акт</a>
+																	<a class="btn btn-primary" id="btnR">Скачать акт</a>
 																	<?}?>
 																	
 <script>
@@ -488,7 +488,36 @@ else
 			data: {ZAKAZ_ID: <?=$arResult['ID']?>},
             success: function(result) {
 				console.log(result);
-				 window.open('/upload/invoices/' + <?=$arResult['ID']?> + '.pdf','_blank'); //Открываем в новом окне файл, созданный TCPDF
+				//window.open('/upload/invoices/' + <?=$arResult['ID']?> + '.pdf','_blank'); //Открываем в новом окне файл, созданный TCPDF
+				var link = document.createElement('a');
+				link.setAttribute('href', '/upload/invoices/' + <?=$arResult['ID']?> + '.pdf');
+				link.setAttribute('download', <?=$arResult['ID']?> + '.pdf');
+				link.click();
+				return false;
+            },
+            error: function(result) {
+				console.log(result);
+            }
+			});
+
+
+		});
+</script>
+<script>
+	$("#btnL").on('click', function(e) {
+		event.preventDefault();
+        $.ajax({
+			url: '/akt/index2.php',
+            type: 'POST',
+			data: {ZAKAZ_ID: <?=$arResult['ID']?>},
+            success: function(result) {
+				console.log(result);
+				//window.open('/upload/scet/' + <?=$arResult['ID']?> + '.pdf','_blank'); //Открываем в новом окне файл, созданный TCPDF
+				var link = document.createElement('a');
+				link.setAttribute('href', '/upload/scet/' + <?=$arResult['ID']?> + '.pdf');
+				link.setAttribute('download', <?=$arResult['ID']?> + '.pdf');
+				link.click();
+				return false;
             },
             error: function(result) {
 				console.log(result);
@@ -1182,5 +1211,10 @@ a.alertm_close {    color: red;    text-decoration: none;    position: absolute;
 	</script>
 <?
 }
+use Bitrix\Sale;
+$order = Sale\Order::load(430);
+$propertyCollection = $order->getPropertyCollection();
+$somePropValue = $propertyCollection->getItemByOrderPropertyId($orderPropertyId);
+print_r($somePropValue);
 ?>
 

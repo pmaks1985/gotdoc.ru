@@ -11,30 +11,71 @@
 	
 class MdfPDF extends \TCPDF
 {
-	
-	
+
+function num2str($num) {
+	$nul='ноль';
+	$ten=array(
+		array('','один','два','три','четыре','пять','шесть','семь', 'восемь','девять'),
+		array('','одна','две','три','четыре','пять','шесть','семь', 'восемь','девять'),
+	);
+	$a20=array('десять','одиннадцать','двенадцать','тринадцать','четырнадцать' ,'пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать');
+	$tens=array(2=>'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят' ,'восемьдесят','девяносто');
+	$hundred=array('','сто','двести','триста','четыреста','пятьсот','шестьсот', 'семьсот','восемьсот','девятьсот');
+	$unit=array( // Units
+		array('копейка' ,'копейки' ,'копеек',	 1),
+		array('рубль'   ,'рубля'   ,'рублей'    ,0),
+		array('тысяча'  ,'тысячи'  ,'тысяч'     ,1),
+		array('миллион' ,'миллиона','миллионов' ,0),
+		array('миллиард','милиарда','миллиардов',0),
+	);
+	//
+	list($rub,$kop) = explode('.',sprintf("%015.2f", floatval($num)));
+	$out = array();
+	if (intval($rub)>0) {
+		foreach(str_split($rub,3) as $uk=>$v) { // by 3 symbols
+			if (!intval($v)) continue;
+			$uk = sizeof($unit)-$uk-1; // unit key
+			$gender = $unit[$uk][3];
+			list($i1,$i2,$i3) = array_map('intval',str_split($v,1));
+			// mega-logic
+			$out[] = $hundred[$i1]; # 1xx-9xx
+			if ($i2>1) $out[]= $tens[$i2].' '.$ten[$gender][$i3]; # 20-99
+			else $out[]= $i2>0 ? $a20[$i3] : $ten[$gender][$i3]; # 10-19 | 1-9
+			// units without rub & kop
+			if ($uk>1) $out[]= morph($v,$unit[$uk][0],$unit[$uk][1],$unit[$uk][2]);
+		} //foreach
+	}
+	else $out[] = $nul;
+	$out[] = morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+	$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
+	return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
+}	
+/**
+ * Склоняем словоформу
+ * @ author runcore
+ */
+function morph($n, $f1, $f2, $f5) {
+	$n = abs(intval($n)) % 100;
+	if ($n>10 && $n<20) return $f5;
+	$n = $n % 10;
+	if ($n>1 && $n<5) return $f2;
+	if ($n==1) return $f1;
+	return $f5;
+}	
 	//Page header
 	public function Header()
 	{
 		// Logo
 		$headerdata = $this->getHeaderData();
 		
-		
-		//$this->Image($headerdata['logo'], 20, 10, $headerdata['logo_width'], '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
 		$this->SetFont('dejavusans', '', 8);
 		// Title
-		
-		//$propertyCollection = $this->order->getPropertyCollection();
-		//$receiver = $propertyCollection->getPayerName()->getValue();
-		
+				
 		$html = "<br /><br /><br />"; // добавим линию, отделающую колонтитул от текста
 		$this->writeHTML($html, true, false, true, false, '');
 		$this->SetTextColor(0, 0, 0); // цвет шрифта
-		//$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div>';
-		//$this->writeHTML($html, true, false, true, false, '');
-		//$html = '<div><b>Заказчик</b>:' .$this->arUserData['WORK_COMPANY']. '</div>';
-		//$this->writeHTML($html, true, false, true, false, '');
+
 		
 
 	}
@@ -69,7 +110,7 @@ class pdfit
 	{
 		\Bitrix\Main\Loader::includeModule('sale');
 		$this->orderID = $_POST['ZAKAZ_ID'] ; // идентификатор заказа для обработки
-		//$this->orderID = 355 ; // идентификатор заказа для обработки
+		//$this->orderID = 425 ; // идентификатор заказа для обработки
 		$this->siteLogo = $siteLogo; // пусть к файлу с логотипом сайта
 	}
 
@@ -84,7 +125,7 @@ class pdfit
 				// определяем файл, в котором будем хранить сгенерированные накладные, если нужно
 				// к стати, при хранении файлов, стоит также написать обработчик, который эти файлы будет удалять 
 				// при удалении заказов
-				$resultfile = $_SERVER['DOCUMENT_ROOT'] .'/upload/invoices/' . $this->orderID . '.pdf';
+				$resultfile = $_SERVER['DOCUMENT_ROOT'] .'/upload/scet/' . $this->orderID . '.pdf';
 
 				if(file_exists($resultfile)){
 					// если файл уже был создан - просто выводим его
@@ -180,14 +221,16 @@ class pdfit
 		//$receiver = $propertyCollection->getPayerName()->getValue();
 		//if (!$receiver && !empty($this->arUserData))
 		//{
-			$user_id = (int)$this->order->getUserId();
-			$resline = [];
+		$user_id = (int)$this->order->getUserId();
+		$resline = [];
 
-			$db_sales = CSaleOrderUserProps::GetList(array("USER_ID" => $user_id));
+		$db_sales = CSaleOrderUserProps::GetList(
+			array("USER_ID" => $user_id)
+		);
 			if($arSaleProps = $db_sales->Fetch()){
 				// Получаем значения профиля
-				$db_propVals = CSaleOrderUserPropsValue::GetList(($b="SORT"), ($o="ASC"), Array("USER_PROPS_ID"=>$arSaleProps['ID']));
-			}
+					$db_propVals = CSaleOrderUserPropsValue::GetList(($b="SORT"), ($o="ASC"), Array("USER_PROPS_ID"=>$arSaleProps['ID']));
+	}
 
 			if (is_object($db_propVals)) 
 			{
@@ -200,12 +243,12 @@ class pdfit
     			}
  			 }
 			 
-			 if (strlen($arPropValsName) > 0)
+			 
+
+			if (strlen($arPropValsName) > 0)
 			{
 				$resline[] = $arPropValsName;
 			}
-
-			 
 
 			if (empty($resline))
 			{
@@ -298,33 +341,45 @@ class pdfit
 			0, false, false, 0);
 
 		$this->pdf->SetFont('dejavusans', '', 8);
-		$html = '<div><b>Поставщик</b>:ИП Чернова Наталья Викторовна, Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</div><br/>';
+		$html = '
+		<style>
+		table.acc {
+			border-collapse: collapse; /* Убираем двойные границы между ячейками */ 
+		}
+		table.acc , table.acc td ,table.acc th {
+			padding: 5px; /* Поля вокруг текста */
+			border: 1px solid #252525; /* Рамка вокруг ячеек */
+		}
+		</style>
+		<table class="header">
+		<tbody><tr><td><b>ИП Чернова Наталья Викторовна</b><br><b>Ивановская область, Шуйский р-н, с. Горицы, ул. Октябрьская, д. 16-а</b><br></td></tr></tbody></table>
+		<table class="acc" width="100%"><colgroup><col width="29%"><col width="29%"><col width="10%"><col width="32%">
+		</colgroup>
+		<tbody><tr>
+			<td>ИНН 890104464334</td>
+			<td>&nbsp;</td>
+			<td rowspan="2"><br><br>Сч. №</td>
+			<td rowspan="2"><br><br>40802810370010259979</td>
+		</tr>
+		<tr>
+			<td colspan="2">Получатель<br>ИП Чернова Наталья Викторовна			</td>
+		</tr>
+		<tr>
+			<td colspan="2">Банк получателя<br>МОСКОВСКИЙ ФИЛИАЛ АО КБ "МОДУЛЬБАНК"</td>
+			<td>БИК<br>Сч. №<br></td>
+			<td>044525092<br>30101810645250000092			</td>
+		</tr>
+	</tbody></table>
+<br>
+<br>';
 		$this->pdf->writeHTML($html, true, false, true, false, '');
 		
+
 		if ($receiver = $this->getInvoiceReceiver())
 		{
-			$html = '<div><b>Заказчик</b>: ' .$receiver. '</div><br/>';
+			$html = '<div><b>Плательщик</b>: ' .$receiver. '</div><br/>';
 			$this->pdf->writeHTML($html, true, false, true, false, '');	
 		}
-
-		/*$receiverContacts = $this->getInvoceContacts();
-		if ($receiverContacts['phone'] && strlen($receiverContacts['phone']) > 0)
-		{
-			$this->pdf->Write(0, 'Тел: ' . $receiverContacts['phone'], '', 0, 'L', true,
-				0, false, false, 0);
-		}
-
-		if ($receiverContacts['email'] && strlen($receiverContacts['email']) > 0)
-		{
-			$this->pdf->Write(0, 'E-mail: ' . $receiverContacts['email'], '', 0, 'L', true,
-				0, false, false, 0);
-		}
-
-		if ($receiverContacts['address'] && strlen($receiverContacts['address']) > 0)
-		{
-			$this->pdf->Write(0, 'Адрес: ' . $receiverContacts['address'], '', 0, 'L', true,
-				0, false, false, 0);
-		}*/
 
 		$this->pdf->Write(0, "", '', 0, 'C', true,
 			0, false, false, 0);
@@ -332,18 +387,27 @@ class pdfit
 	
 	function setTitleByOrderID()
 	{
-		$title = 'Акт №' . $this->orderID;
+		$title = 'Счет №' . $this->orderID;
 		$this->pdf->SetTitle($title);
 		//$this->pdf->SetHeaderData($this->siteLogo, 0, $title, $this->getInvoiceDate());
 	}
+	
 
 	function GetOrderItems()
 	{
-		
-		$html = '<h1>Акт № '.$this->orderID.' от '.$this->getInvoiceDate().'</h1><br>';
+		$html = '<table width="100%" >
+	<tbody><tr>
+		<td style="font-size: 2em; font-weight: bold; text-align: center">
+			<nobr>
+				СЧЕТ № '.$this->orderID.' '.$this->getInvoiceDate().'</nobr>
+		</td>
+	</tr>
+</tbody></table>';
 		$this->pdf->writeHTML($html, true, false, true, false, '');
 
-	$html = '
+		
+		
+$html = '
 <style>
 		table.acc {
 			border-collapse: collapse; /* Убираем двойные границы между ячейками */ 
@@ -363,54 +427,43 @@ foreach ($this->order->getBasket()->getBasketItems() as $basketItem)
 
 $html = $html."</table>";
 $this->pdf->writeHTML($html, true, false, true, false, '');
+
+
 		//$this->pdf->SetFont('dejavusans', 'U',8);
-		
+			
 		$html = "Без налога (НДС)";
 		$this->pdf->writeHTML($html, true, false, true, false, '');
-		
-		$html = "Итого: ".$this->order->getBasket()->getPrice()." руб.";
+	
+		$html = "Итого: ".$this->order->getBasket()->getPrice()." руб.<br><br>";
 		$this->pdf->writeHTML($html, true, false, true, false, '');
 		
-
-	
 		$Number2Word_Rus = num2str($basketItem->getFinalPrice());
 		
 		$html = "Всего наименований, ".$iii.", на сумму ".$basketItem->getFinalPrice();
 		$this->pdf->writeHTML($html, true, false, true, false, '');	
 		$html =  "<b>".$Number2Word_Rus."</b>";
 		$this->pdf->writeHTML($html, true, false, true, false, '');	
-		
-		$html = '<br><p>Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг не имеет.</p><br>';
-		$this->pdf->writeHTML($html, true, false, true, false, '');
-		
-		if (strlen($this->arUserData['LAST_NAME']) > 0)
-		{
-			$resline2 = $this->arUserData['LAST_NAME'];
-		}
-		if (strlen($this->arUserData['NAME']) > 0)
-		{
-			$resline3 = $this->arUserData['NAME'];
-		}
-		if (strlen($this->arUserData['SECOND_NAME']) > 0)
-		{
-			$resline4 = $this->arUserData['SECOND_NAME'];
-		}
-			
 
-		$html = '<table border="0">
+
+		$html = '<br><br><table border="0">
 		<tr>
 		<td>
-			<b>ИСПОЛНИТЕЛЬ</b><br>ИП Чернова Наталья Викторовна<br>
-			<br>Чернова Н. В. <img src="/akt/pp.png" width="70">
+			<b>ИСПОЛНИТЕЛЬ</b><br>ИП Чернова Наталья Викторовна
 		</td>
-		<td><b>ЗАКАЗЧИК</b><br>'.$resline2.' '.$resline3.' '.$resline4.'</td>
+		<td>
+			<img src="/akt/pp.png" width="70">
+		</td>
+		<td>
+			Чернова Н. В.
+		</td>
+		
 		</tr>
 		</table>';
 		$this->pdf->writeHTML($html, true, false, true, false, '');
 	}
 }
 $orderID = $_POST['ZAKAZ_ID'];
-//$orderID = 355;
+//$orderID = 425;
 if($orderID >0){
 	$pdf = new pdfit($orderID, $_SERVER['DOCUMENT_ROOT'] . '/upload/sitelogo.jpg');
 	$pdf->process();
