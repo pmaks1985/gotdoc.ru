@@ -101,7 +101,7 @@ else
 						<?=$arResult["PRICE_FORMATED"]?>
 					</h2>
 
-					<div class="row mb-3">
+					<div class="row mb-3 order-3">
 						<div class="col p-0">
 							<h3 class="sale-order-detail-section-title"><?= Loc::getMessage('SPOD_LIST_ORDER_INFO') ?></h3>
 							<div class="row m-0">
@@ -279,7 +279,7 @@ else
 					}
 					?>
 
-					<div class="row mb-3">
+					<div class="row mb-3 order-3 " id="paid">
 						<div class="col p-0">
 							<h3 class="sale-order-detail-section-title"><?= Loc::getMessage('SPOD_ORDER_PAYMENT') ?></h3>
 
@@ -795,12 +795,26 @@ else
 					}
 					?>
 
-					<div class="row mb-3">
+					<div class="row mb-3 order-1">
 						<div class="col p-0">
-							<h3 class="sale-order-detail-section-title"><?= Loc::getMessage('SPOD_ORDER_BASKET')?></h3>
+							<h3 class="sale-order-detail-section-title">Как работать с сервисом</h3>
 
 							<div class="row mx-0">
 								<div class="col">
+								<div class="col1">
+								<ol>
+									<li><b>Заполните анкету объекта</b>
+									<br/>
+									Вам станет доступен просмотр преченя документов (при заказе комплекта документов), сформированных для ввашего заказа
+									</li>
+									<li>
+									<b><a href="#paid">Оплатите</a></b>
+									
+									</li>
+									<li>Скачайте заказ<br/>Доступно после поступления денежнх средств на счет</li>
+								</ol>
+								<div>По завершении каждого этапа вам на указанный email будет выслано письмо. В случае если письма не дошли, пожалуйста, проверьте папку СПАМ	<br/>	<br/>	<br/></div>
+								</div>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
@@ -817,7 +831,7 @@ else
 												}
 												?>
 												<th scope="col"><?= Loc::getMessage('SPOD_QUANTITY')?></th>
-												<th scope="col">Заполните анкету</th>
+												<th scope="col">Готовность заказа</th>
 												<th class="text-right"><?= Loc::getMessage('SPOD_ORDER_PRICE')?></th>
 											</tr>
 											</thead>
@@ -891,29 +905,11 @@ else
 														?>
 													</td>
 													<td>	
-<?$user = $USER->GetID();
-//print_r($basketItem['PRODUCT_ID']);
-?>
-
+												
 
 <?
 
-
-/*Запрос 1.
-service.gotdoc.ru/api/?class=Market&action=getPrivateId
-Параметры: 
-setId – публичный uuid комплекта
-customerId – uuid покупателя магазина на битриксе
-orderId – номер заказа в магазине битрикса
-Ответ:
-{
-    “uuid”: “приватный_ключ”
-}*/
-
-
-
-
-
+$user = $USER->GetID();
 $connection = Bitrix\Main\Application::getConnection();
 $query = "SELECT `PRODUCT_ID`, `XML_ID`, `privateUUID`, `FUSER_ID`, `ORDER_ID` FROM `b_sale_basket` WHERE `ORDER_ID` = '".$arResult['ID']."' AND `PRODUCT_ID` = '".$basketItem['PRODUCT_ID']."'";
 $result = $connection->query($query);
@@ -937,10 +933,6 @@ if($ob = $res->GetNextElement()){
 		$identificator = $arFields['PROPERTY_IDENTIFIER_VALUE'];
 		
 	}
-	//$identificator = "12345";
-
-
-
 ?>
 
 <script>
@@ -963,17 +955,6 @@ if($ob = $res->GetNextElement()){
 		});
 		});	
 </script>
-<?
-
-/*Запрос 2.*/
-/*$httpClient2 = new HttpClient(array($options = null));
-$httpClient2->setHeader('Content-Type', 'application/json', true);
-$url2 = "https://service.gotdoc.ru/api/?class=Market&action=getSingleUseSetLink";
-$data2 = json_encode(array("privateUUID" => $response12));
-$response2 = $httpClient2->post($url2, $data2);
-$response2 = json_decode($response2, true);
-*/?>
-
 
 <?/*Запрос 3.*/?>
 
@@ -1023,9 +1004,11 @@ $response3 = json_decode($response3, true);
 	jQuery(document).ready(function(){
 	  jQuery("#post_to_url5").click(function(){ 
 		var response1js = <?php echo CUtil::PHPToJSObject($response12);?>;
+		var response2js = <?php echo CUtil::PHPToJSObject($arResult['ID']);?>;
+		var response3js = <?php echo CUtil::PHPToJSObject($arResult["USER"]["EMAIL"]);?>;
 			$.ajax({
 				url: "/bitrix/templates/new-gotdoc/components/bitrix/sale.personal.order.detail/bootstrap_v4/ajax2.php",
-				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>},			
+				data: {"orderId": <?=$arResult['ID']?>, "product_id":  <?=$basketItem['PRODUCT_ID']?>, "email":  <?echo '"'; echo $arResult["USER"]["EMAIL"]; echo '"';?> },			
 				method: "POST", 
 				dataType: 'binary',
 				xhrFields: {
@@ -1040,11 +1023,12 @@ $response3 = json_decode($response3, true);
 					a.href = downloadUrl;
 					a.download = "file.zip";					
 					document.body.appendChild(a);
-					a.click();					
+					a.click();	
+					window.location.href = '/personal/thanks/?orderId='+response2js;	
+									
 				},
 				error: function(err){
 					console.log('ОШИБКА AJAX запроса');
-
 					const file = err.responseText;						
 					const blob = new Blob([file]);	
 					const downloadUrl = URL.createObjectURL(blob);
@@ -1052,7 +1036,8 @@ $response3 = json_decode($response3, true);
 					a.href = downloadUrl;
 					a.download = "file.zip";					
 					document.body.appendChild(a);
-					a.click();		
+					a.click();	
+					
 				}
 			})
 	  });
@@ -1062,22 +1047,34 @@ $response3 = json_decode($response3, true);
 
 <?
 if($response3['result']){?>
-<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Анкета уже заполнена</div>',''); return false;">Анкета заполнена</a>
+<div>
+	<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Анкета уже заполнена</div>',''); return false;">Анкета заполнена</a>
+</div>
 <?} else {?>
-<a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
+<div>
+	<a class="btn btn-primary"  style="margin:5px;" id="post_to_url1">Заполнить анкету</a>
+</div>
 <?} ?>
-<div style="display:flex;">
+
 <?if($response3['result']){?>
-<a class="btn btn-success" style="margin:5px;"  id="post_to_url4">Список документов</a>
+<div>
+	<a class="btn btn-success" style="margin:5px;"  id="post_to_url4">Список документов</a>
+</div>
 <?} else {?>
-<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Заполните анкету</div>',''); return false;">Список документов</a>
+<div>
+	<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Заполните анкету</div>',''); return false;">Список документов</a>
+</div>
 <?} ?>
 <?if($response3['result'] && $payment['PAID'] === 'Y'){?>
-<a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
-<?} else {?>
-<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Заполните анкету и оплатите</div>',''); return false;">Получить документы</a>
-<?} ?>
+<div>
+	<a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
 </div>
+<?} else {?>
+<div>
+	<a class="btn btn-secondary" style="margin:5px;" onclick="alert('<div class=\'alertm_text\'>Заполните анкету и оплатите</div>',''); return false;">Получить документы</a>
+</div>
+<?} ?>
+
 <?//} else {?>
 
 <?//} ?>
@@ -1129,7 +1126,7 @@ a.alertm_close {    color: red;    text-decoration: none;    position: absolute;
 					</div>
 
 
-					<div class="row sale-order-detail-total-payment">
+					<div class="row sale-order-detail-total-payment order-2">
 						<div class="col sale-order-detail-total-payment-container">
 							<div class="row">
 								<ul class="col-md-8 col sale-order-detail-total-payment-list-left">
@@ -1186,7 +1183,7 @@ a.alertm_close {    color: red;    text-decoration: none;    position: absolute;
 				if ($arParams['GUEST_MODE'] !== 'Y' && $arResult['LOCK_CHANGE_PAYSYSTEM'] !== 'Y')
 			{
 				?>
-				<div class="row mb-3">
+				<div class="row mb-3 order-3">
 					<div class="col">
 						<a href="<?= $arResult["URL_TO_LIST"] ?>">&larr; <?= Loc::getMessage('SPOD_RETURN_LIST_ORDERS')?></a>
 					</div>

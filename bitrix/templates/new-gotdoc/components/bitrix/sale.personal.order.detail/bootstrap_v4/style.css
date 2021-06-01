@@ -472,3 +472,9 @@ div.sale-order-detail-payment-options-methods-template {
 
 	.sale-order-detail-payment-options-shipment-button-element { text-align: center; }
 }
+
+.sale-order-detail-card {display: flex;
+flex-direction: column;}
+.sale-order-detail-card .order-1{order:1;}
+.sale-order-detail-card .order-2{order:2;}
+.sale-order-detail-card .order-3{order:3;}
