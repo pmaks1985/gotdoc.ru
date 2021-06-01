@@ -2357,11 +2357,13 @@
 })(window);
 
 $(document).ready(function () {
-    $(".kfp_o").click(function () { // задаем функцию при нажатиии на элемент <button>
-        $(".goods_buy-button_kfp_o").removeClass("d-none"); // вызываем событие click на элементе <div>
+    $(".kfp_o").click(function () {
+        $(".goods_buy-button_kfp_o").removeClass("d-none");
     });
 
     $('.goods_buy-button').click(function () {
+        $(this).html('В корзине');
+        $(this).addClass('disabled');
         setTimeout(load, 100);
     });
 

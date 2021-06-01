@@ -267,25 +267,58 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     $notAvailableMessage = ($arParams['MESS_NOT_AVAILABLE'] != '' ? $arParams['MESS_NOT_AVAILABLE'] : GetMessageJS('CT_BCE_CATALOG_NOT_AVAILABLE'));
                     $showBuyBtn = in_array('BUY', $arParams['ADD_TO_BASKET_ACTION']);
                     $showAddBtn = in_array('ADD', $arParams['ADD_TO_BASKET_ACTION']);
-                    print_r();
 
-                    if ($showBuyBtn && $arOffer["CAN_BUY"]) {
-                        ?>
-                        <a href="javascript:void(0);"
-                           class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o d-none"
-                           id="<? echo $arItemIDs['BUY_LINK']; ?>"><? echo $buyBtnMessage; ?></a>
-                        <?
+                    //Кнопка Заказать для торговых предложений
 
+                    //Получаем ID предложений в корзине пользователя
+                    $dbBasketItems = CSaleBasket::GetList(
+                        array(
+                            "NAME" => "ASC",
+                            "ID" => "ASC"
+                        ),
+                        array(
+                            "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+                            "LID" => SITE_ID,
+                            "ORDER_ID" => "NULL"
+                        ),
+                        false,
+                        false,
+                        array("PRODUCT_ID")
+                    );
+                    while ($arItems = $dbBasketItems->Fetch()) {
+                        $allBasketItems[] = $arItems['PRODUCT_ID'];
                     }
-                    if ($showAddBtn) {
-                        ?>
+
+                    //Создаем массив из ID предложений текущего товара
+                    foreach ($arResult["OFFERS"] as $arOffer) {
+                        $allItemOffersIds[] = $arOffer['ID'];
+                    }
+
+                    //Сравниваем массивы через array_intersect
+                    $IsSkusInBasket = array_intersect($allBasketItems, $allItemOffersIds);
+
+                    //Проверяем массив IsSkusInBasket- на пустоту ?>
+                    <? if ($showBuyBtn && $arOffer["CAN_BUY"]) : ?>
+                        <? if (empty($IsSkusInBasket)) : ?>
+                            <a href="javascript:void(0);"
+                               class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o d-none"
+                               id="<? echo $arItemIDs['BUY_LINK']; ?>">
+                                Заказать
+                            </a>
+                        <? else: ?>
+                            <a href="#"
+                               class="btn text-decoration-none goods_buy-button goods_buy-button_kfp_o disabled" id="" tabindex="-1">
+                                В корзине
+                            </a>
+                        <? endif; ?>
+                    <? endif; ?>
+
+
+                    <? if ($showAddBtn) : ?>
                         <a href="javascript:void(0);" class="btn text-decoration-none goods_buy-button"
                            id="<? echo $arItemIDs['ADD_BASKET_LINK']; ?>"><? echo $addToBasketBtnMessage; ?>
                         </a>
-                        <?
-                    }
-                    ?>
-
+                    <? endif; ?>
 
                 </div>
                 <div>
@@ -430,16 +463,17 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
                     <? foreach ($arResult["PROPERTIES"]["REVIEWS"]["VALUE"] as $analog): ?>
                     <? $res = CIBlockElement::GetByID($analog); ?>
                     <? if ($ar_res = $res->GetNext()) ?>
-                        <div class="question d-flex">
-                            <div class="review-img rounded-circle">
-                                <div class="review-img_url" style="background-image: url(<?= CFile::GetPath($ar_res["PREVIEW_PICTURE"]) ?>);"></div>
-                            </div>
-                            <div>
-                                <b class="question-title"><?=$ar_res["NAME"]?></b>
-                                <div class="question-text"><?=$ar_res["~PREVIEW_TEXT"]?></div>
-                            </div>
+                    <div class="question d-flex">
+                        <div class="review-img rounded-circle">
+                            <div class="review-img_url"
+                                 style="background-image: url(<?= CFile::GetPath($ar_res["PREVIEW_PICTURE"]) ?>);"></div>
                         </div>
-                <? endforeach; ?>
+                        <div>
+                            <b class="question-title"><?= $ar_res["NAME"] ?></b>
+                            <div class="question-text"><?= $ar_res["~PREVIEW_TEXT"] ?></div>
+                        </div>
+                    </div>
+                    <? endforeach; ?>
                 </div>
             </div>
         </div>
