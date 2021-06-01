@@ -16,16 +16,26 @@
                         <div class="text-center card-interest_text"><?= $arElement["NAME"] ?></div>
                         <div class="card-interest_price">
                             <? foreach ($arElement["PRICES"] as $code => $arPrice): ?>
-                                <? $val = substr($arPrice["PRINT_VALUE"], 0, -7); ?>
-                                <? if ($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) : ?>
+                                <? if ($arElement["PROPERTIES"]["FILE_FOR_FREE"]["VALUE"]) :  //если бесплатно?>
                                     <span class="price-new">Бесплатно</span>
-                                <? else: ?>
-                                    <span class="price-new"><?= $val ?> руб.</span>
+                                <? else: //цена без торговых предложений?>
+                                    <span class="price-new"><?= $arPrice["PRINT_VALUE"] ?></span>
                                 <? endif; ?>
                                 <? if ($arElement['PROPERTIES']['OLD_PRICE']['VALUE']): ?>
                                     <span class="price-old"><? echo $arElement['PROPERTIES']['OLD_PRICE']['VALUE']; ?> руб.</span>
                                 <? endif; ?>
                             <? endforeach; ?>
+                            <? if ($arElement['OFFERS']): //цена с торговыми предложениями?>
+                                <? foreach ($arElement['OFFERS'] as $offPrice): ?>
+                                    <span class="price-new"><?= $offPrice["PRICES"]["BASE"]["PRINT_VALUE"] ?></span>
+                                    <?
+                                    break;
+                                endforeach;
+                                ?>
+                                <? if ($arElement['PROPERTIES']['OLD_PRICE']['VALUE']): ?>
+                                    <span class="price-old"><? echo $arElement['PROPERTIES']['OLD_PRICE']['VALUE']; ?> руб.</span>
+                                <? endif; ?>
+                            <? endif; ?>
                         </div>
                         <div class="card-interest_button">
                             <a href="<?= $arElement["DETAIL_PAGE_URL"] ?>"
