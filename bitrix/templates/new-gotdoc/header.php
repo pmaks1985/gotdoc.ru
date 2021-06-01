@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <? $APPLICATION->ShowHead() ?>
 
-	<title>
+    <title>
         <? $APPLICATION->ShowTitle() ?>
     </title>
     <?
@@ -82,6 +82,8 @@
                     <div>
                         <? if ($USER->IsAuthorized()): ?>
                             <a href="/personal/" class="user-name text-decoration-none"><?= $USER->GetFullName(); ?></a>
+                            <a class="text-danger text-decoration-none" title="Выйти" href="?logout=yes"><i
+                                        class="bi bi-box-arrow-right pl-2"></i></a>
                         <? else: ?>
                             <a href="/personal/auth/"
                                class="btn-outline-danger select-region_button text-decoration-none">Войти</a>
@@ -126,57 +128,57 @@
                 </div>
                 <div>
                     <? $APPLICATION->IncludeComponent(
-	"bitrix:search.title", 
-	"catalog-search-title", 
-	array(
-		"CATEGORY_0" => array(
-			0 => "iblock_newgotdoc",
-		),
-		"CATEGORY_0_TITLE" => "",
-		"CATEGORY_0_iblock_newgotdoc" => array(
-			0 => "32",
-		),
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "catalog-search-title",
-		"CONTAINER_ID" => "title-search",
-		"CONVERT_CURRENCY" => "N",
-		"INPUT_ID" => "title-search-input",
-		"NUM_CATEGORIES" => "1",
-		"ORDER" => "date",
-		"PAGE" => "#SITE_DIR#search/",
-		"PREVIEW_HEIGHT" => "75",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PREVIEW_WIDTH" => "75",
-		"PRICE_CODE" => array(
-			0 => "BASE",
-		),
-		"PRICE_VAT_INCLUDE" => "N",
-		"SHOW_INPUT" => "Y",
-		"SHOW_OTHERS" => "N",
-		"SHOW_PREVIEW" => "Y",
-		"TEMPLATE_THEME" => "blue",
-		"TOP_COUNT" => "5",
-		"USE_LANGUAGE_GUESS" => "Y"
-	),
-	false
-); ?>
+                        "bitrix:search.title",
+                        "catalog-search-title",
+                        array(
+                            "CATEGORY_0" => array(
+                                0 => "iblock_newgotdoc",
+                            ),
+                            "CATEGORY_0_TITLE" => "",
+                            "CATEGORY_0_iblock_newgotdoc" => array(
+                                0 => "32",
+                            ),
+                            "CHECK_DATES" => "Y",
+                            "COMPONENT_TEMPLATE" => "catalog-search-title",
+                            "CONTAINER_ID" => "title-search",
+                            "CONVERT_CURRENCY" => "N",
+                            "INPUT_ID" => "title-search-input",
+                            "NUM_CATEGORIES" => "1",
+                            "ORDER" => "date",
+                            "PAGE" => "#SITE_DIR#search/",
+                            "PREVIEW_HEIGHT" => "75",
+                            "PREVIEW_TRUNCATE_LEN" => "",
+                            "PREVIEW_WIDTH" => "75",
+                            "PRICE_CODE" => array(
+                                0 => "BASE",
+                            ),
+                            "PRICE_VAT_INCLUDE" => "N",
+                            "SHOW_INPUT" => "Y",
+                            "SHOW_OTHERS" => "N",
+                            "SHOW_PREVIEW" => "Y",
+                            "TEMPLATE_THEME" => "blue",
+                            "TOP_COUNT" => "5",
+                            "USE_LANGUAGE_GUESS" => "Y"
+                        ),
+                        false
+                    ); ?>
 
                 </div>
             </div>
             <div id="basket-container">
                 <? $APPLICATION->IncludeComponent(
-	"bazarow:basket.small.bazarow", 
-	"ajax", 
-	array(
-		"COMPONENT_TEMPLATE" => "ajax",
-		"PATH_TO_BASKET" => "/personal/cart/",
-		"PATH_TO_ORDER" => "/personal/cart/",
-		"SHOW_DELAY" => "N",
-		"SHOW_NOTAVAIL" => "N",
-		"SHOW_SUBSCRIBE" => "N"
-	),
-	false
-); ?>
+                    "bazarow:basket.small.bazarow",
+                    "ajax",
+                    array(
+                        "COMPONENT_TEMPLATE" => "ajax",
+                        "PATH_TO_BASKET" => "/personal/cart/",
+                        "PATH_TO_ORDER" => "/personal/cart/",
+                        "SHOW_DELAY" => "N",
+                        "SHOW_NOTAVAIL" => "N",
+                        "SHOW_SUBSCRIBE" => "N"
+                    ),
+                    false
+                ); ?>
             </div>
         </div>
     </header>
