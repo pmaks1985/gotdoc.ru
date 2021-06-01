@@ -217,37 +217,21 @@ class pdfit
 
 	function getInvoiceReceiver()
 	{
-		//$propertyCollection = $this->order->getPropertyCollection();
+		$propertyCollection = $this->order->getPropertyCollection();
 		//$receiver = $propertyCollection->getPayerName()->getValue();
+		$somePropValue = $propertyCollection->getItemByOrderPropertyId(21);
+		$receiver = $somePropValue->getValue();
+
 		//if (!$receiver && !empty($this->arUserData))
+		//if (!$receiver)
 		//{
-		$user_id = (int)$this->order->getUserId();
-		$resline = [];
+		
+			$resline = [];
 
-		$db_sales = CSaleOrderUserProps::GetList(
-			array("USER_ID" => $user_id)
-		);
-			if($arSaleProps = $db_sales->Fetch()){
-				// Получаем значения профиля
-					$db_propVals = CSaleOrderUserPropsValue::GetList(($b="SORT"), ($o="ASC"), Array("USER_PROPS_ID"=>$arSaleProps['ID']));
-	}
-
-			if (is_object($db_propVals)) 
+		
+			if (strlen($receiver ) > 0)
 			{
-				while ($arPropVals = $db_propVals->Fetch())
-				{
-				if ($arPropVals['CODE']=='NAME')
-      				{
-						$arPropValsName = $arPropVals['VALUE'];
-					}
-    			}
- 			 }
-			 
-			 
-
-			if (strlen($arPropValsName) > 0)
-			{
-				$resline[] = $arPropValsName;
+				$resline[] = $receiver;
 			}
 
 			if (empty($resline))

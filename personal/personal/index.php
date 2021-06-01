@@ -40,6 +40,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 		"PATH_TO_PAYMENT" => "/personal/personal/order/payment/",
 		"PER_PAGE" => "20",
 		"PROP_1" => array(
+			0 => "3",
 		),
 		"PROP_2" => array(
 		),
@@ -75,6 +76,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 		"PROFILES_PER_PAGE" => "20",
 		"MAIN_CHAIN_NAME" => "Мой кабинет",
 		"PROP_4" => array(
+			0 => "22",
 		),
 		"SEF_URL_TEMPLATES" => array(
 			"index" => "index.php",

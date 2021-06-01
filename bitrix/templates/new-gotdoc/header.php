@@ -36,7 +36,7 @@
         </div>
         <div class="d-flex justify-content-between">
             <div>
-                <nav class="navbar navbar-expand-lg p-0">
+                <nav class="navbar navbar-expand-lg p-0 d-none">
                     <div class="collapse navbar-collapse px-0" id="navbarNav">
                         <? $APPLICATION->IncludeComponent(
                             "bitrix:menu",

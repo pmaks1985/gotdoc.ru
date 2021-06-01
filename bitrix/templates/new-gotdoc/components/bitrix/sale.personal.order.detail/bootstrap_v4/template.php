@@ -1212,9 +1212,11 @@ a.alertm_close {    color: red;    text-decoration: none;    position: absolute;
 <?
 }
 use Bitrix\Sale;
-$order = Sale\Order::load(430);
+$order = Sale\Order::load(413);
 $propertyCollection = $order->getPropertyCollection();
-$somePropValue = $propertyCollection->getItemByOrderPropertyId($orderPropertyId);
-print_r($somePropValue);
+$somePropValue = $propertyCollection->getItemByOrderPropertyId(21);
+$receiver = $somePropValue->getValue();
+//print_r($receiver);
+
 ?>
 
