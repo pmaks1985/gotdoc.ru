@@ -1,9 +1,6 @@
 <?
-$sSectionName = "Персональный раздел";
+$sSectionName = "Подписка";
 $arDirProperties = array(
-   "description" => "Персональный раздел",
-   "keywords" => "Персональный раздел",
-   "title" => "Персональный раздел",
-   "keywords_inner" => "Персональный раздел"
+
 );
 ?>

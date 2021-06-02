@@ -32,8 +32,10 @@
 
 <div class="container">
     <header>
-        <div class="align-items-center banner">
-        </div>
+        <a href="/catalog/?arrFilter_104_289485416=Y&set_filter=Показать">
+            <div class="align-items-center banner">
+            </div>
+        </a>
         <div class="d-flex justify-content-between">
             <div>
                 <nav class="navbar navbar-expand-lg p-0 d-none">

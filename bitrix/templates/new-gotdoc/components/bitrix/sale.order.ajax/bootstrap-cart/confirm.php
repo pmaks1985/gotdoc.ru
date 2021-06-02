@@ -36,7 +36,7 @@ if ($arParams["SET_TITLE"] == "Y") {
             <div class="col-12">
                 <?
                 $orderAccountNumberA = urlencode(urlencode($arResult["ORDER"]["ACCOUNT_NUMBER"]));
-                $orderA = "/personal/personal/orders/" . $orderAccountNumberA; ?>
+                $orderA = "/personal/orders/" . $orderAccountNumberA; ?>
                 <?= Loc::getMessage('SOA_ORDER_SUC1', ['#LINK#' => $orderA]) ?>
             </div>
             <div class="col-12 mt-5">
