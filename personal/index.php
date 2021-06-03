@@ -30,9 +30,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 		),
 		"NAV_TEMPLATE" => "",
 		"ORDER_HISTORIC_STATUSES" => array(
-			0 => "C",
-			1 => "N",
-			2 => "F",
+			0 => "F",
 		),
 		"PATH_TO_BASKET" => "/personal/cart/",
 		"PATH_TO_CATALOG" => "/catalog/",

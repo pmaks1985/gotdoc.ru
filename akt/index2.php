@@ -435,7 +435,7 @@ $this->pdf->writeHTML($html, true, false, true, false, '');
 			<b>ИСПОЛНИТЕЛЬ</b><br>ИП Чернова Наталья Викторовна
 		</td>
 		<td>
-			<img src="/akt/pp.png" width="70">
+			<img src="/akt/pp.png" width="90">
 		</td>
 		<td>
 			Чернова Н. В.

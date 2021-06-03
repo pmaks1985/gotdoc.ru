@@ -11,7 +11,7 @@ $query = "SELECT `PRODUCT_ID`, `XML_ID`, `privateUUID`, `FUSER_ID`, `ORDER_ID` F
 $result = $connection->query($query);
 while($ar=$result->fetch())
 {
-	if($ar['privateUUID']>0){
+	if($ar['privateUUID']){
 		$data = $ar['privateUUID'];	
 	}
 }

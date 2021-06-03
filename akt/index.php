@@ -388,7 +388,7 @@ $this->pdf->writeHTML($html, true, false, true, false, '');
 		<tr>
 		<td>
 			<b>ИСПОЛНИТЕЛЬ</b><br>ИП Чернова Наталья Викторовна<br>
-			<br>Чернова Н. В. <img src="/akt/pp.png" width="70">
+			<br>Чернова Н. В. <img src="/akt/pp2.png" >
 		</td>
 		<td><b>ЗАКАЗЧИК</b><br>'.$resline2.' '.$resline3.' '.$resline4.'</td>
 		</tr>

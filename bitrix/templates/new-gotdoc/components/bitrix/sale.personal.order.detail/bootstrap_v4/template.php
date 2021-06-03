@@ -460,7 +460,7 @@ else
 																	<button class="btn btn-primary btn-sm active-button"><?= Loc::getMessage('SPOD_ORDER_PAY') ?></button>
 																	<? 
 																	if($payment['PAY_SYSTEM_ID'] == 3){
-																	$link = "/personal/personal/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
+																	$link = "/personal/order/?ORDER_ID=".$arResult['ID']."&pdf=1&DOWNLOAD=Y"?>
 																	<br/>																	
 																	<a class="btn btn-primary" id="btnL">Скачать счет на оплату</a>
 																	
@@ -475,7 +475,7 @@ else
 													}
 													?>
 													<br/>
-																	<?if($payment['PAID']  ===  "Y"){?>
+																	<?if($payment['PAID']  ===  "Y"  &&  $payment['PAY_SYSTEM_ID'] == 3){?>
 																	<a class="btn btn-primary" id="btnR">Скачать акт</a>
 																	<?}?>
 																	
@@ -1028,7 +1028,7 @@ $response3 = json_decode($response3, true);
 									
 				},
 				error: function(err){
-					console.log('ОШИБКА AJAX запроса');
+					console.log(err);
 					const file = err.responseText;						
 					const blob = new Blob([file]);	
 					const downloadUrl = URL.createObjectURL(blob);
@@ -1067,7 +1067,7 @@ if($response3['result']){?>
 <?} ?>
 <?if($response3['result'] && $payment['PAID'] === 'Y'){?>
 <div>
-	<a class="btn btn-danger" style="margin:5px;"  id="post_to_url5">Получить документы</a>
+	<a class="btn btn-success" style="margin:5px;"  id="post_to_url5">Получить документы</a>
 </div>
 <?} else {?>
 <div>

@@ -98,7 +98,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"ADDITIONAL_PICT_PROP_35" => "-",
 		"MESS_AUTH_BLOCK_NAME" => "Авторизация",
 		"MESS_REG_BLOCK_NAME" => "Регистрация",
-		"MESS_BASKET_BLOCK_NAME" => "Товары в заказе",
+		"MESS_BASKET_BLOCK_NAME" => "Товары в заказе. Вставьте ваш промокод, нажав кнопку изменить",
 		"MESS_REGION_BLOCK_NAME" => "Выберите тип плательщика",
 		"MESS_PAYMENT_BLOCK_NAME" => "Оплата",
 		"MESS_DELIVERY_BLOCK_NAME" => "Доставка",

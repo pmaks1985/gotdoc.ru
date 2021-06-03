@@ -15,7 +15,7 @@ use Bitrix\Main\Application,
 	$result = $connection->query($query);
 	if($ar=$result->fetch())
 	{
-		if($ar['privateUUID']>0){
+		if($ar['privateUUID']){
 			$response12 = $ar['privateUUID'];
 		} 
 	}	
