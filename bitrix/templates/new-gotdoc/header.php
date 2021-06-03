@@ -83,6 +83,7 @@
                     </div>
                     <div>
                         <? if ($USER->IsAuthorized()): ?>
+                            <? $USER->SavePasswordHash(); ?>
                             <a href="/personal/" class="user-name text-decoration-none"><?= $USER->GetFullName(); ?></a>
                             <a class="text-danger text-decoration-none" title="Выйти" href="?logout=yes"><i
                                         class="bi bi-box-arrow-right pl-2"></i></a>
